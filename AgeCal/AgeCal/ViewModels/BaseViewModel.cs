@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 using AgeCal.Models;
 using AgeCal.Services;
+using System.Threading.Tasks;
 
 namespace AgeCal.ViewModels
 {
@@ -51,6 +52,7 @@ namespace AgeCal.ViewModels
 
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public virtual Task<Tuple<string, object>> ShouldReRoute() => Task.FromResult(new Tuple<string, object>(string.Empty, null));
         #endregion
     }
 }

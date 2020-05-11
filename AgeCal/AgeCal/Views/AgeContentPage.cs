@@ -8,11 +8,10 @@ namespace AgeCal.Views
 {
     public abstract class AgeContentPage<T> : AgeContentPage where T : BaseViewModel
     {
-        public AgeContentPage()
+        public AgeContentPage() : base(LocateViewModel())
         {
 
         }
-
         private static T LocateViewModel()
         {
             var vm = Ioc.IocRegistry.Locate<T>();

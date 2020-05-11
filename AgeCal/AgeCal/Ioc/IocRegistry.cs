@@ -52,9 +52,9 @@ namespace AgeCal.Ioc
             catch (Exception ex)
             {
 
-                throw;
+               
             }
-
+            return null;
         }
         public static IEnumerable<T> LocateAll<T>() where T : class
         {
@@ -65,9 +65,9 @@ namespace AgeCal.Ioc
             catch (Exception ex)
             {
 
-                throw;
+              
             }
-
+            return null;
         }
         public static void DistroyViewModels()
         {

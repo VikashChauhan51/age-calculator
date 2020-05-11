@@ -2,6 +2,13 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using AgeCal.Views;
+using GalaSoft.MvvmLight.Ioc;
+using AgeCal.Ioc;
+using AgeCal.Services;
+using AgeCal.Models;
+using GalaSoft.MvvmLight.Views;
+using AgeCal.Core;
+using AgeCal.ViewModels;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace AgeCal
@@ -9,14 +16,44 @@ namespace AgeCal
     public partial class App : Application
     {
 
-        public App()
+        private static NavigationPage navPage;
+        /// <summary>
+        /// Thread Safe Singleton without using locks
+        /// </summary>
+        private static Lazy<App> lazy = new Lazy<App>(() => new App());
+
+        /// <summary>
+        /// Explicit static constructor to tell C# compiler not to mark type as before field init.
+        /// </summary>
+        static App()
+        {
+        }
+
+        private App()
         {
             InitializeComponent();
 
+            InitApp(null);
+        }
+        private App(Type page)
+        {
+            InitializeComponent();
 
-            MainPage = new MainPage();
+            InitApp(page);
         }
 
+        public static void InitWithNavTarget(Type page)
+        {
+            lazy = new Lazy<App>(() => new App(page));
+        }
+
+        public static App Instance => lazy.Value;
+        private void InitApp(Type page)
+        {
+            var navPage = new NavigationPage(page == null ? new MainPage() : new MainPage());
+            MainPage = navPage;
+            RegisterServices();
+        }
         protected override void OnStart()
         {
             // Handle when your app starts
@@ -30,6 +67,24 @@ namespace AgeCal
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        internal static void RegisterServices()
+        {
+            SimpleIoc container = SimpleIoc.Default;
+            var serviceLocator = new SimpleIocLocatorProvider(container);
+            CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => serviceLocator);
+            IocRegistry.Register<IDataStore<Item>, MockDataStore>();
+
+            //register navigation
+            IocRegistry.Register<INavigationService>(NavigationFactory);
+        }
+        internal static INavigationService NavigationFactory()
+        {
+            AgeNavigationService navService = new AgeNavigationService(navPage);
+            navService.RegisterPage<MainViewModel, MainPage>();
+            return navService;
+
         }
     }
 }
