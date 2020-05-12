@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AgeCal.Components.BottomNavigationView">
+    <ContentView.Content>
+        <StackLayout x:Name="BottomNavBar" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="80" BackgroundColor="DarkCyan">
+            <BoxView x:Name="TopDivider" HeightRequest="1" VerticalOptions="Start" Color="Gray" HorizontalOptions="FillAndExpand">
+
+            </BoxView>
+            <FlexLayout x:Name="IconLayout" HorizontalOptions="FillAndExpand" AlignItems="Center" HeightRequest="79" JustifyContent="Center"></FlexLayout>
+        </StackLayout>
+    </ContentView.Content>
+</ContentView>

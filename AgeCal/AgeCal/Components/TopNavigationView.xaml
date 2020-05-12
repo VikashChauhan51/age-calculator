@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pageControls:BaseTopNavigationView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageControls="clr-namespace:AgeCal.Components"
+             x:Class="AgeCal.Components.TopNavigationView">
+    <ContentView.Content>
+        <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
+            <!--<ImageButton x:Name="BackIcon" WidthRequest="24" HeightRequest="24">
+                
+            </ImageButton>-->
+            <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <Label x:Name="TitleLabel" HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center" VerticalOptions="FillAndExpand"
+                       VerticalTextAlignment="Center" MaxLines="1" Margin="0" LineBreakMode="TailTruncation" />
+                <Label x:Name="SubTitleLabel" HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center" VerticalOptions="End"
+                       VerticalTextAlignment="Center" MaxLines="1" Margin="0,1,0,0" LineBreakMode="TailTruncation" />
+            </StackLayout>
+        </StackLayout>
+    </ContentView.Content>
+</pageControls:BaseTopNavigationView>

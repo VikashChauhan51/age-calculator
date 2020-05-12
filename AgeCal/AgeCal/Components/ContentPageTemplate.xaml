@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ControlTemplate xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageControls="clr-namespace:AgeCal.Components"
+             x:Class="AgeCal.Components.ContentPageTemplate">
+
+    <pageControls:PageLayout x:Name="MainLayout">
+        <StackLayout Spacing="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <pageControls:TopNavigationView x:Name="TopNavigationView" IsVisible="True" />
+            <!-- Here's where the content page render-->
+            <ContentPresenter x:Name="ContentPresenter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            <BoxView x:Name="NavBoder" HeightRequest="1" IsVisible="True"  Color="Gray"/>
+            <pageControls:BottomNavigationView  x:Name="BottomNavigationView" IsVisible="True" />
+        </StackLayout>
+    </pageControls:PageLayout>
+
+</ControlTemplate>

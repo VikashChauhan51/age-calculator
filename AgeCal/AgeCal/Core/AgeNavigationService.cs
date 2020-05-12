@@ -8,6 +8,7 @@ using Xamarin.Forms;
 
 namespace AgeCal.Core
 {
+
     public class AgeNavigationService : IAgeNavigationService
     {
         private Dictionary<string, Type> _pages = new Dictionary<string, Type>();
