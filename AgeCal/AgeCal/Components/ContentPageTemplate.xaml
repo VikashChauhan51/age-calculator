@@ -9,7 +9,7 @@
             <pageControls:TopNavigationView x:Name="TopNavigationView" IsVisible="True" />
             <!-- Here's where the content page render-->
             <ContentPresenter x:Name="ContentPresenter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-            <BoxView x:Name="NavBoder" HeightRequest="1" IsVisible="True"  Color="Gray"/>
+            <BoxView x:Name="NavBoder" HeightRequest="1" IsVisible="True"  Opacity="0.8" Color="{StaticResource  PrimaryGray}"/>
             <pageControls:BottomNavigationView  x:Name="BottomNavigationView" IsVisible="True" />
         </StackLayout>
     </pageControls:PageLayout>

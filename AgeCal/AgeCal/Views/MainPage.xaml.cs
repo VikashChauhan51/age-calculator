@@ -15,7 +15,7 @@ namespace AgeCal.Views
         public MainPage() : base()
         {
             InitializeComponent();
-            PageTitle = "Dashboard";
+            PageTitle = "Age Calculator";
         }
 
 

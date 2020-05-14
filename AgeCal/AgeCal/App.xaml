@@ -5,10 +5,102 @@
     <Application.Resources>
         <ResourceDictionary>
             <!--Global Styles-->
-            <Color x:Key="NavigationPrimary">#2196F3</Color>
+            <Color x:Key="PrimaryCyan">#198EBE</Color>
+            <Color x:Key="CyanLight">#33b5e5</Color>
+            <Color x:Key="PrimaryWhite">#fff</Color>
+            <Color x:Key="PrimaryBlack">#494949</Color>
+            <Color x:Key="PrimaryBlue">#007bff</Color>
+            <Color x:Key="PrimaryDark">#1c2331</Color>
+            <Color x:Key="PrimaryGray">#e0e0e0</Color>
+            <Color x:Key="PrimaryRed">#dc3545</Color>
+            <Color x:Key="PrimaryGreen">#28a745</Color>
+            <Color x:Key="PrimaryYellow">#fffe2a</Color>
+            <Color x:Key="PrimaryOrange">#fd7e14</Color>
+            <Color x:Key="ButtonBackground">#27A9E1</Color>
+            <Color x:Key="ButtonBackgroundSecondry">#1FAECE</Color>
             <Style TargetType="NavigationPage">
-                <Setter Property="BarBackgroundColor" Value="{StaticResource NavigationPrimary}" />
-                <Setter Property="BarTextColor" Value="White" />
+                <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryCyan}" />
+                <Setter Property="BarTextColor" Value="{StaticResource PrimaryWhite}" />
+            </Style>
+            <Style x:Key="BtnPill" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackground}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryWhite}" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="11" Tablet="16"/>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter Property="WidthRequest">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="250" Tablet="320"/>
+                    </Setter.Value>
+                </Setter>-->
+                <Setter Property="HeightRequest">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="32" Tablet="50"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalOptions" Value="Center" />
+
+                <Setter Property="BorderRadius">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="x:Int32" Phone="15" Tablet="25"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style x:Key="BtnPrimary" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackground}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryWhite}" />
+                <Setter Property="FontSize">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="11" Tablet="16"/>
+                    </Setter.Value>
+                </Setter>
+                <!--<Setter Property="WidthRequest">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="250" Tablet="320"/>
+                    </Setter.Value>
+                </Setter>-->
+                <Setter Property="HeightRequest">
+                    <Setter.Value>
+                        <OnIdiom x:TypeArguments="x:Double" Phone="32" Tablet="50"/>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="HorizontalOptions" Value="Center" />
+
+             
+            </Style>
+
+            <Style x:Key="SeparatorBoxView" TargetType="BoxView"
+               Class="Separator">
+                <Setter Property="BackgroundColor"
+                    Value="#CCCCCC" />
+                <Setter Property="HeightRequest"
+                    Value="1" />
+            </Style>
+
+            <Style x:Key="RoundedBoxView" TargetType="BoxView"
+               Class="Rounded">
+                <Setter Property="BackgroundColor"
+                    Value="#1FAECE" />
+                <Setter Property="HorizontalOptions"
+                    Value="Start" />
+                <Setter Property="CornerRadius"
+                    Value="10" />
+            </Style>
+
+            <Style x:Key="CircleBoxView" TargetType="BoxView"
+               Class="Circle">
+                <Setter Property="BackgroundColor"
+                    Value="#1FAECE" />
+                <Setter Property="WidthRequest"
+                    Value="100" />
+                <Setter Property="HeightRequest"
+                    Value="100" />
+                <Setter Property="HorizontalOptions"
+                    Value="Start" />
+                <Setter Property="CornerRadius"
+                    Value="50" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>
