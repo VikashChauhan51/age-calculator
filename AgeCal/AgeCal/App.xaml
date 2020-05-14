@@ -18,9 +18,54 @@
             <Color x:Key="PrimaryOrange">#fd7e14</Color>
             <Color x:Key="ButtonBackground">#27A9E1</Color>
             <Color x:Key="ButtonBackgroundSecondry">#1FAECE</Color>
+
+
+            <OnPlatform x:Key="Padding_For_ImageButton" x:TypeArguments="Thickness">
+                <On Platform="iOS" Value="0,0,0,0"/>
+                <On Platform="Android" Value="0,0,0,0"/>
+                <On Platform="UWP" Value="2,2,2,2"/>
+            </OnPlatform>
+
+            <OnPlatform x:Key="BorderWidth_For_Button" x:TypeArguments="x:Double">
+                <On Platform="iOS" Value="2"/>
+                <On Platform="Android" Value="0"/>
+                <On Platform="UWP" Value="0"/>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ImageSource_For_Button" x:TypeArguments="FileImageSource">
+                <On Platform="iOS" Value="AppIcon"/>
+                <On Platform="Android" Value="icon.png"/>
+                <On Platform="UWP" Value="../../Assets/Square44x44Logo.altform-unplated_targetsize-256.png"/>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ImageBackgroundColor_For_Button" x:TypeArguments="Color">
+                <On Platform="iOS" Value="White"/>
+                <On Platform="Android" Value="#FF3598DB"/>
+                <On Platform="UWP" Value="#FF3598DB"/>
+            </OnPlatform>
+
+            <OnPlatform x:Key="ImageBorderColor_For_Button" x:TypeArguments="Color">
+                <On Platform="iOS" Value="Gray"/>
+                <On Platform="Android" Value="#FF3598DB"/>
+                <On Platform="UWP" Value="#FF3598DB"/>
+            </OnPlatform>
+
             <Style TargetType="NavigationPage">
                 <Setter Property="BarBackgroundColor" Value="{StaticResource PrimaryCyan}" />
                 <Setter Property="BarTextColor" Value="{StaticResource PrimaryWhite}" />
+            </Style>
+
+            <Style x:Key="BtnRound" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackground}" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryWhite}" />
+                <Setter Property="BorderColor"  Value="{StaticResource ButtonBackground}" />
+                <Setter Property="BorderWidth"  Value="2" />
+                <Setter Property="Margin"  Value="8" />
+                <Setter Property="HorizontalOptions"  Value="Center" />
+                <Setter Property="VerticalOptions"  Value="Start" />
+                <Setter Property="WidthRequest"  Value="40" />
+                <Setter Property="HeightRequest"  Value="40" />
+                <Setter Property="CornerRadius"  Value="20" />
             </Style>
             <Style x:Key="BtnPill" TargetType="Button">
                 <Setter Property="BackgroundColor" Value="{StaticResource ButtonBackground}" />
@@ -68,7 +113,7 @@
                 </Setter>
                 <Setter Property="HorizontalOptions" Value="Center" />
 
-             
+
             </Style>
 
             <Style x:Key="SeparatorBoxView" TargetType="BoxView"
