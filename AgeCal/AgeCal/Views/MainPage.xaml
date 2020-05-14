@@ -3,11 +3,13 @@
             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
             xmlns:views="clr-namespace:AgeCal.Views"
             x:Class="AgeCal.Views.MainPage"
+            xmlns:local="clr-namespace:AgeCal"
             xmlns:viewModel="clr-namespace:AgeCal.ViewModels;assembly:AgeCal"
              x:TypeArguments="viewModel:MainViewModel">
 
     <ContentPage.Content>
         <StackLayout>
+            <Image Source="{local:ImageResource age-calculator.png}" />
             <Label>AgeCal.Views</Label>
             <Button x:Name="btnme" Style="{StaticResource BtnPrimary}" Text="Click Me" />
             <BoxView class="Separator" BackgroundColor="#1FAECE" HeightRequest="1"></BoxView>
