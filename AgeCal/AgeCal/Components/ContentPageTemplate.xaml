@@ -8,7 +8,7 @@
         <StackLayout Spacing="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
             <pageControls:TopNavigationView x:Name="TopNavigationView" IsVisible="True" />
             <!-- Here's where the content page render-->
-            <ContentPresenter x:Name="ContentPresenter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+            <ContentPresenter x:Name="ContentPresenter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryWhite}" />
             <BoxView x:Name="NavBoder" HeightRequest="1" IsVisible="True"  Opacity="0.8" Color="{StaticResource  PrimaryGray}"/>
             <pageControls:BottomNavigationView  x:Name="BottomNavigationView" IsVisible="True" />
         </StackLayout>

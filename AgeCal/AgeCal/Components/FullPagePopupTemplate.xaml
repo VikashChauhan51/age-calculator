@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ControlTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageControls="clr-namespace:AgeCal.Components"
+             x:Class="AgeCal.Components.FullPagePopupTemplate">
+    <pageControls:PageLayout x:Name="FullPagePopupMainLayout">
+        <StackLayout Spacing="0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+
+            <!-- Here's where the content page render-->
+            <ContentPresenter x:Name="FullPagePopupContentPresenter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryWhite}" />
+
+        </StackLayout>
+    </pageControls:PageLayout>
+</ControlTemplate>

@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageControls="clr-namespace:AgeCal.Components"
+             x:Class="AgeCal.Components.ToastView">
+    <ContentView.Content>
+        <pageControls:PillFrame x:Name="ToastFrame" HorizontalOptions="Center" VerticalOptions="Fill" Padding="10" Margin="10,0,10,0" >
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center"  VerticalOptions="Fill" Padding="0">
+                <Label x:Name="ToastLabel" LineBreakMode="WordWrap" MaxLines="3" HorizontalOptions="Fill" VerticalOptions="Fill"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
+            </StackLayout>
+        </pageControls:PillFrame>
+    </ContentView.Content>
+</ContentView>

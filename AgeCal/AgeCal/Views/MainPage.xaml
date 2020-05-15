@@ -12,12 +12,7 @@
         <StackLayout>
 
             <Label>AgeCal.Views</Label>
-            <Button x:Name="Button_Round"
-Style="{StaticResource BtnRound}"
-        Text="+"
-/>
-            <Button x:Name="btnme" Style="{StaticResource BtnPrimary}" Text="Click Me" />
-            <BoxView class="Separator" BackgroundColor="#1FAECE" HeightRequest="1"></BoxView>
+
         </StackLayout>
     </ContentPage.Content>
 </views:AgeContentPage>

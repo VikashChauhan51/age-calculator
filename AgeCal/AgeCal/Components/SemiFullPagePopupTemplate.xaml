@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ControlTemplate xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageControls="clr-namespace:AgeCal.Components"
+             x:Class="AgeCal.Components.SemiFullPagePopupTemplate">
+    <pageControls:PageLayout x:Name="SemiFullPagePopupMainLayout">
+        <BoxView x:Name="OverlayBox" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.6" BackgroundColor="{StaticResource PrimaryDark}" />
+        <StackLayout Spacing="0" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional"  AbsoluteLayout.LayoutBounds="0,40,1,1">
+
+            <!-- Here's where the content page render-->
+            <ContentPresenter x:Name="SemiFullPagePopupContentPresenter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryWhite}" Margin="0" />
+
+        </StackLayout>
+    </pageControls:PageLayout>
+</ControlTemplate>

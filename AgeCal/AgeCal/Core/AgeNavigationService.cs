@@ -1,7 +1,9 @@
 ﻿using AgeCal.ViewModels;
 using AgeCal.Views;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -103,30 +105,54 @@ namespace AgeCal.Core
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                var destination = await CreatePageInstance(pageKey);
-                Page page = destination.Item1;
-                if (destination.Item2 != null)
-                    parameters = destination.Item2;
-                Type pageType = page?.GetType();
-                if (page != null)
+                try
                 {
-                    if (_mainPage.CurrentPage == null || _mainPage.CurrentPage.GetType() != pageType)
+                    var currentPopupPage = PopupNavigation.Instance?.PopupStack?.FirstOrDefault();
+                    var destination = await CreatePageInstance(pageKey);
+                    Page page = destination.Item1;
+                    if (destination.Item2 != null)
+                        parameters = destination.Item2;
+                    Type pageType = page?.GetType();
+                    if (page != null)
                     {
-                        if (page is AgeContentPage && ((AgeContentPage)page).ViewModel != null)
+                        bool isPopup = pageType.IsSubclassOf(typeof(AgePopup));
+                        if (isPopup && (currentPopupPage == null || currentPopupPage.GetType() != pageType))
                         {
-                            //
+                            if (page is AgePopup && ((AgePopup)page).ViewModel != null)
+                            {
+                                //
+                            }
+                            //TODO:need to test
+
+                            AgePopup popupPage = (AgePopup)PopupNavigation.Instance.PopupStack.FirstOrDefault();
+                            if (popupPage != null)
+                                popupPage.Disappeared();
+
+                            await PopupNavigation.Instance.PushAsync(page as AgePopup, true);
                         }
-                        if (RootPages.Contains(pageType))
+                        else if (_mainPage.CurrentPage == null || _mainPage.CurrentPage.GetType() != pageType)
                         {
-                            var navigationStack = Navigation.NavigationStack;
-                            Navigation.InsertPageBefore(page, navigationStack[0]);
-                            await Navigation.PopToRootAsync(false);
-                        }
-                        else
-                        {
-                            await Navigation.PushAsync(page);
+                            if (page is AgeContentPage && ((AgeContentPage)page).ViewModel != null)
+                            {
+                                //
+                            }
+                            if (RootPages.Contains(pageType))
+                            {
+                                var navigationStack = Navigation.NavigationStack;
+                                Navigation.InsertPageBefore(page, navigationStack[0]);
+                                await Navigation.PopToRootAsync(false);
+                            }
+                            else
+                            {
+                                await Navigation.PushAsync(page);
+                            }
                         }
                     }
+                }
+                catch (Exception ex)
+                {
+
+
                 }
             });
         }
@@ -155,7 +181,55 @@ namespace AgeCal.Core
             return new Tuple<Page, object>(page, parms);
         }
 
+        public void GoBackModel(Toast message = null)
+        {
+            if (PopupNavigation.Instance.PopupStack == null && !PopupNavigation.Instance.PopupStack.Any())
+                return;
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                try
+                {
+                    PopupNavigation.Instance.PopAsync(true).ContinueWith((task) =>
+                    {
+                        if (task != null && task.Exception == null)
+                        {
+                            AgePopup popup = (AgePopup)PopupNavigation.Instance.PopupStack.LastOrDefault();
+                            if (popup != null)
+                            {
+                                popup.PageAppeared();
+                                if (message != null)
+                                {
+                                    popup.ViewModel.ToastCommand.Execute(message);
+                                }
+                            }
+                            else if (message != null)
+                            {
+                                if (_mainPage.CurrentPage is AgeContentPage)
+                                {
+                                    ((AgeContentPage)_mainPage.CurrentPage).ViewModel.ToastCommand.Execute(message);
+                                }
+                            }
+                        }
+                    });
+                }
+                catch
+                {
 
 
+                }
+            });
+        }
+
+        public async Task<ModalResultMessage> NavigateToModelForResult<TViewModel>(OkCancelModalParameter parm) where TViewModel : OkCancelModalViewModal
+        {
+            return await NavigateToModelResult<TViewModel, ModalResultMessage>(parm);
+        }
+
+        public async Task<TResult> NavigateToModelResult<TModel, TResult>(OkCancelModalParameter parm)
+        {
+            var completedSurce = new TaskCompletionSource<TResult>();
+            NavigateTo<TModel>(parm);
+            return await completedSurce.Task;
+        }
     }
 }

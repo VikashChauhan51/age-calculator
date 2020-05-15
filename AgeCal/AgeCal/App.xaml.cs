@@ -77,12 +77,13 @@ namespace AgeCal
             IocRegistry.Register<IDataStore<Item>, MockDataStore>();
 
             //register navigation
-            IocRegistry.Register<INavigationService>(NavigationFactory);
+            IocRegistry.Register<IAgeNavigationService>(NavigationFactory);
         }
-        internal static INavigationService NavigationFactory()
+        internal static IAgeNavigationService NavigationFactory()
         {
             AgeNavigationService navService = new AgeNavigationService(navPage);
             navService.RegisterPage<MainViewModel, MainPage>();
+            navService.RegisterPage<ItemsViewModel, AddPopup>();
             return navService;
 
         }

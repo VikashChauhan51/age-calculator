@@ -1,7 +1,9 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿using AgeCal.ViewModels;
+using GalaSoft.MvvmLight.Views;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AgeCal.Core
 {
@@ -18,5 +20,7 @@ namespace AgeCal.Core
         void NavigateTo<TViewModel>(object parameters);
         void NavigateTo<TViewModel>();
         void BackToRoot();
+        void GoBackModel(Toast message = null);
+        Task<ModalResultMessage> NavigateToModelForResult<TViewModel>(OkCancelModalParameter parm) where TViewModel : OkCancelModalViewModal;
     }
 }

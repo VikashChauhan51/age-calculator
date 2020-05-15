@@ -18,15 +18,15 @@ namespace AgeCal.ViewModels
         public ItemsViewModel()
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            //Items = new ObservableCollection<Item>();
+            //LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
 
-            MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            {
-                var newItem = item as Item;
-                Items.Add(newItem);
-                await DataStore.AddItemAsync(newItem);
-            });
+            //MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
+            //{
+            //    var newItem = item as Item;
+            //    Items.Add(newItem);
+            //    await DataStore.AddItemAsync(newItem);
+            //});
         }
 
         async Task ExecuteLoadItemsCommand()

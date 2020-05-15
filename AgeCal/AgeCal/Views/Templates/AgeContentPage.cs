@@ -1,4 +1,5 @@
 ﻿using AgeCal.Components;
+using AgeCal.Core;
 using AgeCal.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace AgeCal.Views
 {
     public abstract class AgeContentPage<T> : AgeContentPage where T : BaseViewModel
     {
-        public AgeContentPage() : base(LocateViewModel(),true)
+        public AgeContentPage() : base(LocateViewModel(), true)
         {
 
         }
@@ -37,7 +38,7 @@ namespace AgeCal.Views
     public abstract class AgeContentPage : ContentPage
     {
         protected BaseTopNavigationView NavigationBarView = null;
- 
+
         protected View ContainerView;
         protected readonly bool ShowNavBar;
         public AgeContentPage() : this(null, true)
@@ -62,6 +63,7 @@ namespace AgeCal.Views
             if (ShowNavBar)
             {
                 NavigationBarView = new TopNavigationView();
+               
                 NavigationPage.SetTitleView(this, NavigationBarView);
             }
             else
@@ -71,7 +73,7 @@ namespace AgeCal.Views
             }
             AdjustNavigationBar();
         }
-         
+
 
         private void AdjustNavigationBar()
         {
@@ -91,9 +93,19 @@ namespace AgeCal.Views
             AdjustNavigationBar();
             if (ViewModel != null)
             {
-                //TODO:
+                ViewModel.DisplayToast += HandleToast;
+                if (NavigationBarView != null)
+                    NavigationBarView.ButtonPressed = ViewModel.TopNavigationCommand;
+                if (BottomNavigationView != null)
+                    BottomNavigationView.ButtonPressed = ViewModel.BottomNavigationCommand;
 
             }
+        }
+   
+        public void HandleToast(object sender, Toast e)
+        {
+            PageLayout?.Toast(e.Message, e.Duration);
+
         }
         protected override void OnDisappearing()
         {
@@ -138,7 +150,7 @@ namespace AgeCal.Views
         }
 
         private PageLayout _pageLayout;
-        protected PageLayout MyProperty
+        protected PageLayout PageLayout
         {
             get
             {
@@ -153,7 +165,7 @@ namespace AgeCal.Views
             get
             {
                 if (_bottomNavigationView == null)
-                    _bottomNavigationView = this.FindByName<BottomNavigationView>("BottomNavigationView");
+                    _bottomNavigationView = this.FindElementByName<BottomNavigationView>("BottomNavigationView");
                 return _bottomNavigationView;
             }
         }
@@ -167,5 +179,19 @@ namespace AgeCal.Views
                 return _topNavigationView;
             }
         }
+
+        public static readonly BindableProperty ShowBottomNavProperty = BindableProperty.Create(
+            nameof(ShowBottomNav),
+            typeof(bool),
+            typeof(AgeContentPage),
+            true,
+            propertyChanged: (bindable, oldV, newV) => ((AgeContentPage)bindable).UpdateShowBottomNav((bool)oldV, (bool)newV));
+        public bool ShowBottomNav { get { return (bool)GetValue(ShowBottomNavProperty); } set { SetValue(ShowBottomNavProperty, value); } }
+
+        protected virtual void UpdateShowBottomNav(bool oldV, bool newV)
+        {
+            ShowBottomNav = newV;
+        }
+         
     }
 }
