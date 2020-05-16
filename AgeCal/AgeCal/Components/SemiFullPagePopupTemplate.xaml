@@ -5,11 +5,11 @@
              x:Class="AgeCal.Components.SemiFullPagePopupTemplate">
     <pageControls:PageLayout x:Name="SemiFullPagePopupMainLayout">
         <BoxView x:Name="OverlayBox" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.6" BackgroundColor="{StaticResource PrimaryDark}" />
-        <StackLayout Spacing="0" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional"  AbsoluteLayout.LayoutBounds="0,40,1,1">
-
-            <!-- Here's where the content page render-->
-            <ContentPresenter x:Name="SemiFullPagePopupContentPresenter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryWhite}" Margin="0" />
-
+        <StackLayout x:Name="SemiPopupLayout" Spacing="0" Opacity="0.9" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional" BackgroundColor="Transparent"  AbsoluteLayout.LayoutBounds="0,40,1,1">
+            <Frame CornerRadius="20" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <!-- Here's where the content page render-->
+                <ContentPresenter x:Name="SemiFullPagePopupContentPresenter" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryWhite}" Margin="0" />
+            </Frame>
         </StackLayout>
     </pageControls:PageLayout>
 </ControlTemplate>

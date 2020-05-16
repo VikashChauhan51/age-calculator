@@ -23,7 +23,12 @@ namespace AgeCal.Components
 
             };
             addButton.Clicked += AddData;
+
+            this.IconLayout.Children.Add(AddIcon("home.png",0,10, LayoutOptions.Start));
+            this.IconLayout.Children.Add(AddIcon("data.png", 0, 10, LayoutOptions.Start));
             this.IconLayout.Children.Add(addButton);
+            this.IconLayout.Children.Add(AddIcon("fact.png", 0, 10, LayoutOptions.Start));
+            this.IconLayout.Children.Add(AddIcon("team.png", 10, 0, LayoutOptions.End));
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
             nameof(ButtonPressed),
@@ -39,8 +44,22 @@ namespace AgeCal.Components
         }
         private void AddData(object sender, EventArgs e)
         {
-            
+
             ButtonPressed?.Execute(typeof(ViewModels.ItemsViewModel));
+        }
+        ImageButton AddIcon(string icon, double leftPadding, double rightPadding, LayoutOptions horizontalOption)
+        {
+            return new ImageButton
+            {
+                Source = icon,
+                HeightRequest = 48,
+                WidthRequest = 48,
+                Padding = new Thickness(leftPadding, 0, rightPadding, 0),
+                Margin = 0,
+                BackgroundColor = Color.Transparent,
+                HorizontalOptions = horizontalOption
+
+            };
         }
     }
 }

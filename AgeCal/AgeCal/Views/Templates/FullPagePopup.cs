@@ -20,6 +20,7 @@ namespace AgeCal.Views
                 PositionIn = Rg.Plugins.Popup.Enums.MoveAnimationOptions.Bottom,
                 PositionOut = Rg.Plugins.Popup.Enums.MoveAnimationOptions.Bottom
             };
+            
         }
 
         protected override void OnAppearing()
