@@ -18,7 +18,7 @@ namespace AgeCal.Views
         {
             InitializeComponent();
             Container = AddPopupContainer;
-
+            AgePicker.MaximumDate = DateTime.Now;
         }
     }
 }

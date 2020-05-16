@@ -7,8 +7,18 @@
               x:TypeArguments="viewModel:ItemsViewModel"
              x:Class="AgeCal.Views.AddPopup">
     <StackLayout x:Name="AddPopupContainer" Spacing="0" Padding="0"  Margin="0" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-         
-        <Label Text="demo" />
+
+        <StackLayout Spacing="20" Padding="5">
+            <Label Text="Name" Style="{StaticResource PrimaryLabel}"/>
+            <Entry  Keyboard="Text"  Style="{StaticResource PrimaryEntry}" />
+            <Label Text="Description" Style="{StaticResource PrimaryLabel}" />
+            <Editor Style="{StaticResource PrimaryEditor}" Margin="0" />
+            <Label Text="Birthday Date" Style="{StaticResource PrimaryLabel}" />
+            <DatePicker x:Name="AgePicker"></DatePicker>
+            <Label Text="Birthday Time" Style="{StaticResource PrimaryLabel}" />
+            <TimePicker></TimePicker>
+            <Button x:Name="Save" Style="{StaticResource BtnPrimary}" Text="Save"></Button>
+        </StackLayout>
 
         <StackLayout x:Name="AddPopupFooter" HeightRequest="0"
                  BackgroundColor="White" HorizontalOptions="FillAndExpand" Padding="0,0,0,40"  VerticalOptions="End" Spacing="0" />

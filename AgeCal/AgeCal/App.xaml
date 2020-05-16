@@ -147,6 +147,38 @@
                 <Setter Property="CornerRadius"
                     Value="50" />
             </Style>
+
+            <Style x:Key="PrimaryLabel" TargetType="Label" >
+                <Setter Property="FontSize"
+                    Value="Medium" />
+                <Setter Property="BackgroundColor"
+                    Value="Transparent" />
+                <Setter Property="TextColor"
+                    Value="{StaticResource PrimaryBlack}" />
+                <Setter Property="TextDecorations"
+                    Value="None" />
+            </Style>
+
+            <Style x:Key="PrimaryEntry" TargetType="Entry" >
+                <Setter Property="FontSize"
+                    Value="Small" />
+                <Setter Property="BackgroundColor"
+                    Value="{StaticResource PrimaryWhite}" />
+                <Setter Property="TextColor"
+                    Value="{StaticResource PrimaryBlack}" />
+                <Setter Property="PlaceholderColor"
+                    Value="{StaticResource PrimaryGray}" />
+            </Style>
+            <Style x:Key="PrimaryEditor" TargetType="Editor" >
+                <Setter Property="FontSize"
+                    Value="Small" />
+                <Setter Property="BackgroundColor"
+                    Value="{StaticResource PrimaryWhite}" />
+                <Setter Property="TextColor"
+                    Value="{StaticResource PrimaryBlack}" />
+                <Setter Property="PlaceholderColor"
+                    Value="{StaticResource PrimaryGray}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
