@@ -4,14 +4,17 @@
             xmlns:views="clr-namespace:AgeCal.Views"
             x:Class="AgeCal.Views.MainPage"
             xmlns:local="clr-namespace:AgeCal"
-            xmlns:viewModel="clr-namespace:AgeCal.ViewModels;assembly:AgeCal"
+            xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
              x:TypeArguments="viewModel:MainViewModel">
 
     <ContentPage.Content>
 
-        <StackLayout>
+        <StackLayout x:Name="MainContainer" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
 
-            <Label>AgeCal.Views</Label>
+            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+                <ActivityIndicator IsRunning="True" IsEnabled="True" Color="{StaticResource PrimaryCyan}" HeightRequest="80" WidthRequest="80" />
+            </StackLayout>
+
 
         </StackLayout>
     </ContentPage.Content>

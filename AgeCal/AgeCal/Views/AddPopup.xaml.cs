@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace AgeCal.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddPopup : SemiFullPagePopup<ItemsViewModel>
+    public partial class AddPopup : SemiFullPagePopup<AddViewModel>
     {
         public AddPopup()
         {

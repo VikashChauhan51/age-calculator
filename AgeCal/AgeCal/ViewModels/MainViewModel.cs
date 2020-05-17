@@ -8,9 +8,15 @@ namespace AgeCal.ViewModels
     {
         public MainViewModel()
         {
-            Title = "Dashboard";
+            Title = "Age Calculator";
 
           
+        }
+
+        public override void OnPageAppearing()
+        {
+            base.OnPageAppearing();
+            NavigationService.NavigateTo<HomeViewModel>();
         }
 
     }

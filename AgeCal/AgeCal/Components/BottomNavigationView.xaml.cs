@@ -24,11 +24,11 @@ namespace AgeCal.Components
             };
             addButton.Clicked += AddData;
 
-            this.IconLayout.Children.Add(AddIcon("home.png",-10,0));
-            this.IconLayout.Children.Add(AddIcon("data.png", 0, 10));
+            AddIcon("home.png", -10, 0);
+            AddIcon("data.png", 0, 10);
             this.IconLayout.Children.Add(addButton);
-            this.IconLayout.Children.Add(AddIcon("fact.png", 10, 10));
-            this.IconLayout.Children.Add(AddIcon("team.png", 10, 0));
+            AddIcon("fact.png", 10, 10);
+            AddIcon("team.png", 10, 0);
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
             nameof(ButtonPressed),
@@ -45,11 +45,11 @@ namespace AgeCal.Components
         private void AddData(object sender, EventArgs e)
         {
 
-            ButtonPressed?.Execute(typeof(ViewModels.ItemsViewModel));
+            ButtonPressed?.Execute(typeof(ViewModels.AddViewModel));
         }
-        ImageButton AddIcon(string icon, double leftPadding, double rightPadding)
+        void AddIcon(string icon, double leftPadding, double rightPadding)
         {
-            return new ImageButton
+            var imageButton = new ImageButton
             {
                 Source = icon,
                 HeightRequest = 48,
@@ -59,6 +59,7 @@ namespace AgeCal.Components
                 BackgroundColor = Color.Transparent
 
             };
+            FlexLayout.SetGrow(imageButton, 1f);
         }
     }
 }

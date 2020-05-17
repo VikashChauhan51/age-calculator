@@ -44,12 +44,34 @@ namespace AgeCal.Core
         }
         public void GoBack()
         {
-            Device.BeginInvokeOnMainThread(() =>
+            if (PopupNavigation.Instance.PopupStack != null && PopupNavigation.Instance.PopupStack.Any())
             {
+                GoBackModel();
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(() =>
+                {
 
-                Navigation.PopAsync();
+                    try
+                    {
+                        Navigation.PopAsync(true).ContinueWith((task) =>
+                        {
+                            if (task?.Exception != null)
+                            {
 
-            });
+                            }
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+
+
+                    }
+
+                });
+            }
+
         }
 
         public void NavigateTo<TViewModel>() => GoTo(GetKey<TViewModel>(), null);
@@ -120,9 +142,9 @@ namespace AgeCal.Core
                         {
                             if (page is AgePopup && ((AgePopup)page).ViewModel != null)
                             {
-                                //
+                                ((AgePopup)page).ViewModel.OnNavigationParameter(parameters);
                             }
-                            //TODO:need to test
+
 
                             AgePopup popupPage = (AgePopup)PopupNavigation.Instance.PopupStack.FirstOrDefault();
                             if (popupPage != null)
@@ -134,7 +156,7 @@ namespace AgeCal.Core
                         {
                             if (page is AgeContentPage && ((AgeContentPage)page).ViewModel != null)
                             {
-                                //
+                                ((AgeContentPage)page).ViewModel.OnNavigationParameter(parameters);
                             }
                             if (RootPages.Contains(pageType))
                             {
@@ -212,7 +234,7 @@ namespace AgeCal.Core
                         }
                     });
                 }
-                catch
+                catch (Exception ex)
                 {
 
 

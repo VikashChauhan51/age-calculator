@@ -51,7 +51,7 @@ namespace AgeCal.Views
             get
             {
                 if (_pageLayout == null)
-                    _pageLayout = (PageLayout)this.FindByName("PageLayout");
+                    _pageLayout =this.FindElementByName<PageLayout>("PageLayout");
                 return _pageLayout;
             }
         }

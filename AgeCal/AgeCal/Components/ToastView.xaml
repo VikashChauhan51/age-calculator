@@ -4,11 +4,11 @@
              xmlns:pageControls="clr-namespace:AgeCal.Components"
              x:Class="AgeCal.Components.ToastView">
     <ContentView.Content>
-        <pageControls:PillFrame x:Name="ToastFrame" HorizontalOptions="Center" VerticalOptions="Fill" Padding="10" Margin="10,0,10,0" >
-            <StackLayout Orientation="Horizontal" HorizontalOptions="Center"  VerticalOptions="Fill" Padding="0">
-                <Label x:Name="ToastLabel" LineBreakMode="WordWrap" MaxLines="3" HorizontalOptions="Fill" VerticalOptions="Fill"
+        <StackLayout Orientation="Horizontal"  BackgroundColor="{StaticResource PrimaryWhite}"   HorizontalOptions="Center"  VerticalOptions="Fill" Padding="0">
+            <Frame CornerRadius="20" HorizontalOptions="CenterAndExpand"  BorderColor="{StaticResource PrimaryBlack}"  BackgroundColor="{StaticResource PrimaryCyan}"  VerticalOptions="CenterAndExpand">
+                <Label x:Name="ToastLabel" LineBreakMode="WordWrap" TextColor="{StaticResource PrimaryWhite}" MaxLines="1" HorizontalOptions="Fill" VerticalOptions="Fill"
                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
-            </StackLayout>
-        </pageControls:PillFrame>
+            </Frame>
+        </StackLayout>
     </ContentView.Content>
 </ContentView>

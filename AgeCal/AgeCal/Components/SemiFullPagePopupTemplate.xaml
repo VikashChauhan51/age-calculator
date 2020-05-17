@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pageControls="clr-namespace:AgeCal.Components"
              x:Class="AgeCal.Components.SemiFullPagePopupTemplate">
-    <pageControls:PageLayout x:Name="SemiFullPagePopupMainLayout">
+    <pageControls:PageLayout x:Name="PageLayout">
         <BoxView x:Name="OverlayBox" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.6" BackgroundColor="{StaticResource PrimaryDark}" />
         <StackLayout x:Name="SemiPopupLayout" Spacing="0" Opacity="0.9" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional" BackgroundColor="Transparent"  AbsoluteLayout.LayoutBounds="0,40,1,1">
             <Frame CornerRadius="20" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

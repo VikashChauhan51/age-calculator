@@ -28,7 +28,10 @@ namespace AgeCal.Components
         protected virtual void UpdateMessage(string oldV, string newV)
         {
             if (oldV != newV)
+            {
                 Message = newV;
+                ToastLabel.Text = Message;
+            }
         }
     }
 }

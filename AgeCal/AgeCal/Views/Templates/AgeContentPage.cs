@@ -98,7 +98,7 @@ namespace AgeCal.Views
                     NavigationBarView.ButtonPressed = ViewModel.TopNavigationCommand;
                 if (BottomNavigationView != null)
                     BottomNavigationView.ButtonPressed = ViewModel.BottomNavigationCommand;
-
+                ViewModel.OnPageAppearing();
             }
         }
    
@@ -110,6 +110,11 @@ namespace AgeCal.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
+            if (ViewModel !=null)
+            {
+                ViewModel.DisplayToast -= HandleToast;
+                ViewModel.OnPageDisappearing();
+            }
         }
 
         public string PageTitle
@@ -155,7 +160,7 @@ namespace AgeCal.Views
             get
             {
                 if (_pageLayout == null)
-                    _pageLayout = this.FindByName<PageLayout>("PageLayout");
+                    _pageLayout = this.FindElementByName<PageLayout>("PageLayout");
                 return _pageLayout;
             }
         }
@@ -175,7 +180,7 @@ namespace AgeCal.Views
             get
             {
                 if (_topNavigationView == null)
-                    _topNavigationView = this.FindByName<TopNavigationView>("TopNavigationView");
+                    _topNavigationView = this.FindElementByName<TopNavigationView>("TopNavigationView");
                 return _topNavigationView;
             }
         }

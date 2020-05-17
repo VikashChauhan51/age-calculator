@@ -13,6 +13,10 @@ namespace AgeCal
             var container = page as IPageController;
             return FindElementByName<TElement>(container.InternalChildren, name);
         }
+        public static TElement FindElementByName<TElement>(this Layout<View> layout, string name) where TElement : Element
+        {
+            return FindElementByName<TElement>(layout.Children, name);
+        }
         private static TElement FindElementByName<TElement>(this IEnumerable<Element> list, string name) where TElement : Element
         {
             if (list == null)

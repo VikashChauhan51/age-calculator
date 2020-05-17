@@ -46,7 +46,10 @@ namespace AgeCal.Components
         }
         public void Toast(string message, int duration = 3000)
         {
-            var bottom = this.FindByName<BottomNavigationView>("BottomNavigationView");
+            if (duration <= 0)
+                duration = 3000;
+
+            var bottom = this.FindElementByName<BottomNavigationView>("BottomNavigationView");
             Device.BeginInvokeOnMainThread(() =>
             {
                 if (toast == null)
@@ -56,10 +59,11 @@ namespace AgeCal.Components
                     AbsoluteLayout.SetLayoutBounds(toast, new Rectangle(0, this.Height, 1, AbsoluteLayout.AutoSize));
                     AbsoluteLayout.SetLayoutFlags(toast, AbsoluteLayoutFlags.WidthProportional | AbsoluteLayoutFlags.XProportional);
                 }
+                this.HeightRequest = 40;
                 toast.Message = message;
                 toast.IsVisible = true;
-                double height = this.HeightRequest > 124 ? 60 : this.HeightRequest;
-                double bottomNavHeight = bottom?.HeightRequest ?? 0;
+                double height = this.HeightRequest > 124 ? 100 : this.HeightRequest;
+                double bottomNavHeight = 50;
                 var transY = height + bottomNavHeight + 10;
                 toast.TranslateTo(0, -transY, 500, Easing.CubicInOut);
                 toast.FadeTo(100, 500, Easing.CubicInOut);

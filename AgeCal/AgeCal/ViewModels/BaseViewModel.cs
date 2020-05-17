@@ -108,6 +108,18 @@ namespace AgeCal.ViewModels
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public virtual Task<Tuple<string, object>> ShouldReRoute() => Task.FromResult(new Tuple<string, object>(string.Empty, null));
+        public virtual void OnNavigationParameter(object parm)
+        {
+
+        }
+        public virtual void OnPageAppearing()
+        {
+
+        }
+        public virtual void OnPageDisappearing()
+        {
+
+        }
         #endregion
     }
 }
