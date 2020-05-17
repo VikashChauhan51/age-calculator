@@ -9,29 +9,21 @@ using AgeCal.ViewModels;
 namespace AgeCal.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ItemDetailPage : ContentPage
+    public partial class ItemDetailPage : AgeContentPage<ItemDetailViewModel>
     {
-        ItemDetailViewModel viewModel;
 
-        public ItemDetailPage(ItemDetailViewModel viewModel)
+
+        public ItemDetailPage() : base()
         {
             InitializeComponent();
-
-            BindingContext = this.viewModel = viewModel;
-        }
-
-        public ItemDetailPage()
-        {
-            InitializeComponent();
-
-            var item = new Item
+            if (ViewModel != null)
             {
-                Text = "Item 1",
-                Description = "This is an item description."
-            };
+                PageTitle = ViewModel?.Item?.Text;
+            }
+            PageHasbackButton = true;
 
-            viewModel = new ItemDetailViewModel(item);
-            BindingContext = viewModel;
         }
+
+
     }
 }

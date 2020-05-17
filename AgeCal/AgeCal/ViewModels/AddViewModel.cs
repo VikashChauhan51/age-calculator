@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AgeCal.ViewModels
 {
@@ -59,7 +60,26 @@ namespace AgeCal.ViewModels
 
         public void Add()
         {
-            NavigationService.GoBackModel(new Core.Toast { Message = "Saved" });
+            try
+            {
+                if (!IsBusy)
+                {
+                    IsBusy = true;
+                    Task.Run(async () => await DataStore.AddItemAsync(new Models.Item { Text = Title, Description = Description, Id = Guid.NewGuid().ToString() }));
+                    NavigationService.GoBackModel(new Core.Toast { Message = "Saved" });
+                }
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
+
         }
 
         public override void OnNavigationParameter(object parm)

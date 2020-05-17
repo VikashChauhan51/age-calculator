@@ -54,5 +54,11 @@ namespace AgeCal.ViewModels
                 IsBusy = false;
             }
         }
+        public override void OnPageAppearing()
+        {
+            base.OnPageAppearing();
+            Task.Run(() => ExecuteLoadItemsCommand());
+        }
+
     }
 }

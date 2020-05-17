@@ -17,7 +17,7 @@ namespace AgeCal.ViewModels
     public class BaseViewModel : ViewModelBase
     {
         public EventHandler<Toast> DisplayToast;
-        public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>() ?? new MockDataStore();
+        public IDataStore<Item> DataStore => IocRegistry.Locate<IDataStore<Item>>() ?? new MockDataStore();
 
         public ExclusiveRelayCommand<AgeNavigationType> TopNavigationCommand { get; set; }
         public ExclusiveRelayCommand<Type> BottomNavigationCommand { get; set; }

@@ -86,7 +86,8 @@ namespace AgeCal
             navService.RegisterPage<AddViewModel, AddPopup>();
             navService.RegisterPage<HomeViewModel, Home>();
             navService.RegisterPage<AboutViewModel, AboutPage>();
-
+            navService.RegisterPage<ItemsViewModel, ItemsPage>();
+            navService.RegisterPage<ItemDetailViewModel, ItemDetailPage>();
             return navService;
 
         }

@@ -26,7 +26,7 @@ namespace AgeCal.Components
             addButton.Clicked += AddData;
 
             AddIcon("home.png", "Home", typeof(HomeViewModel));
-            AddIcon("data.png", "Data", typeof(HomeViewModel));
+            AddIcon("data.png", "Data", typeof(ItemsViewModel));
             this.IconLayout.Children.Add(addButton);
             AddIcon("fact.png", "About", typeof(AboutViewModel));
             AddIcon("team.png", "Teams", typeof(HomeViewModel));
