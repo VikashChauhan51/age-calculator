@@ -44,7 +44,16 @@ namespace AgeCal.ViewModels
                 RaisePropertyChanged(nameof(IsBusy));
             }
         }
-
+        bool isReady = false;
+        public bool IsReady
+        {
+            get { return isReady; }
+            set
+            {
+                isReady = value;
+                RaisePropertyChanged(nameof(IsReady));
+            }
+        }
         string title = string.Empty;
         public string Title
         {
@@ -97,6 +106,18 @@ namespace AgeCal.ViewModels
         {
             DisplayToast?.Invoke(this, message);
         }
+        public virtual void OnNavigationParameter(object parm)
+        {
+            IsReady = true;
+        }
+        public virtual void OnPageAppearing()
+        {
+
+        }
+        public virtual void OnPageDisappearing()
+        {
+
+        }
         #region INotifyPropertyChanged
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
@@ -108,18 +129,7 @@ namespace AgeCal.ViewModels
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public virtual Task<Tuple<string, object>> ShouldReRoute() => Task.FromResult(new Tuple<string, object>(string.Empty, null));
-        public virtual void OnNavigationParameter(object parm)
-        {
-
-        }
-        public virtual void OnPageAppearing()
-        {
-
-        }
-        public virtual void OnPageDisappearing()
-        {
-
-        }
+       
         #endregion
     }
 }

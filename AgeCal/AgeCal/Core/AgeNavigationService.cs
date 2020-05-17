@@ -38,7 +38,21 @@ namespace AgeCal.Core
             Device.BeginInvokeOnMainThread(() =>
             {
 
-                Navigation.PopToRootAsync();
+                try
+                {
+                    Navigation.PopToRootAsync();
+                    if (PopupNavigation.Instance.PopupStack != null && PopupNavigation.Instance.PopupStack.Any())
+                    {
+                        PopupNavigation.Instance.PopAllAsync(true).ContinueWith((task) =>
+                        {
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+
+
+                }
 
             });
         }
@@ -252,6 +266,28 @@ namespace AgeCal.Core
             var completedSurce = new TaskCompletionSource<TResult>();
             NavigateTo<TModel>(parm);
             return await completedSurce.Task;
+        }
+
+        public void CloseAllModelPages()
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                try
+                {
+
+                    if (PopupNavigation.Instance.PopupStack != null && PopupNavigation.Instance.PopupStack.Any())
+                    {
+                        PopupNavigation.Instance.PopAllAsync(true).ContinueWith((task) =>
+                        {
+                        });
+                    }
+                }
+                catch (Exception ex)
+                {
+
+
+                }
+            });
         }
     }
 }

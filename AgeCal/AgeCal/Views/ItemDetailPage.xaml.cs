@@ -18,12 +18,37 @@ namespace AgeCal.Views
             InitializeComponent();
             if (ViewModel != null)
             {
+                ShowSpinner = ViewModel.IsReady;
                 PageTitle = ViewModel?.Item?.Text;
             }
             PageHasbackButton = true;
 
         }
 
+        protected override void OnViewModelPropertyChanged(object sender, PropertyChangingEventArgs e)
+        {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                try
+                {
+                    base.OnViewModelPropertyChanged(sender, e);
+                    switch (e.PropertyName)
+                    {
+                        case (nameof(ViewModel.IsReady)):
+                            ShowSpinner = !ViewModel.IsReady;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                catch
+                {
+
+
+                }
+            });
+
+        }
 
     }
 }

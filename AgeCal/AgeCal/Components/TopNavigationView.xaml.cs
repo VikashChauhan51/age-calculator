@@ -15,7 +15,7 @@ namespace AgeCal.Components
         public TopNavigationView()
         {
             InitializeComponent();
-            RenderBackButton(HasBackButton);
+            RenderBackIcon(HasBackButton);
 
         }
         protected override void UpdateTitle(string oldV, string newV)
@@ -32,23 +32,26 @@ namespace AgeCal.Components
         {
             base.UpdateTitleIcon(oldV, newV);
         }
-        void RenderBackButton(bool visible)
-        {
-
-        }
+     
         protected override void UpdateHasBackButton(bool oldV, bool newV)
         {
             base.UpdateHasBackButton(oldV, newV);
+            RenderBackIcon(newV);
         }
         public override void Dispose()
         {
             base.Dispose();
+            BackIcon.Clicked -= OnBackClick;
         }
 
         protected void OnBackClick(object sender, EventArgs args)
         {
             ButtonPressed?.Execute(Core.AgeNavigationType.BACK);
 
+        }
+        void RenderBackIcon(bool visibility)
+        {
+            BackIcon.IsVisible = visibility;
         }
     }
 }

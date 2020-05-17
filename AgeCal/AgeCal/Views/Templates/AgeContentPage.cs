@@ -3,6 +3,7 @@ using AgeCal.Core;
 using AgeCal.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using Xamarin.Forms;
 
@@ -63,7 +64,7 @@ namespace AgeCal.Views
             if (ShowNavBar)
             {
                 NavigationBarView = new TopNavigationView();
-               
+
                 NavigationPage.SetTitleView(this, NavigationBarView);
             }
             else
@@ -94,6 +95,7 @@ namespace AgeCal.Views
             if (ViewModel != null)
             {
                 ViewModel.DisplayToast += HandleToast;
+                ViewModel.PropertyChanged += OnViewModelPropertyChanged;
                 if (NavigationBarView != null)
                     NavigationBarView.ButtonPressed = ViewModel.TopNavigationCommand;
                 if (BottomNavigationView != null)
@@ -101,7 +103,7 @@ namespace AgeCal.Views
                 ViewModel.OnPageAppearing();
             }
         }
-   
+
         public void HandleToast(object sender, Toast e)
         {
             PageLayout?.Toast(e.Message, e.Duration);
@@ -110,9 +112,10 @@ namespace AgeCal.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            if (ViewModel !=null)
+            if (ViewModel != null)
             {
                 ViewModel.DisplayToast -= HandleToast;
+                ViewModel.PropertyChanged -= OnViewModelPropertyChanged;
                 ViewModel.OnPageDisappearing();
             }
         }
@@ -197,6 +200,34 @@ namespace AgeCal.Views
         {
             ShowBottomNav = newV;
         }
-         
+
+        public static readonly BindableProperty ShowSpinnerProperty = BindableProperty.Create(
+            nameof(ShowSpinner),
+            typeof(bool),
+            typeof(AgeContentPage),
+            true,
+            propertyChanged: (bindable, oldV, newV) => ((AgeContentPage)bindable).UpdateShowSpinner((bool)oldV, (bool)newV));
+        public bool ShowSpinner { get { return (bool)GetValue(ShowSpinnerProperty); } set { SetValue(ShowSpinnerProperty, value); } }
+
+        protected virtual void UpdateShowSpinner(bool oldV, bool newV)
+        {
+            if (oldV != newV)
+            {
+                ShowSpinner = newV;
+                IsBusy = ShowSpinner;
+                if (ShowSpinner)
+                    PageLayout?.ShowSpinner();
+                else
+                    PageLayout?.HideSpinner();
+            }
+
+        }
+
+
+        protected virtual void OnViewModelPropertyChanged(object sender,PropertyChangedEventArgs e)
+        {
+
+        }
+
     }
 }

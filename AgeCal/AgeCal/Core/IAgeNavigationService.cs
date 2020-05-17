@@ -21,6 +21,7 @@ namespace AgeCal.Core
         void NavigateTo<TViewModel>();
         void BackToRoot();
         void GoBackModel(Toast message = null);
+        void CloseAllModelPages();
         Task<ModalResultMessage> NavigateToModelForResult<TViewModel>(OkCancelModalParameter parm) where TViewModel : OkCancelModalViewModal;
     }
 }
