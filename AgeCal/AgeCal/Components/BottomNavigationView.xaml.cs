@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgeCal.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,11 +25,11 @@ namespace AgeCal.Components
             };
             addButton.Clicked += AddData;
 
-            AddIcon("home.png", -10, 0);
-            AddIcon("data.png", 0, 10);
+            AddIcon("home.png", "Home", typeof(HomeViewModel));
+            AddIcon("data.png", "Data", typeof(HomeViewModel));
             this.IconLayout.Children.Add(addButton);
-            AddIcon("fact.png", 10, 10);
-            AddIcon("team.png", 10, 0);
+            AddIcon("fact.png", "About", typeof(AboutViewModel));
+            AddIcon("team.png", "Teams", typeof(HomeViewModel));
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
             nameof(ButtonPressed),
@@ -45,21 +46,49 @@ namespace AgeCal.Components
         private void AddData(object sender, EventArgs e)
         {
 
-            ButtonPressed?.Execute(typeof(ViewModels.AddViewModel));
+            ButtonPressed?.Execute(typeof(AddViewModel));
         }
-        void AddIcon(string icon, double leftPadding, double rightPadding)
+        void AddIcon(string icon, string label, Type viewModelType)
         {
-            var imageButton = new ImageButton
+            var MainContainer = new StackLayout
             {
-                Source = icon,
-                HeightRequest = 48,
-                WidthRequest = 48,
-                Padding = new Thickness(leftPadding, 0, rightPadding, 0),
+                HorizontalOptions = LayoutOptions.Center,
+                Padding = new Thickness(15, 0, 15, 0),
                 Margin = 0,
-                BackgroundColor = Color.Transparent
 
             };
-            FlexLayout.SetGrow(imageButton, 1f);
+            var Icon = new ImageButton
+            {
+                Source = icon,
+                HeightRequest = 32,
+                Padding = 0,
+                Margin = 0,
+                BackgroundColor = Color.Transparent,
+                WidthRequest = 32,
+            };
+            Icon.Clicked += Icon_Clicked;
+            Icon.CommandParameter = viewModelType;
+            var Text = new Label
+            {
+                InputTransparent = true,
+                Text = label,
+                Margin = 0,
+            };
+            MainContainer.Children.Add(Icon);
+            MainContainer.Children.Add(Text);
+            this.IconLayout.Children.Add(MainContainer);
+        }
+
+        private void Icon_Clicked(object sender, EventArgs e)
+        {
+            var btn = sender as ImageButton;
+            if (btn != null)
+            {
+                var type = btn.CommandParameter as Type;
+                ButtonPressed?.Execute(type);
+            }
         }
     }
+
+
 }

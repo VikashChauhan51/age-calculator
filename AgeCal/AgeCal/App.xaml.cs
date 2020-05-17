@@ -50,7 +50,7 @@ namespace AgeCal
         public static App Instance => lazy.Value;
         private void InitApp(Type page)
         {
-             navPage = new NavigationPage(page == null ? new MainPage() : new MainPage());
+            navPage = new NavigationPage(page == null ? new MainPage() : new MainPage());
             MainPage = navPage;
             RegisterServices();
         }
@@ -85,6 +85,8 @@ namespace AgeCal
             navService.RegisterPage<MainViewModel, MainPage>();
             navService.RegisterPage<AddViewModel, AddPopup>();
             navService.RegisterPage<HomeViewModel, Home>();
+            navService.RegisterPage<AboutViewModel, AboutPage>();
+
             return navService;
 
         }
