@@ -12,6 +12,7 @@ using AgeCal.Views;
 using AgeCal.ViewModels;
 using AgeCal.Ioc;
 using AgeCal.Core;
+using System.ComponentModel;
 
 namespace AgeCal.Views
 {
@@ -26,7 +27,7 @@ namespace AgeCal.Views
 
             if (ViewModel != null)
             {
-                ShowSpinner = ViewModel.IsReady;
+                ShowSpinner = !ViewModel.IsReady;
 
             }
             PageTitle = "Data";
@@ -46,7 +47,7 @@ namespace AgeCal.Views
             ItemsListView.SelectedItem = null;
         }
 
-        protected override void OnViewModelPropertyChanged(object sender, PropertyChangingEventArgs e)
+        protected override void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() =>
             {

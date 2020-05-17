@@ -12,15 +12,19 @@ namespace AgeCal.ViewModels
         public ItemDetailViewModel()
         {
         }
-        public override void OnNavigationParameter(object parm)
+        public override async void OnNavigationParameter(object parm)
         {
             this.parm = parm;
+            if (this.parm != null)
+            {
+                await ExecuteLoadCommand();
+            }
         }
 
         public override void OnPageAppearing()
         {
             base.OnPageAppearing();
-            Task.Run(async () => await ExecuteLoadCommand());
+
 
         }
 

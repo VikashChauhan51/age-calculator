@@ -5,6 +5,7 @@ using Xamarin.Forms.Xaml;
 
 using AgeCal.Models;
 using AgeCal.ViewModels;
+using System.ComponentModel;
 
 namespace AgeCal.Views
 {
@@ -19,13 +20,14 @@ namespace AgeCal.Views
             if (ViewModel != null)
             {
                 ShowSpinner = ViewModel.IsReady;
-                PageTitle = ViewModel?.Item?.Text;
+                
             }
+            PageTitle = "Details";
             PageHasbackButton = true;
 
         }
 
-        protected override void OnViewModelPropertyChanged(object sender, PropertyChangingEventArgs e)
+        protected override void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() =>
             {
