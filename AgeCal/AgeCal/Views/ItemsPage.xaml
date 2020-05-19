@@ -2,12 +2,17 @@
 <views:AgeContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AgeCal"
+             xmlns:converter="clr-namespace:AgeCal.Convertors"
              xmlns:views="clr-namespace:AgeCal.Views"
              xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
              x:TypeArguments="viewModel:ItemsViewModel"
              x:Class="AgeCal.Views.ItemsPage"
              x:Name="BrowseItemsPage">
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BirthdayDateConverter x:Key="BirthdayDateConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
             <ListView x:Name="ItemsListView"
@@ -27,7 +32,7 @@
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
-                                <Label Text="{Binding Description}" 
+                                <Label Text="{Binding DOB,Converter={StaticResource BirthdayDateConverter}}" 
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />

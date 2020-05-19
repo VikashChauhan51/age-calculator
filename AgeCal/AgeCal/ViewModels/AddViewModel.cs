@@ -1,4 +1,5 @@
-﻿using AgeCal.Interfaces;
+﻿using AgeCal.i18n;
+using AgeCal.Interfaces;
 using AgeCal.Ioc;
 using System;
 using System.Collections.Generic;
@@ -76,8 +77,8 @@ namespace AgeCal.ViewModels
                         Time = Time,
                         CreatedOn = DateTime.UtcNow
                     });
-                    // Task.Run(async () => await DataStore.AddItemAsync(new Models.Item { Text = Title, Description = Description, Id = Guid.NewGuid().ToString() }));
-                    NavigationService.GoBackModel(new Core.Toast { Message = "Saved" });
+                    Clear();
+                    NavigationService.GoBackModel(new Core.Toast { Message = AppResource.DataSaveMessage });
                 }
             }
             catch (Exception ex)
@@ -110,6 +111,14 @@ namespace AgeCal.ViewModels
 
             return isValid;
 
+        }
+        void Clear()
+        {
+            var date = DateTime.Now;
+            Name = string.Empty;
+            Description = string.Empty;
+            Time = new TimeSpan(date.Hour, date.Minute, date.Second);
+            DOB = date;
         }
     }
 }
