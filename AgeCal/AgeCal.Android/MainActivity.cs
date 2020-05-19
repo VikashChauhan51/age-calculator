@@ -6,6 +6,9 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using AgeCal.Ioc;
+using AgeCal.Droid.Services;
+using AgeCal.Interfaces;
 
 namespace AgeCal.Droid
 {
@@ -21,6 +24,21 @@ namespace AgeCal.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(App.Instance);
+
+            RegisterServices();
+
+            //Init Database
+            IocRegistry.Locate<ILocalDatabase>();
+        }
+
+        void RegisterServices()
+        {
+            IocRegistry.Register<ILocalDatabase>(() =>
+            {
+                var db = new SqliteDatabase();
+                db.Initialize();
+                return db;
+            });
         }
     }
 }
