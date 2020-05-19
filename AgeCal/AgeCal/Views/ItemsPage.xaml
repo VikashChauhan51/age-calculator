@@ -10,7 +10,7 @@
              x:Name="BrowseItemsPage">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <converter:BirthdayDateConverter x:Key="BirthdayDateConverter" />
+            <converter:AgeConverter x:Key="AgeConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -32,7 +32,7 @@
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
-                                <Label Text="{Binding DOB,Converter={StaticResource BirthdayDateConverter}}" 
+                                <Label Text="{Binding DOB,Converter={StaticResource AgeConverter}}" 
                                 LineBreakMode="NoWrap"
                                 Style="{DynamicResource ListItemDetailTextStyle}"
                                 FontSize="13" />

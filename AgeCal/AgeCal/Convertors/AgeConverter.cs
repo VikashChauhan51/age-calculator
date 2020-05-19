@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace AgeCal.Convertors
 {
-    public class BirthdayDateConverter : IValueConverter
+    public class AgeConverter : IValueConverter
     {
         const int SECOND = 1;
         const int MINUTE = 60 * SECOND;

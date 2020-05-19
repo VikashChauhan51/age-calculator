@@ -35,7 +35,8 @@ namespace AgeCal.Interfaces
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-        IEnumerable<TEntity> Find(System.Linq.Expressions.Expression<Func<TEntity, bool>> predicate, int skip, int take);
-        IEnumerable<TEntity> GetAll( int skip, int take);
+       // IEnumerable<TEntity> Find(Func<TEntity, bool> predicate, int skip, int take);
+        IEnumerable<TEntity> GetAll(int skip, int take);
+       // bool Any(Func<TEntity, bool> predicate);
     }
 }
