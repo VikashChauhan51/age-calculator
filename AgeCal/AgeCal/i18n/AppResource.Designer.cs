@@ -68,5 +68,86 @@ namespace AgeCal.i18n {
                 return ResourceManager.GetString("AppName", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birthday Date.
+        /// </summary>
+        internal static string BirthDateLabel {
+            get {
+                return ResourceManager.GetString("BirthDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birthday Time.
+        /// </summary>
+        internal static string BirthTimeLabel {
+            get {
+                return ResourceManager.GetString("BirthTimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information deleted successfully!.
+        /// </summary>
+        internal static string DataDeleteMessage {
+            get {
+                return ResourceManager.GetString("DataDeleteMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information saved successfully!.
+        /// </summary>
+        internal static string DataSaveMessage {
+            get {
+                return ResourceManager.GetString("DataSaveMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string DeleteLable {
+            get {
+                return ResourceManager.GetString("DeleteLable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure?.
+        /// </summary>
+        internal static string DeletePopupMessage {
+            get {
+                return ResourceManager.GetString("DeletePopupMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string DescriptionLabel {
+            get {
+                return ResourceManager.GetString("DescriptionLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string NameLabel {
+            get {
+                return ResourceManager.GetString("NameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string SaveLabel {
+            get {
+                return ResourceManager.GetString("SaveLabel", resourceCulture);
+            }
+        }
     }
 }

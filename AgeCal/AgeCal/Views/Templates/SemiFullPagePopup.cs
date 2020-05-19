@@ -73,10 +73,18 @@ namespace AgeCal.Views
                         closeButton.Clicked += CloseButton_Clicked;
                         closeContainer.Children.Add(closeButton);
                         AbsoluteLayout.SetLayoutFlags(closeButton, AbsoluteLayoutFlags.XProportional | AbsoluteLayoutFlags.SizeProportional);
+                        BoxView box = new BoxView()
+                        {
+                            BackgroundColor=Color.Gray,
+                            HorizontalOptions= LayoutOptions.Center,
+                            VerticalOptions= LayoutOptions.StartAndExpand,
+                            HeightRequest=4,
+                            WidthRequest=30
+                        };
                         AbsoluteLayout.SetLayoutBounds(closeButton, new Rectangle(1, 0, 1, 1));
-
                         ((StackLayout)value).Children.Insert(0, closeContainer);
-              
+                        ((StackLayout)value).Children.Insert(0, box);
+
                     }
                 }
             }

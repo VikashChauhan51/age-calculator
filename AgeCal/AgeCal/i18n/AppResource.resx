@@ -121,4 +121,31 @@
     <value>Age Calculator</value>
     <comment>app title</comment>
   </data>
+  <data name="BirthDateLabel" xml:space="preserve">
+    <value>Birthday Date</value>
+  </data>
+  <data name="BirthTimeLabel" xml:space="preserve">
+    <value>Birthday Time</value>
+  </data>
+  <data name="DataDeleteMessage" xml:space="preserve">
+    <value>Information deleted successfully!</value>
+  </data>
+  <data name="DataSaveMessage" xml:space="preserve">
+    <value>Information saved successfully!</value>
+  </data>
+  <data name="DeleteLable" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeletePopupMessage" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="DescriptionLabel" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="SaveLabel" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

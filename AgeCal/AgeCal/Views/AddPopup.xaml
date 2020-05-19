@@ -8,21 +8,21 @@
               x:TypeArguments="viewModel:AddViewModel"
              x:Class="AgeCal.Views.AddPopup">
     <StackLayout x:Name="AddPopupContainer" Spacing="0" Padding="0"  Margin="0" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-
         <StackLayout Spacing="20" Padding="5">
-            <Label Text="Name" Style="{StaticResource PrimaryLabel}"/>
+            <Label Text="{local:Translation NameLabel}" Style="{StaticResource PrimaryLabel}"/>
             <Entry  MaxLength="100" Text="{Binding Name}" Style="{StaticResource PrimaryEntry}" >
                 <Entry.Behaviors>
                     <validation:RequiredValidationBehavior  />
+                    <validation:MaxLengthValidatorBehavior MaxLength="100"  />
                 </Entry.Behaviors>
             </Entry>
-            <Label Text="Description" Style="{StaticResource PrimaryLabel}" />
+            <Label Text="{local:Translation DescriptionLabel}" Style="{StaticResource PrimaryLabel}" />
             <Editor MaxLength="150" Style="{StaticResource PrimaryEditor}" Text="{Binding Description}" Margin="0" />
-            <Label Text="Birthday Date" Style="{StaticResource PrimaryLabel}" />
+            <Label Text="{local:Translation BirthDateLabel}" Style="{StaticResource PrimaryLabel}" />
             <DatePicker x:Name="AgePicker" Date="{Binding DOB,Mode=TwoWay}" ></DatePicker>
-            <Label Text="Birthday Time"  Style="{StaticResource PrimaryLabel}" />
+            <Label Text="{local:Translation BirthTimeLabel}" Style="{StaticResource PrimaryLabel}" />
             <TimePicker x:Name="AgeTimer" Time="{Binding Time}"></TimePicker>
-            <Button x:Name="Save" Command="{Binding AddCommand}" Style="{StaticResource BtnPrimary}" Text="Save"></Button>
+            <Button x:Name="Save" Command="{Binding AddCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>
         </StackLayout>
 
         <StackLayout x:Name="AddPopupFooter" HeightRequest="0"
