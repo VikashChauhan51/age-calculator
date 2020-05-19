@@ -10,7 +10,7 @@
 
         <StackLayout Spacing="20" Padding="5">
             <Label Text="Name" Style="{StaticResource PrimaryLabel}"/>
-            <Entry  Keyboard="Text" MaxLength="100" Text="{Binding Name}" Style="{StaticResource PrimaryEntry}" />
+            <Entry  MaxLength="100" Text="{Binding Name}" Style="{StaticResource PrimaryEntry}" />
             <Label Text="Description" Style="{StaticResource PrimaryLabel}" />
             <Editor MaxLength="150" Style="{StaticResource PrimaryEditor}" Text="{Binding Description}" Margin="0" />
             <Label Text="Birthday Date" Style="{StaticResource PrimaryLabel}" />

@@ -7,19 +7,21 @@ using Xamarin.Forms;
 
 using AgeCal.Models;
 using AgeCal.Views;
+using AgeCal.Interfaces;
 
 namespace AgeCal.ViewModels
 {
     public class ItemsViewModel : BaseViewModel
     {
-        public ObservableCollection<Item> Items { get; set; }
+        public ObservableCollection<User> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
-
-        public ItemsViewModel()
+        private readonly IUserRepository _userRepository;
+        public ItemsViewModel(IUserRepository userRepository)
         {
             Title = "Browse";
-            Items = new ObservableCollection<Item>();
-            LoadItemsCommand = new Command(async () => await ExecuteLoadItemsCommand());
+            Items = new ObservableCollection<User>();
+            _userRepository = userRepository;
+            LoadItemsCommand = new Command(ExecuteLoadItemsCommand);
 
             //MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
             //{
@@ -29,7 +31,7 @@ namespace AgeCal.ViewModels
             //});
         }
 
-        async Task ExecuteLoadItemsCommand()
+        void ExecuteLoadItemsCommand()
         {
             if (IsBusy)
                 return;
@@ -39,7 +41,7 @@ namespace AgeCal.ViewModels
             try
             {
                 Items.Clear();
-                var items = await DataStore.GetItemsAsync(true);
+                var items = _userRepository.GetAll(0, 50);
                 foreach (var item in items)
                 {
                     Items.Add(item);

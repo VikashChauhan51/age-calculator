@@ -36,7 +36,7 @@ namespace AgeCal.Views
 
         void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
         {
-            var item = args.SelectedItem as Item;
+            var item = args.SelectedItem as User;
             if (item == null)
                 return;
 

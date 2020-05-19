@@ -1,23 +1,26 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using AgeCal.Interfaces;
 using AgeCal.Models;
 
 namespace AgeCal.ViewModels
 {
     public class ItemDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
+        public User Item { get; set; }
         private object parm;
-        public ItemDetailViewModel()
+        private readonly IUserRepository _userRepository;
+        public ItemDetailViewModel(IUserRepository userRepository)
         {
+            _userRepository = userRepository;
         }
-        public override async void OnNavigationParameter(object parm)
+        public override void OnNavigationParameter(object parm)
         {
             this.parm = parm;
             if (this.parm != null)
             {
-                await ExecuteLoadCommand();
+                ExecuteLoadCommand();
             }
         }
 
@@ -28,7 +31,7 @@ namespace AgeCal.ViewModels
 
         }
 
-        async Task ExecuteLoadCommand()
+        void ExecuteLoadCommand()
         {
             if (IsBusy)
                 return;
@@ -37,7 +40,7 @@ namespace AgeCal.ViewModels
 
             try
             {
-                this.Item = await DataStore.GetItemAsync((string)parm);
+                this.Item = _userRepository.Get((string)parm);
 
             }
             catch (Exception ex)
@@ -48,8 +51,10 @@ namespace AgeCal.ViewModels
             {
                 IsBusy = false;
                 if (this.Item == null)
-                    this.Item = new Item();
+                    this.Item = new User();
             }
         }
+
+       
     }
 }

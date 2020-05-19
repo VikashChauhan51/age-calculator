@@ -9,6 +9,8 @@ using AgeCal.Models;
 using GalaSoft.MvvmLight.Views;
 using AgeCal.Core;
 using AgeCal.ViewModels;
+using AgeCal.Interfaces;
+using AgeCal.Repository;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace AgeCal
@@ -74,7 +76,7 @@ namespace AgeCal
             SimpleIoc container = SimpleIoc.Default;
             var serviceLocator = new SimpleIocLocatorProvider(container);
             CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => serviceLocator);
-            IocRegistry.Register<IDataStore<Item>, MockDataStore>();
+            IocRegistry.Register<IUserRepository, UserRepository>();
 
             //register navigation
             IocRegistry.Register<IAgeNavigationService>(NavigationFactory);

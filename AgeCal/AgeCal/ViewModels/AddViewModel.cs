@@ -1,4 +1,5 @@
-﻿using AgeCal.Ioc;
+﻿using AgeCal.Interfaces;
+using AgeCal.Ioc;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,9 +11,10 @@ namespace AgeCal.ViewModels
     {
 
         public ExclusiveRelayCommand AddCommand { get; set; }
-        private string id;
-        public AddViewModel()
+        private readonly IUserRepository _userRepository;
+        public AddViewModel(IUserRepository userRepository)
         {
+            _userRepository = userRepository;
             AddCommand = new ExclusiveRelayCommand(Add);
 
         }
@@ -62,10 +64,19 @@ namespace AgeCal.ViewModels
         {
             try
             {
-                if (!IsBusy)
+                if (!IsBusy && isValid())
                 {
                     IsBusy = true;
-                    Task.Run(async () => await DataStore.AddItemAsync(new Models.Item { Text = Title, Description = Description, Id = Guid.NewGuid().ToString() }));
+                    _userRepository.Add(new Models.User
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        Text = Name,
+                        Description = Description,
+                        DOB = DOB,
+                        Time = Time,
+                        CreatedOn = DateTime.UtcNow
+                    });
+                    // Task.Run(async () => await DataStore.AddItemAsync(new Models.Item { Text = Title, Description = Description, Id = Guid.NewGuid().ToString() }));
                     NavigationService.GoBackModel(new Core.Toast { Message = "Saved" });
                 }
             }
@@ -84,8 +95,20 @@ namespace AgeCal.ViewModels
 
         public override void OnNavigationParameter(object parm)
         {
-            if (parm != null && parm is string)
-                id = (string)parm;
+             
+
+        }
+        bool isValid()
+        {
+            var isValid = true;
+            if (string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
+                isValid = false;
+            if (string.IsNullOrEmpty(Description) || string.IsNullOrWhiteSpace(Description))
+                isValid = false;
+            if (DOB > DateTime.Now || DOB < new DateTime(1900, 1, 1))
+                isValid = false;
+
+            return isValid;
 
         }
     }

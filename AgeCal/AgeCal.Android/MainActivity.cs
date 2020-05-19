@@ -9,6 +9,8 @@ using Android.OS;
 using AgeCal.Ioc;
 using AgeCal.Droid.Services;
 using AgeCal.Interfaces;
+using System.Collections.Generic;
+using AgeCal.Models;
 
 namespace AgeCal.Droid
 {
@@ -27,8 +29,6 @@ namespace AgeCal.Droid
 
             RegisterServices();
 
-            //Init Database
-            IocRegistry.Locate<ILocalDatabase>();
         }
 
         void RegisterServices()
@@ -37,6 +37,7 @@ namespace AgeCal.Droid
             {
                 var db = new SqliteDatabase();
                 db.Initialize();
+                db.InitializeTables(new List<Type> { typeof(User) });
                 return db;
             });
         }
