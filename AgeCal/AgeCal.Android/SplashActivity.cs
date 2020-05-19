@@ -14,7 +14,7 @@ using Android.Widget;
 
 namespace AgeCal.Droid
 {
-    [Activity(Theme = "@style/SplashTheme", MainLauncher = true, NoHistory = true,  ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Theme = "@style/SplashTheme", MainLauncher = true, NoHistory = true, ScreenOrientation = ScreenOrientation.Portrait, ConfigurationChanges = ConfigChanges.ScreenSize)]
     public class SplashActivity : AppCompatActivity
     {
 
@@ -29,17 +29,12 @@ namespace AgeCal.Droid
         protected override void OnResume()
         {
             base.OnResume();
-            Task startupWork = new Task(() => { SimulateStartup(); });
-            startupWork.Start();
+            SimulateStartup();
+
         }
 
         // Simulates background work that happens behind the splash screen
-        async void SimulateStartup()
-        {
+        void SimulateStartup() => StartActivity(new Intent(Application.Context, typeof(MainActivity)));
 
-            await Task.Delay(3000); // Simulate a bit of startup work.
-
-            StartActivity(new Intent(Application.Context, typeof(MainActivity)));
-        }
     }
 }
