@@ -7,14 +7,25 @@
              x:TypeArguments="viewModel:HomeViewModel"
              x:Class="AgeCal.Views.Home">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Birthday.Text}" FontSize="Large"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            
-            <Label Text="{Binding Message}"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Spacing="5" Margin="2" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand">
+            <Label Text="Hey!" FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
+            <Label Text="Welcome to Age Calculator. Tap on + icon to add your birthday information." FontSize="Small" TextColor="{StaticResource PrimaryBlack}"></Label>
+            <Label Text="Today Birthday" TextDecorations="Underline" FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
+            <Frame CornerRadius="20" Margin="2" BackgroundColor="{StaticResource PrimaryCyan}" Opacity="0.6" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
+                <StackLayout Spacing="5">
+                    <Label Text="{Binding Birthday.Text}" TextColor="{StaticResource PrimaryWhite}" IsVisible="{Binding HasData}" FontSize="Large"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="StartAndExpand" />
+                    <Label Text="Happy birthday! I hope all your birthday wishes and dreams come true." TextColor="{StaticResource PrimaryWhite}" IsVisible="{Binding HasData}" FontSize="Small"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="StartAndExpand" />
+
+                </StackLayout>
+            </Frame>
+            <Label Text="Other" IsVisible="{Binding HasMoreBirthday}" TextDecorations="Underline" FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
+            <Label Text="{Binding Message}" IsVisible="{Binding HasMoreBirthday}"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="StartAndExpand" />
         </StackLayout>
     </ContentPage.Content>
 

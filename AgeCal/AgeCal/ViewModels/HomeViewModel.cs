@@ -13,6 +13,7 @@ namespace AgeCal.ViewModels
         {
             _userRepository = userRepository;
             Title = "Dashboard";
+            MessageService.Register<User>(this, AddedUser);
 
 
         }
@@ -42,6 +43,16 @@ namespace AgeCal.ViewModels
                 RaisePropertyChanged(nameof(HasData));
             }
         }
+        bool hasMoreBirthday;
+        public bool HasMoreBirthday
+        {
+            get { return hasMoreBirthday; }
+            set
+            {
+                hasMoreBirthday = value;
+                RaisePropertyChanged(nameof(HasMoreBirthday));
+            }
+        }
 
         string message;
         public string Message
@@ -50,6 +61,7 @@ namespace AgeCal.ViewModels
             set
             {
                 message = value;
+                HasMoreBirthday = !string.IsNullOrEmpty(message);
                 RaisePropertyChanged(nameof(Message));
             }
         }
@@ -61,7 +73,13 @@ namespace AgeCal.ViewModels
             base.OnPageAppearing();
 
         }
-
+        void AddedUser(User newUsre)
+        {
+            var day = DateTime.Now.Day;
+            var month = DateTime.Now.Month;
+            if (newUsre != null && ((newUsre.DOB.Month == month && newUsre.DOB.Day >= day) || newUsre.DOB.Month > month))
+                SetBirthday();
+        }
         public void SetBirthday()
         {
             try

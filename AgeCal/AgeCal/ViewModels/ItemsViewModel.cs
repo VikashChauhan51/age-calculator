@@ -38,6 +38,7 @@ namespace AgeCal.ViewModels
                 var items = _userRepository.GetAll(0, 50);
                 foreach (var item in items)
                 {
+                    item.DOB = new DateTime(item.DOB.Year, item.DOB.Month, item.DOB.Day, item.Time.Hours, item.Time.Minutes, item.Time.Seconds);
                     Items.Add(item);
                 }
             }
@@ -54,6 +55,7 @@ namespace AgeCal.ViewModels
         {
             if (newUsre != null)
             {
+                newUsre.DOB = new DateTime(newUsre.DOB.Year, newUsre.DOB.Month, newUsre.DOB.Day, newUsre.Time.Hours, newUsre.Time.Minutes, newUsre.Time.Seconds);
                 Items.Add(newUsre);
             }
         }
