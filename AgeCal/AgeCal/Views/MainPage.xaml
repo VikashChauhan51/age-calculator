@@ -12,7 +12,7 @@
         <StackLayout x:Name="MainContainer" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0">
 
             <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-                <ActivityIndicator IsRunning="True" IsEnabled="True" Color="{StaticResource PrimaryCyan}" HeightRequest="80" WidthRequest="80" />
+                <ActivityIndicator IsRunning="True" IsEnabled="True" Color="{StaticResource  PrimaryGray}" HeightRequest="80" WidthRequest="80" />
             </StackLayout>
 
 

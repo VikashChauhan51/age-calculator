@@ -67,6 +67,8 @@
   <ItemGroup>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Services\iOSNotificationManager.cs" />
+    <Compile Include="Services\NotificationEventArgs.cs" />
     <Compile Include="Services\SqliteDatabase.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />

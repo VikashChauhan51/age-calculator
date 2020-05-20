@@ -23,12 +23,14 @@ namespace AgeCal.Components
                 if (spinner == null)
                 {
                     spinner = new ActivityIndicator
-
                     {
                         IsRunning = true,
                         IsEnabled = true,
-                        VerticalOptions = LayoutOptions.FillAndExpand,
-                        HorizontalOptions = LayoutOptions.FillAndExpand,
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center,
+                        Color = Color.Gray,
+                        HeightRequest = 32,
+                        WidthRequest = 32,
 
                     };
                     this.Children.Add(spinner);

@@ -41,6 +41,12 @@ namespace AgeCal.Droid
                 db.InitializeTables(new List<Type> { typeof(User) });
                 return db;
             });
+            IocRegistry.Register<INotificationManager>(() =>
+            {
+                var notification = new AndroidNotificationManager();
+                notification.Initialize();
+                return notification;
+            });
             IocRegistry.Register<ILocalizer, Localizer>();
         }
     }
