@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using AgeCal.Core;
 using AgeCal.Ioc;
 using GalaSoft.MvvmLight;
+using AgeCal.Interfaces;
 
 namespace AgeCal.ViewModels
 {
@@ -32,6 +33,7 @@ namespace AgeCal.ViewModels
 
         protected IAgeNavigationService NavigationService => IocRegistry.Locate<IAgeNavigationService>();
         protected ILocalizer Localizer => IocRegistry.Locate<ILocalizer>();
+        protected IAppMessagingCenter MessageService => IocRegistry.Locate<IAppMessagingCenter>();
         bool isBusy = false;
         public bool IsBusy
         {
@@ -127,7 +129,7 @@ namespace AgeCal.ViewModels
             changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
         public virtual Task<Tuple<string, object>> ShouldReRoute() => Task.FromResult(new Tuple<string, object>(string.Empty, null));
-       
+
         #endregion
     }
 }

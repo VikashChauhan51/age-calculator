@@ -1,6 +1,7 @@
 ﻿using AgeCal.i18n;
 using AgeCal.Interfaces;
 using AgeCal.Ioc;
+using AgeCal.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -68,7 +69,7 @@ namespace AgeCal.ViewModels
                 if (!IsBusy && isValid())
                 {
                     IsBusy = true;
-                    _userRepository.Add(new Models.User
+                    var user = new User
                     {
                         Id = Guid.NewGuid().ToString(),
                         Text = Name,
@@ -76,9 +77,12 @@ namespace AgeCal.ViewModels
                         DOB = DOB,
                         Time = Time,
                         CreatedOn = DateTime.UtcNow
-                    });
+                    };
+                    _userRepository.Add(user);
+                    MessageService.Send<User>(user);
                     Clear();
                     NavigationService.GoBackModel(new Core.Toast { Message = AppResource.DataSaveMessage });
+
                 }
             }
             catch (Exception ex)
@@ -96,7 +100,7 @@ namespace AgeCal.ViewModels
 
         public override void OnNavigationParameter(object parm)
         {
-             
+
 
         }
         bool isValid()

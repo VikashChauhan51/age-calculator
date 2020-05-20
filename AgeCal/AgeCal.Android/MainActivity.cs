@@ -11,6 +11,7 @@ using AgeCal.Droid.Services;
 using AgeCal.Interfaces;
 using System.Collections.Generic;
 using AgeCal.Models;
+using AgeCal.Services;
 
 namespace AgeCal.Droid
 {
@@ -40,6 +41,7 @@ namespace AgeCal.Droid
                 db.InitializeTables(new List<Type> { typeof(User) });
                 return db;
             });
+            IocRegistry.Register<ILocalizer, Localizer>();
         }
     }
 }

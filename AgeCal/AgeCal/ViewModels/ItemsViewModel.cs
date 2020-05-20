@@ -22,13 +22,7 @@ namespace AgeCal.ViewModels
             Items = new ObservableCollection<User>();
             _userRepository = userRepository;
             LoadItemsCommand = new Command(ExecuteLoadItemsCommand);
-
-            //MessagingCenter.Subscribe<NewItemPage, Item>(this, "AddItem", async (obj, item) =>
-            //{
-            //    var newItem = item as Item;
-            //    Items.Add(newItem);
-            //    await DataStore.AddItemAsync(newItem);
-            //});
+            MessageService.Register<User>(this, AddedUser);
         }
 
         void ExecuteLoadItemsCommand()
@@ -54,6 +48,13 @@ namespace AgeCal.ViewModels
             finally
             {
                 IsBusy = false;
+            }
+        }
+        void AddedUser(User newUsre)
+        {
+            if (newUsre != null)
+            {
+                Items.Add(newUsre);
             }
         }
         public override void OnPageAppearing()

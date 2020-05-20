@@ -73,11 +73,13 @@ namespace AgeCal
 
         internal static void RegisterServices()
         {
+
             SimpleIoc container = SimpleIoc.Default;
             var serviceLocator = new SimpleIocLocatorProvider(container);
             CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => serviceLocator);
+            IocRegistry.Register<IAppMessagingCenter, AppMessagingCenter>();
+            //register repositories
             IocRegistry.Register<IUserRepository, UserRepository>();
-
             //register navigation
             IocRegistry.Register<IAgeNavigationService>(NavigationFactory);
         }
