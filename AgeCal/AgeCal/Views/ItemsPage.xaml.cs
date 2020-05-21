@@ -41,7 +41,7 @@ namespace AgeCal.Views
                 return;
 
             if (ViewModel != null)
-                IocRegistry.Locate<IAgeNavigationService>().NavigateTo<ItemDetailViewModel>(item.Id);
+                IocRegistry.Locate<IAgeNavigationService>().NavigateTo<ItemDetailViewModel>(item);
 
             // Manually deselect item.
             ItemsListView.SelectedItem = null;

@@ -2,17 +2,32 @@
 <views:AgeContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AgeCal"
+             xmlns:converter="clr-namespace:AgeCal.Convertors"
              xmlns:views="clr-namespace:AgeCal.Views"
              xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
              x:TypeArguments="viewModel:ItemDetailViewModel"
              x:Class="AgeCal.Views.ItemDetailPage">
-
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:DatetimeToStringConverter x:Key="DatetimeToStringConverter" />
+            <converter:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15">
+        <StackLayout Spacing="20" Padding="15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <StackLayout Spacing="5"  Padding="5" Orientation="Horizontal">
+                <ImageButton x:Name="btnDelete" Source="delete.png" Clicked="BtnDelete_Clicked" WidthRequest="32" HeightRequest="32" BackgroundColor="Transparent" HorizontalOptions="Start"  />
+                <ImageButton x:Name="btnShare" Source="share.png" Command="{Binding ShareCommand}"   WidthRequest="32" HeightRequest="32" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
+            </StackLayout>
+            <BoxView Style="{StaticResource SeparatorBoxView}"></BoxView>
             <Label Text="Text:" FontSize="Medium" />
-            <Label Text="{Binding Item.Text}" FontSize="Small"/>
+            <Label Text="{Binding Name}" FontSize="Small"/>
             <Label Text="Description:" FontSize="Medium" />
-            <Label Text="{Binding Item.Description}" FontSize="Small"/>
+            <Label Text="{Binding Description}" FontSize="Small"/>
+            <Label Text="Birthday Date:" FontSize="Medium" />
+            <Label Text="{Binding DOB,Converter={StaticResource DatetimeToStringConverter}}" FontSize="Small"/>
+            <Label Text="Birthday Time:" FontSize="Medium" />
+            <Label Text="{Binding Time,Converter={StaticResource TimeSpanToStringConverter}}" FontSize="Small"/>
         </StackLayout>
     </ContentPage.Content>
 

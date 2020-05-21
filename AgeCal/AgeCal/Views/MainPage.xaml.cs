@@ -1,4 +1,6 @@
-﻿using AgeCal.Models;
+﻿using AgeCal.Core;
+using AgeCal.Ioc;
+using AgeCal.Models;
 using AgeCal.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,6 +18,7 @@ namespace AgeCal.Views
         {
             InitializeComponent();
             PageTitle = "Age Calculator";
+            
         }
 
       

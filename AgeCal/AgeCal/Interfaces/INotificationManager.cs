@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgeCal.Models;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,8 @@ namespace AgeCal.Interfaces
     {
         event EventHandler NotificationReceived;
 
-        int ScheduleNotification(string title, string message);
+        int ScheduleNotification(Reminder reminder);
+        void UnscheduleNotification(int id);
 
         void ReceiveNotification(string title, string message);
     }

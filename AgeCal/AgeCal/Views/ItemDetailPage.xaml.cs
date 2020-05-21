@@ -6,6 +6,7 @@ using Xamarin.Forms.Xaml;
 using AgeCal.Models;
 using AgeCal.ViewModels;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace AgeCal.Views
 {
@@ -20,7 +21,7 @@ namespace AgeCal.Views
             if (ViewModel != null)
             {
                 ShowSpinner = ViewModel.IsReady;
-                
+
             }
             PageTitle = "Details";
             PageHasbackButton = true;
@@ -52,5 +53,14 @@ namespace AgeCal.Views
 
         }
 
+        async void BtnDelete_Clicked(object sender, EventArgs e)
+        {
+            bool answer = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
+            if (answer)
+            {
+                ViewModel.DeleteCommand.Execute(null);
+            }
+
+        }
     }
 }
