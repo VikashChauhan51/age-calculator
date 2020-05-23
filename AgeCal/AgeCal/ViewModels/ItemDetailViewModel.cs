@@ -21,12 +21,34 @@ namespace AgeCal.ViewModels
 
         private void Share()
         {
-             
+            ShareService.Show("Birthday", "hello");
         }
 
-        private  void Delete()
+        private void Delete()
         {
-            NavigationService.GoBack();
+            try
+            {
+                if (!IsBusy)
+                {
+                    IsBusy = true;
+                    var item = _userRepository.Get(Id);
+                    if (item != null)
+                        _userRepository.Delete(item);
+
+                    NavigationService.GoBack();
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
+
         }
 
         string id = string.Empty;

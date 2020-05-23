@@ -74,6 +74,7 @@
     <Compile Include="Services\AndroidNotificationManager.cs" />
     <Compile Include="Services\Localizer.cs" />
     <Compile Include="Services\NotificationEventArgs.cs" />
+    <Compile Include="Services\Share.cs" />
     <Compile Include="Services\SqliteDatabase.cs" />
     <Compile Include="SplashActivity.cs" />
   </ItemGroup>

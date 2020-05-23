@@ -69,6 +69,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Services\iOSNotificationManager.cs" />
     <Compile Include="Services\NotificationEventArgs.cs" />
+    <Compile Include="Services\Share.cs" />
     <Compile Include="Services\SqliteDatabase.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
@@ -140,6 +141,9 @@
     </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.7.335</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Essentials">
+      <Version>1.5.3.2</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.4.0.1008975" />
   </ItemGroup>
