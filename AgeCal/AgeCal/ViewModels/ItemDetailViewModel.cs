@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AgeCal.Interfaces;
 using AgeCal.Ioc;
 using AgeCal.Models;
+using Xamarin.Essentials;
 
 namespace AgeCal.ViewModels
 {
@@ -16,12 +17,16 @@ namespace AgeCal.ViewModels
         {
             _userRepository = userRepository;
             DeleteCommand = new ExclusiveRelayCommand(Delete);
-            ShareCommand = new ExclusiveRelayCommand(Share);
+            ShareCommand = new ExclusiveRelayCommand(ShareData);
         }
 
-        private void Share()
+        private async void ShareData()
         {
-            ShareService.Show("Birthday", "hello");
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Text = "name",
+                Title = "Share Text"
+            });
         }
 
         private void Delete()
