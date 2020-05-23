@@ -29,7 +29,7 @@ namespace AgeCal.Droid.Services
         public override void Initialize()
         {
 
-            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal); // Documents folder
+            string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData); 
             path = base.GetPath(documentsPath);
             if (!File.Exists(path))
                 File.Create(path);

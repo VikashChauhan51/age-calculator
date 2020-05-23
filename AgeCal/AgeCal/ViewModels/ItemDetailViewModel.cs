@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using AgeCal.Interfaces;
 using AgeCal.Ioc;
 using AgeCal.Models;
+using AgeCal.Utilities;
 using Xamarin.Essentials;
 
 namespace AgeCal.ViewModels
@@ -22,11 +23,22 @@ namespace AgeCal.ViewModels
 
         private async void ShareData()
         {
-            await Share.RequestAsync(new ShareTextRequest
+            try
             {
-                Text = "name",
-                Title = "Share Text"
-            });
+                var date = new DateTime(DOB.Year, DOB.Month, DOB.Day, Time.Hours, Time.Minutes, Time.Seconds);
+                var nextBirthday = BirthdayHelper.GetDateToMessage(date);
+                var age = BirthdayHelper.GetCurrentAge(date);
+                //  NotificationManager.ScheduleNotification(new Reminder { Date = DateTime.Now, Time = new TimeSpan(0, 2, 0), Id = 2, Title = "Birthday", Message = "Today is your birthday" });
+                await Share.RequestAsync(new ShareTextRequest
+                {
+                    Text = string.Format("{0}:{1}\n{2}", name, age, nextBirthday),
+                    Title = "Age Calculation"
+                });
+            }
+            catch (Exception ex)
+            {
+
+            }
         }
 
         private void Delete()

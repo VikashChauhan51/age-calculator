@@ -57,12 +57,11 @@ namespace AgeCal.Droid.Services
                 .SetSmallIcon(Resource.Drawable.data)
                 .SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
 
+            var date = new DateTime(reminder.Date.Year, reminder.Date.Month, reminder.Date.Day+1, reminder.Time.Hours, reminder.Time.Minutes, reminder.Time.Seconds);
+            var triggerTime = NotifyTimeInMilliseconds(date);
+            var alarmManager = GetAlarmManager();
 
-            //var pendingIntent = PendingIntent.GetBroadcast(Application.Context, 0, intent, PendingIntentFlags.CancelCurrent);
-            //var triggerTime = NotifyTimeInMilliseconds(localNotification.NotifyTime);
-            //var alarmManager = GetAlarmManager();
-
-            //alarmManager.Set(AlarmType.RtcWakeup, triggerTime, pendingIntent);
+            alarmManager.Set(AlarmType.RtcWakeup, triggerTime, pendingIntent);
             var notification = builder.Build();
             manager.Notify(reminder.Id, notification);
 
@@ -99,7 +98,7 @@ namespace AgeCal.Droid.Services
         public void UnscheduleNotification(int id)
         {
             Intent intent = new Intent(AndroidApp.Context, typeof(MainActivity));
-            var pendingIntent = PendingIntent.GetBroadcast(AndroidApp.Context, pendingIntentId, intent, PendingIntentFlags.CancelCurrent);;
+            var pendingIntent = PendingIntent.GetBroadcast(AndroidApp.Context, pendingIntentId, intent, PendingIntentFlags.CancelCurrent); ;
             var alarmManager = GetAlarmManager();
             alarmManager.Cancel(pendingIntent);
             manager.Cancel(id);
