@@ -49,7 +49,7 @@ namespace AgeCal
             lazy = new Lazy<App>(() => new App(page));
         }
 
-        public static App Instance => lazy.Value;
+        public static App Instance => new App();// lazy.Value;
         private void InitApp(Type page)
         {
             navPage = new NavigationPage(page == null ? new MainPage() : new MainPage());

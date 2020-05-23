@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using AgeCal.Core;
 using AgeCal.Interfaces;
 using Foundation;
 using UIKit;
@@ -68,6 +69,21 @@ namespace AgeCal.iOS.Services
                 Message = message
             };
             NotificationReceived?.Invoke(null, args);
+        }
+
+        public int ScheduleNotification(Core.NotificationEventArgs reminder)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UnscheduleNotification(string tag, int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Reminder(int seconds, string title, string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

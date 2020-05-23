@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using AgeCal.Core;
 using AgeCal.Interfaces;
 using AgeCal.Ioc;
 using AgeCal.Models;
 using AgeCal.Utilities;
+using Plugin.LocalNotifications;
 using Xamarin.Essentials;
 
 namespace AgeCal.ViewModels
@@ -28,7 +30,7 @@ namespace AgeCal.ViewModels
                 var date = new DateTime(DOB.Year, DOB.Month, DOB.Day, Time.Hours, Time.Minutes, Time.Seconds);
                 var nextBirthday = BirthdayHelper.GetDateToMessage(date);
                 var age = BirthdayHelper.GetCurrentAge(date);
-                //  NotificationManager.ScheduleNotification(new Reminder { Date = DateTime.Now, Time = new TimeSpan(0, 2, 0), Id = 2, Title = "Birthday", Message = "Today is your birthday" });
+                // CrossLocalNotifications.Current.Show("Birthday", "Today is your birthday", 0, DateTime.Now.AddSeconds(10));
                 await Share.RequestAsync(new ShareTextRequest
                 {
                     Text = string.Format("{0}:{1}\n{2}", name, age, nextBirthday),

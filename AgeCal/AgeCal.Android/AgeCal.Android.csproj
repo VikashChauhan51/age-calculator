@@ -60,6 +60,9 @@
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.7.335</Version>
     </PackageReference>
+    <PackageReference Include="Xam.Plugins.Notifier">
+      <Version>3.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Essentials">
       <Version>1.0.1</Version>
     </PackageReference>
@@ -74,9 +77,10 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AlarmReceiver.cs" />
     <Compile Include="Services\AndroidNotificationManager.cs" />
     <Compile Include="Services\Localizer.cs" />
-    <Compile Include="Services\NotificationEventArgs.cs" />
+    <Compile Include="Services\NotificationHandler.cs" />
     <Compile Include="Services\Share.cs" />
     <Compile Include="Services\SqliteDatabase.cs" />
     <Compile Include="SplashActivity.cs" />
