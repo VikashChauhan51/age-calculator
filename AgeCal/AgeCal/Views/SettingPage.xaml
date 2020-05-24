@@ -7,8 +7,9 @@
              x:TypeArguments="viewModel:SettingViewModel"
              x:Class="AgeCal.Views.SettingPage">
     <ContentPage.Content>
-        <StackLayout Spacing="5" Margin="2" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" >
+        <StackLayout Spacing="20" Margin="2" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" >
             <Label Text="General Settings" Style="{StaticResource PrimaryLabel}"  FontSize="Large"></Label>
+            <BoxView Style="{StaticResource SeparatorBoxView}"></BoxView>
             <StackLayout>
                 <ListView x:Name="SettingListView"
                 ItemsSource="{Binding Items}"

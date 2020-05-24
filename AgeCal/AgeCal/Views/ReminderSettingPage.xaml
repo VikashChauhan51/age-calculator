@@ -7,10 +7,41 @@
              x:TypeArguments="viewModel:ReminderSettingViewModel"
              x:Class="AgeCal.Views.ReminderSettingPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Spacing="20" Margin="0" Padding="0" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand">
+            <Label Style="{StaticResource PrimaryLabel}" FontSize="Small" Text="Birthday notification setting:"></Label>
+            <BoxView Style="{StaticResource SeparatorBoxView}"></BoxView>
+            <Grid Margin="2" RowSpacing="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackLayout Grid.Row="0" Grid.Column="0">
+                    <Label Text="Same Day" Style="{StaticResource PrimaryLabel}" ></Label>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Grid.Column="0">
+                    <Label Text="Day Before" Style="{StaticResource PrimaryLabel}" ></Label>
+                </StackLayout>
+                <StackLayout Grid.Row="2" Grid.Column="0">
+                    <Label Text="Week Before" Style="{StaticResource PrimaryLabel}" ></Label>
+                </StackLayout>
+                <StackLayout Grid.Row="3" Grid.Column="0">
+                    <Label Text="Month Before" Style="{StaticResource PrimaryLabel}" ></Label>
+                </StackLayout>
+                <Switch  Grid.Row="0" Grid.Column="1" IsToggled="True" HorizontalOptions="EndAndExpand" ></Switch>
+                <Switch Grid.Row="1" Grid.Column="1" IsToggled="True"  HorizontalOptions="EndAndExpand"  ></Switch>
+                <Switch Grid.Row="2" Grid.Column="1" IsToggled="True"  HorizontalOptions="EndAndExpand"  ></Switch>
+                <Switch Grid.Row="3" Grid.Column="1" IsToggled="True"  HorizontalOptions="EndAndExpand"  ></Switch>
+
+            </Grid>
+
+
+            <Button x:Name="Save" Command="{Binding SaveCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </views:AgeContentPage>

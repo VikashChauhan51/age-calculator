@@ -3,14 +3,21 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
               xmlns:local="clr-namespace:AgeCal"
              xmlns:views="clr-namespace:AgeCal.Views"
+             xmlns:validation="clr-namespace:AgeCal.Behaviors"
              xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
              x:TypeArguments="viewModel:DashboardSettingViewModel"
              x:Class="AgeCal.Views.DashboardSettingPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Spacing="20" Margin="0" Padding="0" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand">
+            <Label Style="{StaticResource PrimaryLabel}" FontSize="Small" Text="The upcoming birthdays will be display on dashboard based on display category."></Label>
+            <Picker x:Name="displayTypePicker"    Title="Select display category"  ItemDisplayBinding="{Binding Text}" ItemsSource="{Binding Items,Mode=TwoWay}" SelectedItem="{Binding SelectedType,Mode=TwoWay}"  ></Picker>
+            <Label Style="{StaticResource PrimaryLabel}" FontSize="Small" Text="Number of birthdays will be display on dashboard."></Label>
+            <Entry Text="{Binding Count}" Keyboard="Numeric" MaxLength="1" Style="{StaticResource PrimaryEntry}" >
+                <Entry.Behaviors>
+                    <validation:NumberValidationBehavior  />
+                </Entry.Behaviors>
+            </Entry>
+            <Button x:Name="Save" Command="{Binding SaveCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </views:AgeContentPage>

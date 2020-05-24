@@ -11,16 +11,18 @@ using Xamarin.Forms.Xaml;
 
 namespace AgeCal.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class DashboardSettingPage : AgeContentPage<DashboardSettingViewModel>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class DashboardSettingPage : AgeContentPage<DashboardSettingViewModel>
     {
-		public DashboardSettingPage()
-		{
-			InitializeComponent();
+        public DashboardSettingPage()
+        {
+            InitializeComponent();
             PageTitle = "Dashboard Settings";
             PageHasbackButton = true;
             ShowBottomNav = false;
+
         }
-        
+
+         
     }
 }
