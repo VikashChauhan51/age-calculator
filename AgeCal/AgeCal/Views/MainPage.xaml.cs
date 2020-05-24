@@ -18,7 +18,7 @@ namespace AgeCal.Views
         {
             InitializeComponent();
             PageTitle = "Age Calculator";
-            
+            ShowBottomNav = true;
         }
 
       

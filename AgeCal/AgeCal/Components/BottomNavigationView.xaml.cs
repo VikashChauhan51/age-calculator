@@ -17,6 +17,9 @@ namespace AgeCal.Components
         {
             InitializeComponent();
 
+            HasVisibility = true;
+            BottomNavBar.IsVisible = HasVisibility;
+            TopDivider.IsVisible = HasVisibility;
             Button addButton = new Button
             {
                 Style = (Style)Application.Current.Resources["BtnRound"],
@@ -26,10 +29,10 @@ namespace AgeCal.Components
             addButton.Clicked += AddData;
 
             AddIcon("home.png", "Home", typeof(HomeViewModel));
-            AddIcon("data.png", "Data", typeof(ItemsViewModel));
+            AddIcon("info.png", "Data", typeof(ItemsViewModel));
             this.IconLayout.Children.Add(addButton);
             AddIcon("fact.png", "About", typeof(AboutViewModel));
-            AddIcon("team.png", "Teams", typeof(HomeViewModel));
+            AddIcon("setting.png", "Settings", typeof(SettingViewModel));
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
             nameof(ButtonPressed),
@@ -42,6 +45,21 @@ namespace AgeCal.Components
         protected virtual void UpdateButtonPressed(ICommand oldV, ICommand newV)
         {
             ButtonPressed = newV;
+        }
+
+        public static readonly BindableProperty HasVisibilityProperty = BindableProperty.Create(
+           nameof(HasVisibility),
+           typeof(bool),
+           typeof(BottomNavigationView),
+           null,
+           propertyChanged: (bindable, oldV, newV) => ((BottomNavigationView)bindable).UpdateHasVisibility((bool)oldV, (bool)newV));
+        public bool HasVisibility { get { return (bool)GetValue(HasVisibilityProperty); } set { SetValue(HasVisibilityProperty, value); } }
+
+        protected virtual void UpdateHasVisibility(bool oldV, bool newV)
+        {
+            HasVisibility = newV;
+            BottomNavBar.IsVisible = HasVisibility;
+            TopDivider.IsVisible = HasVisibility;
         }
         private void AddData(object sender, EventArgs e)
         {

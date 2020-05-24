@@ -199,6 +199,12 @@ namespace AgeCal.Views
         protected virtual void UpdateShowBottomNav(bool oldV, bool newV)
         {
             ShowBottomNav = newV;
+            if (BottomNavigationView != null)
+            {
+                BottomNavigationView.IsVisible = ShowBottomNav;
+                BottomNavigationView.HasVisibility = ShowBottomNav;
+            }
+
         }
 
         public static readonly BindableProperty ShowSpinnerProperty = BindableProperty.Create(
@@ -224,7 +230,7 @@ namespace AgeCal.Views
         }
 
 
-        protected virtual void OnViewModelPropertyChanged(object sender,PropertyChangedEventArgs e)
+        protected virtual void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
 
         }

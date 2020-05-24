@@ -25,6 +25,7 @@ namespace AgeCal.Views
             }
             PageTitle = "Details";
             PageHasbackButton = true;
+            ShowBottomNav = false;
 
         }
 

@@ -47,7 +47,13 @@ namespace AgeCal.Droid
             {
                 var db = new SqliteDatabase();
                 db.Initialize();
-                db.InitializeTables(new List<Type> { typeof(User) });
+                db.InitializeTables(new List<Type>
+                {
+                    typeof(User),
+                    typeof(Reminder),
+                    typeof(ReminderSetting),
+                    typeof(DashboardSetting)
+                });
                 return db;
             });
             IocRegistry.Register<INotificationManager>(() =>

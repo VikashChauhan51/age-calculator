@@ -31,7 +31,7 @@ namespace AgeCal.Views
 
             }
             PageTitle = "Data";
-
+            ShowBottomNav = true;
         }
 
         void OnItemSelected(object sender, SelectedItemChangedEventArgs args)

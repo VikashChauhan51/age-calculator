@@ -34,18 +34,18 @@ namespace AgeCal.Repository
             }
         }
 
-        public IEnumerable<User> Find(Func<User, bool> predicate, int skip, int take)
-        {
-            using (var connect = AgeDatabase.Database.Connection())
-            {
-                return connect.Table<User>()
-                           .Where(predicate)
-                           .Skip(skip)
-                           .Take(take)
-                           .ToList();
+        //public IEnumerable<User> Find(Func<User, bool> predicate, int skip, int take)
+        //{
+        //    using (var connect = AgeDatabase.Database.Connection())
+        //    {
+        //        return connect.Table<User>()
+        //                   .Where(predicate)
+        //                   .Skip(skip)
+        //                   .Take(take)
+        //                   .ToList();
 
-            }
-        }
+        //    }
+        //}
 
         public User Get(string id)
         {
@@ -78,17 +78,17 @@ namespace AgeCal.Repository
             }
         }
 
-        public bool Any(Func<User, bool> predicate)
-        {
-            using (var connect = AgeDatabase.Database.Connection())
-            {
-                return connect.Table<User>()
-                           .Where(predicate)
-                           .Any();
+        //public bool Any(Func<User, bool> predicate)
+        //{
+        //    using (var connect = AgeDatabase.Database.Connection())
+        //    {
+        //        return connect.Table<User>()
+        //                   .Where(predicate)
+        //                   .Any();
 
 
-            }
-        }
+        //    }
+        //}
 
         public User GetTodayBirthday()
         {

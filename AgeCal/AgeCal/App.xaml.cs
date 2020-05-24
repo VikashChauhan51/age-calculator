@@ -92,6 +92,9 @@ namespace AgeCal
             navService.RegisterPage<AboutViewModel, AboutPage>();
             navService.RegisterPage<ItemsViewModel, ItemsPage>();
             navService.RegisterPage<ItemDetailViewModel, ItemDetailPage>();
+            navService.RegisterPage<SettingViewModel, SettingPage>();
+            navService.RegisterPage<DashboardSettingViewModel, DashboardSettingPage>();
+            navService.RegisterPage<ReminderSettingViewModel, ReminderSettingPage>();
             return navService;
 
         }

@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgeCal.Components.BottomNavigationView">
     <ContentView.Content>
-        <StackLayout x:Name="BottomNavBar" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="80" BackgroundColor="{StaticResource PrimaryWhite}">
+        <StackLayout x:Name="BottomNavBar"  Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="80" BackgroundColor="{StaticResource PrimaryWhite}">
             <BoxView x:Name="TopDivider"  Style="{StaticResource SeparatorBoxView}" VerticalOptions="Start"   HorizontalOptions="FillAndExpand">
 
             </BoxView>

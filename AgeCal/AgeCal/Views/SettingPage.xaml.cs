@@ -1,4 +1,7 @@
-﻿using AgeCal.ViewModels;
+﻿using AgeCal.Core;
+using AgeCal.Ioc;
+using AgeCal.Models;
+using AgeCal.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,20 +14,21 @@ using Xamarin.Forms.Xaml;
 
 namespace AgeCal.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class Home :AgeContentPage<HomeViewModel>
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class SettingPage : AgeContentPage<SettingViewModel>
     {
-		public Home ():base()
-		{
-			InitializeComponent();
-            PageTitle = "Dashboard";
-            if (ViewModel!=null)
+        public SettingPage()
+        {
+            InitializeComponent();
+            PageTitle = "Settings";
+            if (ViewModel != null)
             {
                 ShowSpinner = !ViewModel.IsReady || ViewModel.IsBusy;
-                ViewModel.SetBirthday();
+
             }
             ShowBottomNav = true;
         }
+
         protected override void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             Device.BeginInvokeOnMainThread(() =>
@@ -48,6 +52,24 @@ namespace AgeCal.Views
                 }
             });
 
+        }
+
+        private void SettingListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var item = e.SelectedItem as Setting;
+            if (item == null)
+                return;
+
+            if (ViewModel != null)
+            {
+                var navigation = IocRegistry.Locate<IAgeNavigationService>();
+                var key = navigation.GetKey(item.ViewModel);
+                navigation.NavigateTo(key);
+            }
+
+
+            // Manually deselect item.
+            SettingListView.SelectedItem = null;
         }
     }
 }

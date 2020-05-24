@@ -8,13 +8,13 @@ namespace AgeCal.Models
     {
         public int Id { get; set; }
         public string UserId { get; set; }
-        public DateTime Date { get; set; }
-        public TimeSpan Time { get; set; }
+        public DateTimeOffset When { get; set; }
+        public bool Active { get; set; }
         public string Message { get; set; }
         public string Title { get; set; }
         public string Tag { get; set; }
-        public Reminder()
-        {
-        }
+        public string Type { get; set; }
+        public int RepeatInterval { get; set; }
+        
     }
 }

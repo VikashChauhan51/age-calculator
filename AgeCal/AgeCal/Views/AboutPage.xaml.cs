@@ -13,6 +13,7 @@ namespace AgeCal.Views
         {
             InitializeComponent();
             PageTitle = "About";
+            ShowBottomNav = true;
         }
     }
 }
