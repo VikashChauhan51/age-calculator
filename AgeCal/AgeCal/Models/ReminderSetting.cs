@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,7 @@ namespace AgeCal.Models
 {
     public class ReminderSetting
     {
+        [PrimaryKey]
         public string Id { get; set; }
         public string UserId { get; set; }
         public bool Enable { get; set; }

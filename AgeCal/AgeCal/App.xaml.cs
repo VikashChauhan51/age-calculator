@@ -80,6 +80,8 @@ namespace AgeCal
             IocRegistry.Register<IAppMessagingCenter, AppMessagingCenter>();
             //register repositories
             IocRegistry.Register<IUserRepository, UserRepository>();
+            IocRegistry.Register<IDashboardSettingRepository, DashboardSettingRepository>();
+            IocRegistry.Register<IReminderSettingRepository, ReminderSettingRepository>();
             //register navigation
             IocRegistry.Register<IAgeNavigationService>(NavigationFactory);
         }

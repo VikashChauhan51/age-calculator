@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Linq;
 
 namespace AgeCal.ViewModels
 {
@@ -14,11 +15,12 @@ namespace AgeCal.ViewModels
     {
 
         public ExclusiveRelayCommand SaveCommand { get; set; }
-        private readonly IUserRepository _userRepository;
-
-        public DashboardSettingViewModel(IUserRepository userRepository)
+        private readonly IDashboardSettingRepository _dashboardSettingRepository;
+        private DashboardSetting setting;
+        public DashboardSettingViewModel(IDashboardSettingRepository dashboardSettingRepository)
         {
-            _userRepository = userRepository;
+            setting = null;
+            _dashboardSettingRepository = dashboardSettingRepository;
             SaveCommand = new ExclusiveRelayCommand(SaveInfo);
             Items = new ObservableCollection<Item>();
 
@@ -65,13 +67,24 @@ namespace AgeCal.ViewModels
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    var setting = new DashboardSetting
+                    if (setting == null)
                     {
-                        Id = Guid.NewGuid().ToString(),
-                        UserId = string.Empty,
-                        DisplayType = selectedType.Key,
-                        Count = Count
-                    };
+                        setting = new DashboardSetting
+                        {
+                            Id = Guid.NewGuid().ToString(),
+                            UserId = string.Empty,
+                            DisplayType = selectedType.Key,
+                            Count = Count
+                        };
+                        _dashboardSettingRepository.Add(setting);
+                    }
+                    else
+                    {
+                        setting.DisplayType = selectedType.Key;
+                        setting.Count = Count;
+                        _dashboardSettingRepository.Update(setting);
+
+                    }
 
                 }
             }
@@ -90,17 +103,49 @@ namespace AgeCal.ViewModels
         {
             base.OnPageAppearing();
             BindTypeList();
-            SelectedType = new Item { Key = 0, Text = "Today" };
+            LoadData();
 
         }
 
         private void BindTypeList()
         {
             Items.Clear();
-            Items.Add(new Item { Key = 0, Text = "Today" });
-            Items.Add(new Item { Key = 1, Text = "Weekly" });
-            Items.Add(new Item { Key = 2, Text = "Monthly" });
+            foreach (var item in GetItems())
+                Items.Add(item);
 
+        }
+        private IEnumerable<Item> GetItems()
+        {
+            yield return new Item { Key = 0, Text = "Today" };
+            yield return new Item { Key = 1, Text = "Weekly" };
+            yield return new Item { Key = 2, Text = "Monthly" };
+        }
+        private void LoadData()
+        {
+            try
+            {
+                if (!IsBusy)
+                {
+                    IsBusy = true;
+                    setting = _dashboardSettingRepository.GetAll(0, 1).FirstOrDefault();
+                    if (setting != null)
+                    {
+                        SelectedType = GetItems().FirstOrDefault(x => x.Key == setting.DisplayType);
+                        Count = setting.Count;
+                    }
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
     }
 }

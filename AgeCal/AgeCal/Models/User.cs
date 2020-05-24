@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,10 +7,7 @@ namespace AgeCal.Models
 {
     public class User
     {
-        public User()
-        {
-
-        }
+        [PrimaryKey]
         public string Id { get; set; }
         public string Text { get; set; }
         public string Description { get; set; }

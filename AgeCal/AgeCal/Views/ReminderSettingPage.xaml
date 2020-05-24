@@ -22,21 +22,21 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackLayout Grid.Row="0" Grid.Column="0">
-                    <Label Text="Same Day" Style="{StaticResource PrimaryLabel}" ></Label>
+                    <Label Text="Notify Same Day" Style="{StaticResource PrimaryLabel}" ></Label>
                 </StackLayout>
                 <StackLayout Grid.Row="1" Grid.Column="0">
-                    <Label Text="Day Before" Style="{StaticResource PrimaryLabel}" ></Label>
+                    <Label Text="Notify Day Before" Style="{StaticResource PrimaryLabel}" ></Label>
                 </StackLayout>
                 <StackLayout Grid.Row="2" Grid.Column="0">
-                    <Label Text="Week Before" Style="{StaticResource PrimaryLabel}" ></Label>
+                    <Label Text="Notify Week Before" Style="{StaticResource PrimaryLabel}" ></Label>
                 </StackLayout>
                 <StackLayout Grid.Row="3" Grid.Column="0">
-                    <Label Text="Month Before" Style="{StaticResource PrimaryLabel}" ></Label>
+                    <Label Text="Notify Month Before" Style="{StaticResource PrimaryLabel}" ></Label>
                 </StackLayout>
-                <Switch  Grid.Row="0" Grid.Column="1" IsToggled="True" HorizontalOptions="EndAndExpand" ></Switch>
-                <Switch Grid.Row="1" Grid.Column="1" IsToggled="True"  HorizontalOptions="EndAndExpand"  ></Switch>
-                <Switch Grid.Row="2" Grid.Column="1" IsToggled="True"  HorizontalOptions="EndAndExpand"  ></Switch>
-                <Switch Grid.Row="3" Grid.Column="1" IsToggled="True"  HorizontalOptions="EndAndExpand"  ></Switch>
+                <Switch  Grid.Row="0" Grid.Column="1" IsToggled="{Binding NotifySameDay}" HorizontalOptions="EndAndExpand" ></Switch>
+                <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding NotifyDayBefore}"  HorizontalOptions="EndAndExpand"  ></Switch>
+                <Switch Grid.Row="2" Grid.Column="1" IsToggled="{Binding NotifyWeekBefore}"  HorizontalOptions="EndAndExpand"  ></Switch>
+                <Switch Grid.Row="3" Grid.Column="1" IsToggled="{Binding NotifyMonthBefore}"  HorizontalOptions="EndAndExpand"  ></Switch>
 
             </Grid>
 
