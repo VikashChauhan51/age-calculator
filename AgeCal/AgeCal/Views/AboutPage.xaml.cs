@@ -9,12 +9,14 @@ namespace AgeCal.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AboutPage : AgeContentPage<AboutViewModel>
     {
-        public AboutPage():base()
+        public AboutPage() : base()
         {
             InitializeComponent();
             PageTitle = "About";
-            ShowBottomNav = false;
-            PageHasbackButton = true;
+
+            ShowBottomNav = true;
+            PageHasbackButton = false;
+
         }
     }
 }

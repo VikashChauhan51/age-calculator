@@ -56,6 +56,17 @@ namespace AgeCal.ViewModels
                 RaisePropertyChanged(nameof(IsReady));
             }
         }
+        bool showNavBar;
+        public bool ShowNavBar
+        {
+            get { return showNavBar; }
+            set
+            {
+
+                showNavBar = value;
+                RaisePropertyChanged(nameof(ShowNavBar));
+            }
+        }
         string title = string.Empty;
         public string Title
         {
@@ -110,7 +121,16 @@ namespace AgeCal.ViewModels
         }
         public virtual void OnNavigationParameter(object parm)
         {
+            ShowNavBar = false;
+            if (parm is bool showNavBar)
+            {
+                if (showNavBar)
+                    ShowNavBar = showNavBar;
+            }
+                
             IsReady = true;
+
+            
         }
         public virtual void OnPageAppearing()
         {

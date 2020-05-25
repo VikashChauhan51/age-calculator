@@ -64,7 +64,7 @@ namespace AgeCal.Views
             {
                 var navigation = IocRegistry.Locate<IAgeNavigationService>();
                 var key = navigation.GetKey(item.ViewModel);
-                navigation.NavigateTo(key);
+                navigation.NavigateTo(key, true);
             }
 
 

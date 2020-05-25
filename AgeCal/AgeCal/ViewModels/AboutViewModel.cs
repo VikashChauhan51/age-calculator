@@ -15,5 +15,14 @@ namespace AgeCal.ViewModels
         }
 
         public ICommand OpenWebCommand { get; }
+       
+  
+
+        public override void OnPageAppearing()
+        {
+            base.OnPageAppearing();
+
+
+        }
     }
 }
