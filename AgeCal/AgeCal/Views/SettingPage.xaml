@@ -8,18 +8,27 @@
              x:Class="AgeCal.Views.SettingPage">
     <ContentPage.Content>
         <StackLayout Spacing="20" Margin="2" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand" >
-            <Label Text="General Settings" Style="{StaticResource PrimaryLabel}"  FontSize="Large"></Label>
-            <BoxView Style="{StaticResource SeparatorBoxView}"></BoxView>
+
             <StackLayout>
                 <ListView x:Name="SettingListView"
-                ItemsSource="{Binding Items}"
+                ItemsSource="{Binding SettingSource}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
+                IsGroupingEnabled="True"
                 RefreshCommand="{Binding LoadItemsCommand}"
                 IsPullToRefreshEnabled="False"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
                 ItemSelected="SettingListView_ItemSelected">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" HeightRequest="40" Margin="2"  BackgroundColor="Transparent"  VerticalOptions="StartAndExpand">
+                                    <Label Text="{Binding Heading}" FontSize="Medium"  Style="{StaticResource Key=PrimaryLabel}" />
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:AgeContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AgeCal"
+             xmlns:views="clr-namespace:AgeCal.Views"
+             xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
+             x:TypeArguments="viewModel:UserManualViewModel"
+             x:Class="AgeCal.Views.UserManualPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Welcome to Xamarin.Forms!"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</views:AgeContentPage>

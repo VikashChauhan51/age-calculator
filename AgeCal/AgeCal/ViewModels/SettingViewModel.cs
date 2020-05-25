@@ -9,11 +9,11 @@ namespace AgeCal.ViewModels
 {
     public class SettingViewModel : BaseViewModel
     {
-        public ObservableCollection<Setting> Items { get; set; }
+        public ObservableCollection<SettingList> SettingSource { get; set; }
         public Command LoadItemsCommand { get; set; }
         public SettingViewModel()
         {
-            Items = new ObservableCollection<Setting>();
+            SettingSource = new ObservableCollection<SettingList>();
             LoadItemsCommand = new Command(ExecuteLoadItemsCommand);
         }
 
@@ -26,10 +26,34 @@ namespace AgeCal.ViewModels
 
             try
             {
-                Items.Clear();
+                SettingSource.Clear();
+                var account = new SettingList()
+                {
+                          new Setting { Title = "Dashboard", ViewModel = typeof(DashboardSettingViewModel) },
+                          new Setting { Title = "Reminder", ViewModel = typeof(ReminderSettingViewModel) }
+                };
+                account.Heading = "ACCOUNT";
 
-                foreach (var item in GetSettings())
-                    Items.Add(item);
+                var support = new SettingList()
+                {
+                          new Setting { Title = "Contact Us", ViewModel = typeof(ContactUsViewModel) },
+                          new Setting { Title = "App Version", ViewModel = typeof(AppVersionViewModel) },
+                          new Setting { Title = "About Us", ViewModel = typeof(AboutViewModel) },
+                          new Setting { Title = "User Manual", ViewModel = typeof(UserManualViewModel) },
+                          new Setting { Title = "Rate Us", ViewModel = typeof(RateUsViewModel) }
+                };
+                support.Heading = "SUPPORT";
+
+                var documents = new SettingList()
+                {
+                          new Setting { Title = "Private Policy", ViewModel = typeof(PrivatePolicyViewModel) },
+                          new Setting { Title = "Terms & Conditions", ViewModel = typeof(TermsViewModel) }
+                };
+                documents.Heading = "LEGAL DOCUMENTS";
+
+                SettingSource.Add(account);
+                SettingSource.Add(support);
+                SettingSource.Add(documents);
             }
             catch (Exception ex)
             {
@@ -45,10 +69,6 @@ namespace AgeCal.ViewModels
             base.OnPageAppearing();
             ExecuteLoadItemsCommand();
         }
-        private static IEnumerable<Setting> GetSettings()
-        {
-            yield return new Setting { Title = "Dashboard", ViewModel = typeof(DashboardSettingViewModel) };
-            yield return new Setting { Title = "Reminder", ViewModel = typeof(ReminderSettingViewModel) };
-        }
+
     }
 }

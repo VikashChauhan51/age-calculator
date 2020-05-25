@@ -75,7 +75,7 @@ namespace AgeCal.Views
                         AbsoluteLayout.SetLayoutFlags(closeButton, AbsoluteLayoutFlags.XProportional | AbsoluteLayoutFlags.SizeProportional);
                         BoxView box = new BoxView()
                         {
-                            BackgroundColor=Color.Gray,
+                            BackgroundColor=Color.Black,
                             HorizontalOptions= LayoutOptions.Center,
                             VerticalOptions= LayoutOptions.StartAndExpand,
                             HeightRequest=4,
