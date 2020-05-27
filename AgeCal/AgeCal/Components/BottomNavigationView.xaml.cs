@@ -28,10 +28,10 @@ namespace AgeCal.Components
             };
             addButton.Clicked += AddData;
 
-            AddIcon("home.png", "Home", typeof(HomeViewModel));
-            AddIcon("info.png", "Data", typeof(ItemsViewModel));
+            AddIcon("chart.png", "Home", typeof(HomeViewModel));
+            AddIcon("data.png", "Data", typeof(ItemsViewModel));
             this.IconLayout.Children.Add(addButton);
-            AddIcon("fact.png", "About", typeof(AboutViewModel));
+            AddIcon("clock.png", "Reminder", typeof(AboutViewModel));
             AddIcon("setting.png", "Settings", typeof(SettingViewModel));
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
@@ -78,11 +78,11 @@ namespace AgeCal.Components
             var Icon = new ImageButton
             {
                 Source = icon,
-                HeightRequest = 32,
+                HeightRequest = 36,
                 Padding = 0,
                 Margin = 0,
                 BackgroundColor = Color.Transparent,
-                WidthRequest = 32,
+                WidthRequest = 36,
             };
             Icon.Clicked += Icon_Clicked;
             Icon.CommandParameter = viewModelType;
