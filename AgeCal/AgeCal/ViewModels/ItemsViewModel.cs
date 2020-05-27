@@ -18,7 +18,7 @@ namespace AgeCal.ViewModels
         private readonly IUserRepository _userRepository;
         public ItemsViewModel(IUserRepository userRepository)
         {
-            Title = "Browse";
+            Title = "Data";
             Items = new ObservableCollection<User>();
             _userRepository = userRepository;
             LoadItemsCommand = new Command(ExecuteLoadItemsCommand);

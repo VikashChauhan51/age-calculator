@@ -6,8 +6,7 @@
              xmlns:views="clr-namespace:AgeCal.Views"
              xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
              x:TypeArguments="viewModel:ItemsViewModel"
-             x:Class="AgeCal.Views.ItemsPage"
-             x:Name="BrowseItemsPage">
+             x:Class="AgeCal.Views.ItemsPage" >
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:AgeConverter x:Key="AgeConverter" />
@@ -23,20 +22,21 @@
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
+                SeparatorVisibility="None"
                 ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
                             <StackLayout Padding="10">
                                 <Label Text="{Binding Text}" 
                                 LineBreakMode="NoWrap" 
-                                Style="{DynamicResource ListItemTextStyle}" 
-                                FontSize="16" />
+                                FontSize="Medium" FontAttributes="Bold" />
                                 <Label Text="{Binding DOB,Converter={StaticResource AgeConverter}}" 
                                 LineBreakMode="NoWrap"
-                                Style="{DynamicResource ListItemDetailTextStyle}"
-                                FontSize="13" />
+                                FontSize="Small" TextColor="Accent" />
                             </StackLayout>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
