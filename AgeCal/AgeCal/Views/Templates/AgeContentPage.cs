@@ -101,11 +101,8 @@ namespace AgeCal.Views
                 if (BottomNavigationView != null)
                     BottomNavigationView.ButtonPressed = ViewModel.BottomNavigationCommand;
 
-                if (ViewModel.ShowNavBar)
-                {
-                    ShowBottomNav = false;
-                    PageHasbackButton = true;
-                }
+                if (!string.IsNullOrEmpty(ViewModel.Title))
+                    PageTitle = ViewModel.Title;
 
                 ViewModel.OnPageAppearing();
 

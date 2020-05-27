@@ -14,8 +14,8 @@ namespace AgeCal.Views
             InitializeComponent();
             PageTitle = "About";
 
-            ShowBottomNav = true;
-            PageHasbackButton = false;
+            ShowBottomNav = false;
+            PageHasbackButton = true;
 
         }
     }
