@@ -5,7 +5,7 @@
              x:Class="AgeCal.Components.TopNavigationView">
     <ContentView.Content>
         <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryCyan}"  VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
-            <ImageButton x:Name="BackIcon" Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" IsVisible="False" Clicked="OnBackClick" WidthRequest="24" HeightRequest="24">
+            <ImageButton x:Name="BackIcon" Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" IsVisible="False" Clicked="OnBackClick" WidthRequest="48" HeightRequest="48">
                 
             </ImageButton>
             <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

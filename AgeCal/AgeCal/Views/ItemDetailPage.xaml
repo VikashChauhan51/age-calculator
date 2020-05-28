@@ -11,23 +11,42 @@
         <ResourceDictionary>
             <converter:DatetimeToStringConverter x:Key="DatetimeToStringConverter" />
             <converter:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
+            <converter:AgeConverter x:Key="AgeConverter" />
+            <converter:BirthdayConverter  x:Key="BirthdayConverter"  />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Spacing="20" Padding="15" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-            <StackLayout Spacing="5"  Padding="5" Orientation="Horizontal">
-                <ImageButton x:Name="btnDelete" Source="delete.png" Clicked="BtnDelete_Clicked" WidthRequest="32" HeightRequest="32" BackgroundColor="Transparent" HorizontalOptions="Start"  />
-                <ImageButton x:Name="btnShare" Source="share.png" Command="{Binding ShareCommand}"   WidthRequest="32" HeightRequest="32" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
-            </StackLayout>
-            <BoxView Style="{StaticResource SeparatorBoxView}"></BoxView>
-            <Label Text="Text:" FontSize="Medium" />
-            <Label Text="{Binding Name}" FontSize="Small"/>
-            <Label Text="Description:" FontSize="Medium" />
-            <Label Text="{Binding Description}" FontSize="Small"/>
-            <Label Text="Birthday Date:" FontSize="Medium" />
-            <Label Text="{Binding DOB,Converter={StaticResource DatetimeToStringConverter}}" FontSize="Small"/>
-            <Label Text="Birthday Time:" FontSize="Medium" />
-            <Label Text="{Binding Time,Converter={StaticResource TimeSpanToStringConverter}}" FontSize="Small"/>
+        <StackLayout Spacing="5" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <Frame HasShadow="True" CornerRadius="5" OutlineColor="{StaticResource PrimaryGray}" HeightRequest="50">
+                <StackLayout Spacing="0"  Padding="0" Orientation="Horizontal">
+                    <ImageButton x:Name="btnDelete" Source="trash.png" Clicked="BtnDelete_Clicked" WidthRequest="48" HeightRequest="48" BackgroundColor="Transparent" HorizontalOptions="Start"  />
+                    <ImageButton x:Name="btnShare" Source="share.png" Command="{Binding ShareCommand}"   WidthRequest="48" HeightRequest="48" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </Frame>
+            <Frame HasShadow="True" CornerRadius="5" OutlineColor="{StaticResource PrimaryGray}">
+                <StackLayout Spacing="10">
+                    <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold"/>
+                    <Label Text="{Binding Description}" FontSize="Small"/>
+                    <BoxView Style="{StaticResource SeparatorBoxView}"></BoxView>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" Text="{Binding DOB,Converter={StaticResource DatetimeToStringConverter}}" FontSize="Small"/>
+                        <Label Grid.Column="1" Text="AT" FontSize="Small" FontAttributes="Bold" />
+                        <Label Grid.Column="2" Text="{Binding Time,Converter={StaticResource TimeSpanToStringConverter}}" FontSize="Small"/>
+                    </Grid>
+                    <Label  Text="{Binding DOB,Converter={StaticResource AgeConverter}}" FontAttributes="Bold" FontSize="Small"/>
+                    <Label  Text="{Binding DOB,Converter={StaticResource BirthdayConverter}}" TextColor="Accent" FontAttributes="Bold" FontSize="Small"/>
+
+                </StackLayout>
+            </Frame>
+          
         </StackLayout>
     </ContentPage.Content>
 
