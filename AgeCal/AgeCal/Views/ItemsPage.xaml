@@ -23,6 +23,7 @@
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
                 SeparatorVisibility="None"
+                ItemAppearing="ItemsListView_ItemAppearing"
                 ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>

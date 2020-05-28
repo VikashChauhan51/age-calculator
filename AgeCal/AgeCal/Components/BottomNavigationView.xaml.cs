@@ -31,7 +31,7 @@ namespace AgeCal.Components
             AddIcon("chart.png", "Home", typeof(HomeViewModel));
             AddIcon("data.png", "Data", typeof(ItemsViewModel));
             this.IconLayout.Children.Add(addButton);
-            AddIcon("clock.png", "Reminder", typeof(AboutViewModel));
+            AddIcon("clock.png", "Reminder", typeof(ReminderListViewModel));
             AddIcon("setting.png", "Settings", typeof(SettingViewModel));
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(

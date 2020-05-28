@@ -1,12 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:AgeContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AgeCal"
+             xmlns:converter="clr-namespace:AgeCal.Convertors"
+             xmlns:views="clr-namespace:AgeCal.Views"
+             xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
+             x:TypeArguments="viewModel:ReminderListViewModel"
              x:Class="AgeCal.Views.ReminderListPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:DatetimeToStringConverter x:Key="DatetimeToStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="SizeProportional">
+                <StackLayout Spacing="10">
+                    <ListView x:Name="ItemsListView"
+                ItemsSource="{Binding Items}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                SeparatorVisibility="None"
+                ItemAppearing="ItemsListView_ItemAppearing"
+                ItemSelected="OnItemSelected">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
+                                        <StackLayout Padding="10">
+                                            <Label Text="{Binding When,Converter={StaticResource DatetimeToStringConverter}}" 
+                                LineBreakMode="NoWrap" 
+                                FontSize="Medium" FontAttributes="Bold" />
+                                            <Label Text="{Binding Message}" 
+                                LineBreakMode="NoWrap"
+                                FontSize="Small" TextColor="Accent" />
+                                        </StackLayout>
+                                    </Frame>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ScrollView>
+            <ImageButton x:Name="btnAdd" Source="pluse.png" Command="{Binding AddCommand}"   AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
+            AbsoluteLayout.LayoutFlags="PositionProportional"  
+                         WidthRequest="48" HeightRequest="48" BackgroundColor="Transparent"  />
+
+        </AbsoluteLayout>
+
     </ContentPage.Content>
-</ContentPage>
+</views:AgeContentPage>

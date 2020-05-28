@@ -13,20 +13,27 @@ using System.Collections.Generic;
 
 namespace AgeCal.ViewModels
 {
-    public class ItemsViewModel : BaseViewModel
+    public class ReminderListViewModel : BaseViewModel
     {
-        public ObservableCollection<User> Items { get; set; }
+        public ObservableCollection<Reminder> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command LoadMoreItemsCommand { get; set; }
-        private readonly IUserRepository _userRepository;
-        public ItemsViewModel(IUserRepository userRepository)
+        public Command AddCommand { get; set; }
+        private readonly IReminderRepository _reminderRepository;
+        public ReminderListViewModel(IReminderRepository reminderRepository)
         {
-            Title = "Data";
-            Items = new ObservableCollection<User>();
-            _userRepository = userRepository;
+            Title = "Reminders";
+            Items = new ObservableCollection<Reminder>();
+            _reminderRepository = reminderRepository;
             LoadItemsCommand = new Command(ExecuteLoadItemsCommand);
             LoadMoreItemsCommand = new Command(LoadMore);
-            MessageService.Register<User>(this, AddedUser);
+            AddCommand = new Command(NavigateOnAddPage);
+            MessageService.Register<Reminder>(this, AddedReminder);
+        }
+
+        private void NavigateOnAddPage()
+        {
+
         }
 
         bool hasMore;
@@ -51,7 +58,7 @@ namespace AgeCal.ViewModels
             {
 
 
-                var items = _userRepository.GetAll(Items.Count, 10);
+                var items = _reminderRepository.GetAll(Items.Count, 10);
                 RenderData(items);
             }
             catch (Exception ex)
@@ -65,16 +72,13 @@ namespace AgeCal.ViewModels
             }
         }
 
-        private void RenderData(IEnumerable<User> items)
+        private void RenderData(IEnumerable<Reminder> items)
         {
             HasMore = items != null && items.Count() >= 10;
             if (items != null)
             {
                 foreach (var item in items)
-                {
-                    item.DOB = new DateTime(item.DOB.Year, item.DOB.Month, item.DOB.Day, item.Time.Hours, item.Time.Minutes, item.Time.Seconds);
                     Items.Add(item);
-                }
             }
 
         }
@@ -89,7 +93,7 @@ namespace AgeCal.ViewModels
             try
             {
                 Items.Clear();
-                var items = _userRepository.GetAll(0, 10);
+                var items = _reminderRepository.GetAll(0, 10);
                 RenderData(items);
             }
             catch (Exception ex)
@@ -101,13 +105,10 @@ namespace AgeCal.ViewModels
                 IsBusy = false;
             }
         }
-        void AddedUser(User newUsre)
+        void AddedReminder(Reminder reminder)
         {
-            if (newUsre != null)
-            {
-                newUsre.DOB = new DateTime(newUsre.DOB.Year, newUsre.DOB.Month, newUsre.DOB.Day, newUsre.Time.Hours, newUsre.Time.Minutes, newUsre.Time.Seconds);
-                Items.Add(newUsre);
-            }
+            if (reminder != null)
+                Items.Add(reminder);
         }
         public override void OnPageAppearing()
         {

@@ -72,6 +72,18 @@ namespace AgeCal.Views
 
         }
 
+        private void ItemsListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
+        {
+            if (ViewModel == null || ViewModel.IsBusy || ViewModel.Items.Count == 0)
+                return;
 
+            if (ViewModel.HasMore)
+            {
+                var user = e.Item as User;
+                if (user != null && user == ViewModel.Items.LastOrDefault())
+                    ViewModel.LoadMoreItemsCommand.Execute(null);
+            }
+
+        }
     }
 }

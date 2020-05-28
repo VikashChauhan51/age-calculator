@@ -82,6 +82,7 @@ namespace AgeCal
             IocRegistry.Register<IUserRepository, UserRepository>();
             IocRegistry.Register<IDashboardSettingRepository, DashboardSettingRepository>();
             IocRegistry.Register<IReminderSettingRepository, ReminderSettingRepository>();
+            IocRegistry.Register<IReminderRepository, ReminderRepository>();
             //register navigation
             IocRegistry.Register<IAgeNavigationService>(NavigationFactory);
         }
@@ -103,6 +104,7 @@ namespace AgeCal
             navService.RegisterPage<RateUsViewModel, RateUsPage>();
             navService.RegisterPage<PrivatePolicyViewModel, PrivatePolicyPage>();
             navService.RegisterPage<TermsViewModel, TermsPage>();
+            navService.RegisterPage<ReminderListViewModel, ReminderListPage>();
             return navService;
 
         }
