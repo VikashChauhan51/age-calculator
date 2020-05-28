@@ -18,6 +18,7 @@
                 RefreshCommand="{Binding LoadItemsCommand}"
                 IsPullToRefreshEnabled="False"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                SeparatorVisibility="None"
                 CachingStrategy="RecycleElement"
                 ItemSelected="SettingListView_ItemSelected">
                     <ListView.GroupHeaderTemplate>

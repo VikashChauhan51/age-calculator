@@ -5,7 +5,7 @@ using System.Text;
 namespace AgeCal.Utilities
 {
 
-   public static class BirthdayHelper
+    public static class BirthdayHelper
     {
         const int SECOND = 1;
         const int MINUTE = 60 * SECOND;
@@ -62,7 +62,7 @@ namespace AgeCal.Utilities
         public static string GetCurrentAge(DateTime birthdayDate)
         {
             var currentDate = DateTime.Now;
-           
+
 
             var ts = new TimeSpan(currentDate.Ticks - birthdayDate.Ticks);
             double delta = Math.Abs(ts.TotalSeconds);
@@ -136,6 +136,21 @@ namespace AgeCal.Utilities
                 else
                     return years <= 1 ? "one year old" : $"{years} years old";
             }
+        }
+
+        public static DateTimeOffset GetNextBirthday(DateTime birthday)
+        {
+            DateTime today = DateTime.Today;
+            DateTime next = new DateTime(today.Year, birthday.Month, birthday.Day);
+
+            if (next < today)
+                next = next.AddYears(1);
+
+            return new DateTimeOffset(next);
+        }
+        public static DateTime GetDate(DateTime date, TimeSpan time)
+        {
+            return new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
         }
     }
 }

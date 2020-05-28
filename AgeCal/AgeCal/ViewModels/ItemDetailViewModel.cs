@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 using AgeCal.Core;
+using AgeCal.i18n;
 using AgeCal.Interfaces;
 using AgeCal.Ioc;
 using AgeCal.Models;
@@ -16,9 +18,11 @@ namespace AgeCal.ViewModels
         public ExclusiveRelayCommand DeleteCommand { get; set; }
         public ExclusiveRelayCommand ShareCommand { get; set; }
         private readonly IUserRepository _userRepository;
-        public ItemDetailViewModel(IUserRepository userRepository)
+        private readonly IReminderRepository _reminderRepository;
+        public ItemDetailViewModel(IUserRepository userRepository, IReminderRepository reminderRepository)
         {
             _userRepository = userRepository;
+            _reminderRepository = reminderRepository;
             DeleteCommand = new ExclusiveRelayCommand(Delete);
             ShareCommand = new ExclusiveRelayCommand(ShareData);
         }
@@ -30,11 +34,10 @@ namespace AgeCal.ViewModels
                 var date = new DateTime(DOB.Year, DOB.Month, DOB.Day, Time.Hours, Time.Minutes, Time.Seconds);
                 var nextBirthday = BirthdayHelper.GetDateToMessage(date);
                 var age = BirthdayHelper.GetCurrentAge(date);
-                // CrossLocalNotifications.Current.Show("Birthday", "Today is your birthday", 0, DateTime.Now.AddSeconds(10));
                 await Share.RequestAsync(new ShareTextRequest
                 {
                     Text = string.Format("{0}:{1}\n{2}", name, age, nextBirthday),
-                    Title = "Age Calculation"
+                    Title = AppResource.AppName
                 });
             }
             catch (Exception ex)
@@ -52,7 +55,11 @@ namespace AgeCal.ViewModels
                     IsBusy = true;
                     var item = _userRepository.Get(Id);
                     if (item != null)
+                    {
+                        DeleteUserReminders();
                         _userRepository.Delete(item);
+                    }
+
 
                     NavigationService.GoBack();
                 }
@@ -68,6 +75,31 @@ namespace AgeCal.ViewModels
                 IsBusy = false;
             }
 
+        }
+
+        private void DeleteUserReminders()
+        {
+            try
+            {
+                var today = DateTime.Now;
+                var reminders = _reminderRepository.GetReminders(id);
+                if (reminders != null && reminders.Any())
+                {
+                    //removed schedule reminder if any
+                    foreach (var item in reminders)
+                        if (item.When.LocalDateTime > today)
+                            CrossLocalNotifications.Current.Cancel(item.Id);
+
+                    _reminderRepository.Delete(reminders);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
         }
 
         string id = string.Empty;

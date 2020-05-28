@@ -105,6 +105,7 @@ namespace AgeCal
             navService.RegisterPage<PrivatePolicyViewModel, PrivatePolicyPage>();
             navService.RegisterPage<TermsViewModel, TermsPage>();
             navService.RegisterPage<ReminderListViewModel, ReminderListPage>();
+            navService.RegisterPage<AddReminderViewModel, AddReminderPopup>();
             return navService;
 
         }

@@ -12,9 +12,17 @@ namespace AgeCal.Convertors
         {
             if (value == null)
                 return string.Empty;
+            if (value is DateTimeOffset)
+            {
+                var date = (DateTimeOffset)value;
+                return date.LocalDateTime.ToShortDateString();
+            }
+            else
+            {
+                var date = (DateTime)value;
+                return date.ToShortDateString();
+            }
 
-            var date = (DateTime)value;
-            return date.ToShortDateString();
 
         }
 

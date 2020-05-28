@@ -2,16 +2,20 @@
 using AgeCal.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace AgeCal.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
         private readonly IUserRepository _userRepository;
-        public HomeViewModel(IUserRepository userRepository)
+        private readonly IReminderRepository _reminderRepository;
+        public HomeViewModel(IUserRepository userRepository, IReminderRepository reminderRepository)
         {
             _userRepository = userRepository;
+            _reminderRepository = reminderRepository;
             Title = "Dashboard";
             MessageService.Register<User>(this, AddedUser);
 
@@ -71,6 +75,7 @@ namespace AgeCal.ViewModels
         public override void OnPageAppearing()
         {
             base.OnPageAppearing();
+            Task.Run(() => RemovedPassedReminders());
 
         }
         void AddedUser(User newUsre)
@@ -137,6 +142,32 @@ namespace AgeCal.ViewModels
                 IsBusy = false;
             }
 
+        }
+
+        private void RemovedPassedReminders()
+        {
+            try
+            {
+                if (IsBusy)
+                    return;
+                IsBusy = true;
+                var today = DateTime.Now;
+                var reminders = _reminderRepository.GetAll(0, 10);
+                if (reminders != null && reminders.Any())
+                    foreach (var item in reminders)
+                        if (item.When.DateTime < today)
+                            _reminderRepository.Delete(item);
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            finally
+            {
+                IsBusy = false;
+            }
         }
 
     }

@@ -14,10 +14,8 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <AbsoluteLayout>
-            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
-            AbsoluteLayout.LayoutFlags="SizeProportional">
-                <StackLayout Spacing="10">
-                    <ListView x:Name="ItemsListView"
+            <ListView AbsoluteLayout.LayoutBounds="0,0,1,1"
+            AbsoluteLayout.LayoutFlags="SizeProportional"  x:Name="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
@@ -28,25 +26,23 @@
                 SeparatorVisibility="None"
                 ItemAppearing="ItemsListView_ItemAppearing"
                 ItemSelected="OnItemSelected">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
-                                        <StackLayout Padding="10">
-                                            <Label Text="{Binding When,Converter={StaticResource DatetimeToStringConverter}}" 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
+                                <StackLayout Padding="10">
+                                    <Label Text="{Binding When,Converter={StaticResource DatetimeToStringConverter}}" 
                                 LineBreakMode="NoWrap" 
                                 FontSize="Medium" FontAttributes="Bold" />
-                                            <Label Text="{Binding Message}" 
+                                    <Label Text="{Binding Message}" 
                                 LineBreakMode="NoWrap"
                                 FontSize="Small" TextColor="Accent" />
-                                        </StackLayout>
-                                    </Frame>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackLayout>
-            </ScrollView>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <ImageButton x:Name="btnAdd" Source="pluse.png" Command="{Binding AddCommand}"   AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
             AbsoluteLayout.LayoutFlags="PositionProportional"  
                          WidthRequest="48" HeightRequest="48" BackgroundColor="Transparent"  />

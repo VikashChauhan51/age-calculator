@@ -10,6 +10,14 @@ namespace AgeCal.Repository
     public class ReminderRepository : IReminderRepository
     {
 
+        public void Add(IEnumerable<Reminder> entities)
+        {
+            using (var connect = AgeDatabase.Database.Connection())
+            {
+
+                connect.InsertAll(entities, false);
+            }
+        }
         public void Add(Reminder entity)
         {
             using (var connect = AgeDatabase.Database.Connection())
@@ -25,6 +33,16 @@ namespace AgeCal.Repository
             {
 
                 connect.Delete(entity);
+            }
+        }
+
+        public void Delete(IEnumerable<Reminder> entities)
+        {
+            using (var connect = AgeDatabase.Database.Connection())
+            {
+                foreach (var item in entities)
+                    connect.Delete(item);
+
             }
         }
 
@@ -46,6 +64,26 @@ namespace AgeCal.Repository
                 return connect.Table<Reminder>()
                            .Skip(skip)
                            .Take(take)
+                           .ToList();
+
+            }
+        }
+
+        public int GetRemindeMaxId()
+        {
+            using (var connect = AgeDatabase.Database.Connection())
+            {
+                return connect.Table<Reminder>().Count();
+
+            }
+        }
+
+        public IEnumerable<Reminder> GetReminders(string userId)
+        {
+            using (var connect = AgeDatabase.Database.Connection())
+            {
+                return connect.Table<Reminder>()
+                    .Where(x => x.UserId == userId)
                            .ToList();
 
             }
