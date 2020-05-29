@@ -28,6 +28,9 @@ namespace AgeCal.Utilities
             double delta = Math.Abs(ts.TotalSeconds);
             if (numDays <= 0 || delta <= 24 * HOUR)
             {
+                if (ts.Days == 1)
+                    return "Tomorrow is your Birthday";
+
                 return "Today is your Birthday";
 
             }

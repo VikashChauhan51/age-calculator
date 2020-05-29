@@ -10,14 +10,15 @@
     <StackLayout x:Name="AddPopupContainer" Spacing="0" Padding="0"  Margin="0" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
         <StackLayout Spacing="20" Padding="5">
             <Label Text="{local:Translation NameLabel}" Style="{StaticResource PrimaryLabel}"/>
-            <Entry  MaxLength="100" Text="{Binding Name}" Style="{StaticResource PrimaryEntry}" >
+            <Entry  MaxLength="50" Text="{Binding Name}" Placeholder="Full Name" Style="{StaticResource PrimaryEntry}" >
                 <Entry.Behaviors>
                     <validation:RequiredValidationBehavior  />
-                    <validation:MaxLengthValidatorBehavior MaxLength="100"  />
+                    <validation:MaxLengthValidatorBehavior MaxLength="45"  />
                 </Entry.Behaviors>
             </Entry>
+            <Label IsVisible="{Binding HasError}" FontSize="Small" TextColor="{StaticResource PrimaryRed}" Text="Please enter name"></Label>
             <Label Text="{local:Translation DescriptionLabel}" Style="{StaticResource PrimaryLabel}" />
-            <Editor MaxLength="150" Style="{StaticResource PrimaryEditor}" Text="{Binding Description}" Margin="0" />
+            <Editor MaxLength="100" Style="{StaticResource PrimaryEditor}" Text="{Binding Description}" Margin="0" />
             <Label Text="{local:Translation BirthDateLabel}" Style="{StaticResource PrimaryLabel}" />
             <DatePicker x:Name="AgePicker" Date="{Binding DOB,Mode=TwoWay}" ></DatePicker>
             <Label Text="{local:Translation BirthTimeLabel}" Style="{StaticResource PrimaryLabel}" />

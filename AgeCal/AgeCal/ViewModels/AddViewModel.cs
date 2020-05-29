@@ -18,7 +18,7 @@ namespace AgeCal.ViewModels
         {
             _userRepository = userRepository;
             AddCommand = new ExclusiveRelayCommand(Add);
-
+            HasMore = false;
         }
         string name = string.Empty;
         public string Name
@@ -41,6 +41,28 @@ namespace AgeCal.ViewModels
             }
         }
 
+        bool hasMore;
+        public bool HasMore
+        {
+            get { return hasMore; }
+            set
+            {
+
+                hasMore = value;
+                RaisePropertyChanged(nameof(HasMore));
+            }
+        }
+        bool hasError;
+        public bool HasError
+        {
+            get { return hasError; }
+            set
+            {
+
+                hasError = value;
+                RaisePropertyChanged(nameof(HasError));
+            }
+        }
         DateTime dob = DateTime.Now;
         public DateTime DOB
         {
@@ -66,7 +88,7 @@ namespace AgeCal.ViewModels
         {
             try
             {
-                if (!IsBusy && isValid())
+                if (!IsBusy && IsValid())
                 {
                     IsBusy = true;
                     var user = new User
@@ -103,16 +125,16 @@ namespace AgeCal.ViewModels
 
 
         }
-        bool isValid()
+        bool IsValid()
         {
             var isValid = true;
             if (string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
                 isValid = false;
-            if (string.IsNullOrEmpty(Description) || string.IsNullOrWhiteSpace(Description))
-                isValid = false;
+
             if (DOB > DateTime.Now || DOB < new DateTime(1900, 1, 1))
                 isValid = false;
 
+            HasMore = isValid;
             return isValid;
 
         }
@@ -123,6 +145,7 @@ namespace AgeCal.ViewModels
             Description = string.Empty;
             Time = new TimeSpan(date.Hour, date.Minute, date.Second);
             DOB = date;
+            HasMore = false;
         }
     }
 }

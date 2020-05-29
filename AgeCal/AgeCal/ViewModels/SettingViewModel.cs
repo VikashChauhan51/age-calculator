@@ -27,13 +27,7 @@ namespace AgeCal.ViewModels
             try
             {
                 SettingSource.Clear();
-                var account = new SettingList()
-                {
-                          new Setting { Title = "Dashboard", ViewModel = typeof(DashboardSettingViewModel) },
-                          new Setting { Title = "Reminder", ViewModel = typeof(ReminderSettingViewModel) }
-                };
-                account.Heading = "ACCOUNT";
-
+                
                 var support = new SettingList()
                 {
                           new Setting { Title = "Contact Us", ViewModel = typeof(ContactUsViewModel) },
@@ -50,8 +44,7 @@ namespace AgeCal.ViewModels
                           new Setting { Title = "Terms & Conditions", ViewModel = typeof(TermsViewModel) }
                 };
                 documents.Heading = "LEGAL DOCUMENTS";
-
-                SettingSource.Add(account);
+                 
                 SettingSource.Add(support);
                 SettingSource.Add(documents);
             }

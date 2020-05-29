@@ -78,5 +78,18 @@ namespace AgeCal.Views
             }
 
         }
+
+        private async void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            var button = sender as ImageButton;
+            if (button != null)
+            {
+                Reminder reminder = button.BindingContext as Reminder;
+                var result = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
+                if (ViewModel != null && reminder != null && result)
+                    ViewModel.DeleteCommand.Execute(reminder);
+
+            }
+        }
     }
 }

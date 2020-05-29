@@ -29,7 +29,7 @@ namespace AgeCal.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.data;
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(App.Instance);
+            LoadApplication(new App(typeof(Views.Home)));
 
             RegisterServices();
 

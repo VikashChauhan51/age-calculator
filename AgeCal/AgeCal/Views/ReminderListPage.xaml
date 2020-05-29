@@ -31,12 +31,22 @@
                         <ViewCell>
                             <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
                                 <StackLayout Padding="10">
-                                    <Label Text="{Binding When,Converter={StaticResource DatetimeToStringConverter}}" 
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Label Text="{Binding When,Converter={StaticResource DatetimeToStringConverter}}" 
                                 LineBreakMode="NoWrap" 
                                 FontSize="Medium" FontAttributes="Bold" />
-                                    <Label Text="{Binding Message}" 
+
+                                <ImageButton HeightRequest="32" Grid.Column="1" VerticalOptions="End" WidthRequest="32" Clicked="ImageButton_Clicked" Source="trash.png" BackgroundColor="Transparent" HorizontalOptions="End" />
+                                    </Grid>
+                                   
+                                <Label Text="{Binding Message}" 
                                 LineBreakMode="NoWrap"
                                 FontSize="Small" TextColor="Accent" />
+                                   
                                 </StackLayout>
                             </Frame>
                         </ViewCell>

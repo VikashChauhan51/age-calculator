@@ -10,6 +10,7 @@ using AgeCal.Views;
 using AgeCal.Interfaces;
 using System.Linq;
 using System.Collections.Generic;
+using Plugin.LocalNotifications;
 
 namespace AgeCal.ViewModels
 {
@@ -19,6 +20,7 @@ namespace AgeCal.ViewModels
         public Command LoadItemsCommand { get; set; }
         public Command LoadMoreItemsCommand { get; set; }
         public Command AddCommand { get; set; }
+        public Command DeleteCommand { get; set; }
         private readonly IReminderRepository _reminderRepository;
         public ReminderListViewModel(IReminderRepository reminderRepository)
         {
@@ -28,7 +30,36 @@ namespace AgeCal.ViewModels
             LoadItemsCommand = new Command(ExecuteLoadItemsCommand);
             LoadMoreItemsCommand = new Command(LoadMore);
             AddCommand = new Command(NavigateOnAddPage);
+            DeleteCommand = new Command(Delete);
             MessageService.Register<IEnumerable<Reminder>>(this, AddedReminder);
+        }
+
+        private void Delete(object obj)
+        {
+            var reminder = obj as Reminder;
+            if (reminder != null)
+            {
+                DeletePriorReminder(reminder);
+                _reminderRepository.Delete(reminder);
+                Items.Remove(reminder);
+
+            }
+        }
+
+        private void DeletePriorReminder(Reminder reminder)
+        {
+            try
+            {
+                var today = DateTime.Now;
+
+                if (reminder.When.LocalDateTime > today)
+                    CrossLocalNotifications.Current.Cancel(reminder.Id);
+            }
+            catch (Exception ex)
+            {
+
+
+            }
         }
 
         private void NavigateOnAddPage()

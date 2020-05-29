@@ -31,25 +31,20 @@ namespace AgeCal
         {
         }
 
-        private App()
+        public App()
         {
             InitializeComponent();
 
             InitApp(null);
         }
-        private App(Type page)
+
+        public App(Type page)
         {
             InitializeComponent();
 
             InitApp(page);
         }
 
-        public static void InitWithNavTarget(Type page)
-        {
-            lazy = new Lazy<App>(() => new App(page));
-        }
-
-        public static App Instance => new App();// lazy.Value;
         private void InitApp(Type page)
         {
             navPage = new NavigationPage(page == null ? new MainPage() : new MainPage());
@@ -80,8 +75,6 @@ namespace AgeCal
             IocRegistry.Register<IAppMessagingCenter, AppMessagingCenter>();
             //register repositories
             IocRegistry.Register<IUserRepository, UserRepository>();
-            IocRegistry.Register<IDashboardSettingRepository, DashboardSettingRepository>();
-            IocRegistry.Register<IReminderSettingRepository, ReminderSettingRepository>();
             IocRegistry.Register<IReminderRepository, ReminderRepository>();
             //register navigation
             IocRegistry.Register<IAgeNavigationService>(NavigationFactory);
@@ -96,8 +89,6 @@ namespace AgeCal
             navService.RegisterPage<ItemsViewModel, ItemsPage>();
             navService.RegisterPage<ItemDetailViewModel, ItemDetailPage>();
             navService.RegisterPage<SettingViewModel, SettingPage>();
-            navService.RegisterPage<DashboardSettingViewModel, DashboardSettingPage>();
-            navService.RegisterPage<ReminderSettingViewModel, ReminderSettingPage>();
             navService.RegisterPage<ContactUsViewModel, ContactUsPage>();
             navService.RegisterPage<AppVersionViewModel, AppVersionPage>();
             navService.RegisterPage<UserManualViewModel, UserManualPage>();
