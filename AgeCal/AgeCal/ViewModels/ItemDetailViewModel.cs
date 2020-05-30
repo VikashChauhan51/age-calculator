@@ -7,6 +7,7 @@ using AgeCal.i18n;
 using AgeCal.Interfaces;
 using AgeCal.Ioc;
 using AgeCal.Models;
+using AgeCal.Services;
 using AgeCal.Utilities;
 using Plugin.LocalNotifications;
 using Xamarin.Essentials;
@@ -17,12 +18,10 @@ namespace AgeCal.ViewModels
     {
         public ExclusiveRelayCommand DeleteCommand { get; set; }
         public ExclusiveRelayCommand ShareCommand { get; set; }
-        private readonly IUserRepository _userRepository;
-        private readonly IReminderRepository _reminderRepository;
-        public ItemDetailViewModel(IUserRepository userRepository, IReminderRepository reminderRepository)
+        private readonly IUserService _userService;
+        public ItemDetailViewModel(IUserService userService)
         {
-            _userRepository = userRepository;
-            _reminderRepository = reminderRepository;
+            _userService = userService;
             DeleteCommand = new ExclusiveRelayCommand(Delete);
             ShareCommand = new ExclusiveRelayCommand(ShareData);
         }
@@ -53,14 +52,7 @@ namespace AgeCal.ViewModels
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    var item = _userRepository.Get(Id);
-                    if (item != null)
-                    {
-                        DeleteUserReminders();
-                        _userRepository.Delete(item);
-                    }
-
-
+                    _userService.Delete(id);
                     NavigationService.GoBack();
                 }
 
@@ -77,30 +69,6 @@ namespace AgeCal.ViewModels
 
         }
 
-        private void DeleteUserReminders()
-        {
-            try
-            {
-                var today = DateTime.Now;
-                var reminders = _reminderRepository.GetReminders(id);
-                if (reminders != null && reminders.Any())
-                {
-                    //removed schedule reminder if any
-                    foreach (var item in reminders)
-                        if (item.When.LocalDateTime > today)
-                            CrossLocalNotifications.Current.Cancel(item.Id);
-
-                    _reminderRepository.Delete(reminders);
-
-                }
-
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-        }
 
         string id = string.Empty;
         public string Id
@@ -183,7 +151,7 @@ namespace AgeCal.ViewModels
 
             try
             {
-                var item = _userRepository.Get(id);
+                var item = _userService.Get(id);
                 if (item != null)
                 {
                     Id = item.Id;

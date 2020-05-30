@@ -2,6 +2,7 @@
 using AgeCal.Interfaces;
 using AgeCal.Ioc;
 using AgeCal.Models;
+using AgeCal.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,10 +14,10 @@ namespace AgeCal.ViewModels
     {
 
         public ExclusiveRelayCommand AddCommand { get; set; }
-        private readonly IUserRepository _userRepository;
-        public AddViewModel(IUserRepository userRepository)
+        private readonly IUserService _userService;
+        public AddViewModel(IUserService userService)
         {
-            _userRepository = userRepository;
+            _userService = userService;
             AddCommand = new ExclusiveRelayCommand(Add);
             HasMore = false;
         }
@@ -100,7 +101,7 @@ namespace AgeCal.ViewModels
                         Time = Time,
                         CreatedOn = DateTime.UtcNow
                     };
-                    _userRepository.Add(user);
+                    _userService.Add(user);
                     MessageService.Send<User>(user);
                     Clear();
                     NavigationService.GoBackModel(new Core.Toast { Message = AppResource.DataSaveMessage });

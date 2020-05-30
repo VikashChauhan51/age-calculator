@@ -2,14 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
 using AgeCal.Models;
-using AgeCal.Views;
-using AgeCal.Interfaces;
 using System.Linq;
 using System.Collections.Generic;
+using AgeCal.Services;
 
 namespace AgeCal.ViewModels
 {
@@ -18,12 +15,12 @@ namespace AgeCal.ViewModels
         public ObservableCollection<User> Items { get; set; }
         public Command LoadItemsCommand { get; set; }
         public Command LoadMoreItemsCommand { get; set; }
-        private readonly IUserRepository _userRepository;
-        public ItemsViewModel(IUserRepository userRepository)
+        private readonly IUserService _userService;
+        public ItemsViewModel(IUserService userService)
         {
             Title = "Data";
             Items = new ObservableCollection<User>();
-            _userRepository = userRepository;
+            _userService = userService;
             LoadItemsCommand = new Command(ExecuteLoadItemsCommand);
             LoadMoreItemsCommand = new Command(LoadMore);
             MessageService.Register<User>(this, AddedUser);
@@ -51,7 +48,7 @@ namespace AgeCal.ViewModels
             {
 
 
-                var items = _userRepository.GetAll(Items.Count, 10);
+                var items = _userService.Gets(Items.Count, 10);
                 RenderData(items);
             }
             catch (Exception ex)
@@ -89,7 +86,7 @@ namespace AgeCal.ViewModels
             try
             {
                 Items.Clear();
-                var items = _userRepository.GetAll(0, 10);
+                var items = _userService.Gets(0, 10);
                 RenderData(items);
             }
             catch (Exception ex)

@@ -24,7 +24,7 @@
                     <ListView.GroupHeaderTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" HeightRequest="40" Margin="2"  BackgroundColor="Transparent"  VerticalOptions="StartAndExpand">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="StartAndExpand" HeightRequest="40" Margin="5"  BackgroundColor="Transparent"  VerticalOptions="StartAndExpand">
                                     <Label Text="{Binding Heading}" FontSize="Medium"  Style="{StaticResource Key=PrimaryLabel}" />
                                 </StackLayout>
                             </ViewCell>
@@ -33,11 +33,12 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <StackLayout Padding="10">
+                                <StackLayout Padding="10" >
                                     <Label Text="{Binding Title}" 
                                 LineBreakMode="NoWrap" 
                                 Style="{DynamicResource ListItemTextStyle}" 
                                 FontSize="16" />
+                                <BoxView Style="{StaticResource SeparatorBoxView}"  />
                                 </StackLayout>
                             </ViewCell>
                         </DataTemplate>

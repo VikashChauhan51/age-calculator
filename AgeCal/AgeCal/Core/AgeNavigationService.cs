@@ -18,7 +18,7 @@ namespace AgeCal.Core
         private string _currentPageKey;
         public List<Type> RootPages => new List<Type>
         {
-            typeof(MainPage)
+            typeof(Home)
         };
 
         public string CurrentPageKey => _currentPageKey;

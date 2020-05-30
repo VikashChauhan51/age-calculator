@@ -2,15 +2,11 @@
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
-
 using Xamarin.Forms;
-
 using AgeCal.Models;
-using AgeCal.Views;
-using AgeCal.Interfaces;
 using System.Linq;
 using System.Collections.Generic;
-using Plugin.LocalNotifications;
+using AgeCal.Services;
 
 namespace AgeCal.ViewModels
 {
@@ -21,12 +17,13 @@ namespace AgeCal.ViewModels
         public Command LoadMoreItemsCommand { get; set; }
         public Command AddCommand { get; set; }
         public Command DeleteCommand { get; set; }
-        private readonly IReminderRepository _reminderRepository;
-        public ReminderListViewModel(IReminderRepository reminderRepository)
+        private readonly IReminderService _reminderService;
+
+        public ReminderListViewModel(IReminderService reminderService)
         {
             Title = "Reminders";
             Items = new ObservableCollection<Reminder>();
-            _reminderRepository = reminderRepository;
+            _reminderService = reminderService;
             LoadItemsCommand = new Command(ExecuteLoadItemsCommand);
             LoadMoreItemsCommand = new Command(LoadMore);
             AddCommand = new Command(NavigateOnAddPage);
@@ -39,28 +36,13 @@ namespace AgeCal.ViewModels
             var reminder = obj as Reminder;
             if (reminder != null)
             {
-                DeletePriorReminder(reminder);
-                _reminderRepository.Delete(reminder);
+                _reminderService.Delete(reminder);
                 Items.Remove(reminder);
 
             }
         }
 
-        private void DeletePriorReminder(Reminder reminder)
-        {
-            try
-            {
-                var today = DateTime.Now;
-
-                if (reminder.When.LocalDateTime > today)
-                    CrossLocalNotifications.Current.Cancel(reminder.Id);
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-        }
+   
 
         private void NavigateOnAddPage()
         {
@@ -89,7 +71,7 @@ namespace AgeCal.ViewModels
             {
 
 
-                var items = _reminderRepository.GetAll(Items.Count, 10);
+                var items = _reminderService.Gets(Items.Count, 10);
                 RenderData(items);
             }
             catch (Exception ex)
@@ -124,7 +106,7 @@ namespace AgeCal.ViewModels
             try
             {
                 Items.Clear();
-                var items = _reminderRepository.GetAll(0, 10);
+                var items = _reminderService.Gets(0, 10);
                 RenderData(items);
             }
             catch (Exception ex)

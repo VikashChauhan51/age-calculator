@@ -2,6 +2,7 @@
 using AgeCal.Interfaces;
 using AgeCal.Ioc;
 using AgeCal.Models;
+using AgeCal.Services;
 using AgeCal.Utilities;
 using Plugin.LocalNotifications;
 using System;
@@ -19,12 +20,12 @@ namespace AgeCal.ViewModels
         public ExclusiveRelayCommand SaveCommand { get; set; }
         public ExclusiveRelayCommand LoadMoreCommand { get; set; }
         public ExclusiveRelayCommand CloseCommand { get; set; }
-        private readonly IReminderRepository _reminderRepository;
-        private readonly IUserRepository _userRepository;
-        public AddReminderViewModel(IReminderRepository reminderRepository, IUserRepository userRepository)
+        private readonly IReminderService _reminderService;
+        private readonly IUserService _userService;
+        public AddReminderViewModel(IReminderService reminderService, IUserService userService)
         {
-            _userRepository = userRepository;
-            _reminderRepository = reminderRepository;
+            _reminderService = reminderService;
+            _userService = userService;
             Items = new ObservableCollection<User>();
             SaveCommand = new ExclusiveRelayCommand(SaveInfo);
             CloseCommand = new ExclusiveRelayCommand(ClosePopup);
@@ -55,7 +56,7 @@ namespace AgeCal.ViewModels
             try
             {
                 Items.Clear();
-                var items = _userRepository.GetAll(0, 10);
+                var items = _userService.Gets(0, 10);
                 HasMore = items != null && items.Count() == 10;
                 RenderData(items);
             }
@@ -78,7 +79,7 @@ namespace AgeCal.ViewModels
             {
 
 
-                var items = _userRepository.GetAll(Items.Count, 10);
+                var items = _userService.Gets(Items.Count, 10);
                 HasMore = items != null && items.Count() == 10;
                 RenderData(items);
             }
@@ -124,7 +125,7 @@ namespace AgeCal.ViewModels
                     DeletePriorReminder(SelectedUser.Id);
                     var today = DateTime.Now;
                     var nextBirthday = BirthdayHelper.GetNextBirthday(BirthdayHelper.GetDate(SelectedUser.DOB, SelectedUser.Time));
-                    var maxId = _reminderRepository.GetRemindeMaxId();
+                    var maxId = _reminderService.GetMaxId();
                     var reminders = new List<Reminder>();
                     if (NotifySameDay)
                     {
@@ -132,7 +133,7 @@ namespace AgeCal.ViewModels
                         {
                             ReminderId = Guid.NewGuid().ToString(),
                             Id = maxId + reminders.Count + 1,
-                            UserId = string.Empty,
+                            UserId = SelectedUser.Id,
                             Tag = SelectedUser.Id,
                             Title = $"{SelectedUser.Text } Birthday",
                             Message = $"Today,{SelectedUser.Text} has birthday.",
@@ -147,7 +148,7 @@ namespace AgeCal.ViewModels
                         {
                             ReminderId = Guid.NewGuid().ToString(),
                             Id = maxId + reminders.Count + 1,
-                            UserId = string.Empty,
+                            UserId = SelectedUser.Id,
                             Tag = SelectedUser.Id,
                             Title = $"{SelectedUser.Text } Birthday",
                             Message = $"Tomorrow,{SelectedUser.Text} has birthday.",
@@ -162,7 +163,7 @@ namespace AgeCal.ViewModels
                         {
                             ReminderId = Guid.NewGuid().ToString(),
                             Id = maxId + reminders.Count + 1,
-                            UserId = string.Empty,
+                            UserId = SelectedUser.Id,
                             Tag = SelectedUser.Id,
                             Title = $"{SelectedUser.Text } Birthday",
                             Message = $"{SelectedUser.Text} has birthday on {nextBirthday.AddDays(-7).ToLocalTime().ToString()}.",
@@ -177,7 +178,7 @@ namespace AgeCal.ViewModels
                         {
                             ReminderId = Guid.NewGuid().ToString(),
                             Id = maxId + reminders.Count + 1,
-                            UserId = string.Empty,
+                            UserId = SelectedUser.Id,
                             Tag = SelectedUser.Id,
                             Title = $"{SelectedUser.Text } Birthday",
                             Message = $"{SelectedUser.Text} has birthday on {nextBirthday.AddMonths(-1).ToLocalTime().ToString()}.",
@@ -192,11 +193,8 @@ namespace AgeCal.ViewModels
                         return;
                     }
                     ValidationMessage = string.Empty;
-                    //set reminders before save into database
-                    foreach (var item in reminders)
-                        CrossLocalNotifications.Current.Show(item.Title, item.Message, item.Id, item.When.LocalDateTime);
                     //save reminder into database
-                    _reminderRepository.Add(reminders);
+                    _reminderService.Add(reminders);
                     //notify reminder list about new reminders
                     MessageService.Send<IEnumerable<Reminder>>(reminders);
                     Reset();
@@ -334,18 +332,7 @@ namespace AgeCal.ViewModels
         {
             try
             {
-                var today = DateTime.Now;
-                var reminders = _reminderRepository.GetReminders(userId);
-                if (reminders != null && reminders.Any())
-                {
-                    //removed schedule reminder if any
-                    foreach (var item in reminders)
-                        if (item.When.LocalDateTime > today)
-                            CrossLocalNotifications.Current.Cancel(item.Id);
-
-                    _reminderRepository.Delete(reminders);
-
-                }
+                _reminderService.DeleteReminders(userId);
             }
             catch (Exception ex)
             {
