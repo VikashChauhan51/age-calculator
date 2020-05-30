@@ -13,10 +13,11 @@ using System.Collections.Generic;
 using AgeCal.Models;
 using AgeCal.Services;
 using Plugin.LocalNotifications;
+using Android.Content;
 
 namespace AgeCal.Droid
 {
-    [Activity(Label = "Age Calculator", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "Age Calculator", Icon = "@mipmap/icon", Theme = "@style/MainTheme", LaunchMode = LaunchMode.SingleTop, MainLauncher = false, ScreenOrientation = ScreenOrientation.Portrait)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
@@ -27,13 +28,20 @@ namespace AgeCal.Droid
             base.OnCreate(savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.data;
+            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.reminder;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App(typeof(Views.Home)));
 
             RegisterServices();
 
         }
+
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+             
+        }
+
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -41,6 +49,15 @@ namespace AgeCal.Droid
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
 
+        public override void RegisterComponentCallbacks(IComponentCallbacks callback)
+        {
+            base.RegisterComponentCallbacks(callback);  
+        }
+        public override void UnregisterReceiver(BroadcastReceiver receiver)
+        {
+            base.UnregisterReceiver(receiver);  
+        }
+        
         void RegisterServices()
         {
             IocRegistry.Register<ILocalDatabase>(() =>

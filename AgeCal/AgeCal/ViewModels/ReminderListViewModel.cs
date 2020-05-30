@@ -127,7 +127,7 @@ namespace AgeCal.ViewModels
         public override void OnPageAppearing()
         {
             base.OnPageAppearing();
-            Task.Run(() => ExecuteLoadItemsCommand());
+            ExecuteLoadItemsCommand();
         }
 
     }
