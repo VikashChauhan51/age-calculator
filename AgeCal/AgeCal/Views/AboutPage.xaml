@@ -9,9 +9,8 @@
 
 
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="about" />
-        </StackLayout>
+        <WebView x:Name="AboutWebView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  />
+        
     </ContentPage.Content>
 
 
