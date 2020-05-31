@@ -71,11 +71,21 @@ namespace AgeCal.ViewModels
             }
         }
 
-
+        string labelText;
+        public string LabelText
+        {
+            get { return labelText; }
+            set
+            {
+                labelText = value;
+                RaisePropertyChanged(nameof(LabelText));
+            }
+        }
 
         public override void OnPageAppearing()
         {
             base.OnPageAppearing();
+            SetBirthday();
             Task.Run(() => RemovedPassedReminders());
 
         }
@@ -95,10 +105,12 @@ namespace AgeCal.ViewModels
 
                     IsBusy = true;
                     Message = string.Empty;
+                    LabelText = string.Empty;
                     var today = _userService.GetTodayBirthday();
                     if (today != null)
                     {
                         HasData = true;
+                        LabelText = "Today Birthday";
                         Birthday = today;
                         if (_userService.TodayHasMoreBirthday())
                             Message = "Today has more than one Birthdays";
@@ -109,7 +121,8 @@ namespace AgeCal.ViewModels
                         if (month != null)
                         {
                             HasData = true;
-                            Birthday = today;
+                            Birthday = month;
+                            LabelText = "Upcoming Birthday";
                             if (_userService.MonthHasMoreBirthday())
                                 Message = "This month has more than one Birthdays";
                         }
@@ -119,7 +132,8 @@ namespace AgeCal.ViewModels
                             if (year != null)
                             {
                                 HasData = true;
-                                Birthday = today;
+                                Birthday = year;
+                                LabelText = "Upcoming Birthday";
                                 if (_userService.YearsHasMoreBirthday())
                                     Message = "This year has more than one Birthdays";
                             }

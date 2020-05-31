@@ -28,9 +28,9 @@ namespace AgeCal.Components
                         IsEnabled = true,
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
-                        Color = Color.Gray,
-                        HeightRequest = 32,
-                        WidthRequest = 32,
+                        Color = Color.LightGray,
+                        HeightRequest = 48,
+                        WidthRequest = 48,
 
                     };
                     this.Children.Add(spinner);

@@ -123,7 +123,7 @@ namespace AgeCal.ViewModels
                     IsBusy = true;
                     //Delete prior reminder of user if any.
                     DeletePriorReminder(SelectedUser.Id);
-                    var today = DateTime.Now;
+                    var today = DateTime.Now.Date;
                     var nextBirthday = BirthdayHelper.GetNextBirthday(BirthdayHelper.GetDate(SelectedUser.DOB, SelectedUser.Time));
                     var maxId = _reminderService.GetMaxId();
                     var reminders = new List<Reminder>();
@@ -142,7 +142,7 @@ namespace AgeCal.ViewModels
                         };
                         reminders.Add(item);
                     }
-                    if (notifyDayBefore && today <= nextBirthday.AddDays(-1))
+                    if (notifyDayBefore && today <= nextBirthday.AddDays(-1).Date)
                     {
                         var item = new Reminder
                         {
@@ -157,7 +157,7 @@ namespace AgeCal.ViewModels
                         };
                         reminders.Add(item);
                     }
-                    if (NotifyWeekBefore && today <= nextBirthday.AddDays(-7))
+                    if (NotifyWeekBefore && today <= nextBirthday.AddDays(-7).Date)
                     {
                         var item = new Reminder
                         {
@@ -172,7 +172,7 @@ namespace AgeCal.ViewModels
                         };
                         reminders.Add(item);
                     }
-                    if (NotifyMonthBefore && today <= nextBirthday.AddMonths(-1))
+                    if (NotifyMonthBefore && today <= nextBirthday.AddMonths(-1).Date)
                     {
                         var item = new Reminder
                         {
@@ -195,8 +195,8 @@ namespace AgeCal.ViewModels
                     ValidationMessage = string.Empty;
                     //save reminder into database
                     _reminderService.Add(reminders);
-                    //notify reminder list about new reminders
-                    MessageService.Send<IEnumerable<Reminder>>(reminders);
+                    //notify reminder list about new reminder
+                    MessageService.Send<Reminder>(reminders.FirstOrDefault());
                     Reset();
                     NavigationService.GoBackModel(new Core.Toast { Message = AppResource.DataSaveMessage });
 

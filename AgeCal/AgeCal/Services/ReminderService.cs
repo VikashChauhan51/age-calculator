@@ -89,14 +89,15 @@ namespace AgeCal.Services
             if (reminders == null)
                 throw new ArgumentNullException(reminders.GetType().FullName);
 
-            var today = DateTime.Now;
+            var today = DateTime.Now.AddDays(-1);
             var priorReminder = new List<Reminder>();
             //get passed reminders
             foreach (var item in reminders)
-                if (item.When.DateTime < today)
+                if (item.When.Date < today.Date)
                     priorReminder.Add(item);
 
-            //delete reminder into database
+            //delete reminder from database
+            if(priorReminder.Any())
             _reminderRepository.Delete(priorReminder);
 
         }

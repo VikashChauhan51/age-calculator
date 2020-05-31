@@ -144,7 +144,7 @@ namespace AgeCal.Utilities
         public static DateTimeOffset GetNextBirthday(DateTime birthday)
         {
             DateTime today = DateTime.Today;
-            DateTime next = new DateTime(today.Year, birthday.Month, birthday.Day);
+            DateTime next = new DateTime(today.Year, birthday.Month, birthday.Day, birthday.Hour, birthday.Minute, 0);
 
             if (next < today)
                 next = next.AddYears(1);

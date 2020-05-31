@@ -3,20 +3,33 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:AgeCal"
              xmlns:views="clr-namespace:AgeCal.Views"
+             xmlns:converter="clr-namespace:AgeCal.Convertors"
             xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
              x:TypeArguments="viewModel:HomeViewModel"
              x:Class="AgeCal.Views.Home">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout Spacing="5" Margin="2" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand">
+        <StackLayout Spacing="15" Margin="2" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand">
             <Label Text="Hey!" FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
             <Label Text="Welcome to Age Calculator. Tap on + icon to add your birthday information." FontSize="Small" TextColor="{StaticResource PrimaryBlack}"></Label>
-            <Label Text="Today Birthday" FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
+            <Label Text="{Binding LabelText}" FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
             <Frame CornerRadius="20" Margin="2" BackgroundColor="{StaticResource PrimaryCyan}" HasShadow="True" Opacity="0.6" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
                 <StackLayout Spacing="5">
                     <Label Text="{Binding Birthday.Text}" TextColor="{StaticResource PrimaryWhite}" IsVisible="{Binding HasData}" FontSize="Large"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="StartAndExpand" />
+
                     <Label Text="Happy birthday! I hope all your birthday wishes and dreams come true." TextColor="{StaticResource PrimaryWhite}" IsVisible="{Binding HasData}" FontSize="Small"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="StartAndExpand" />
+                    <Label Text="Smile!" TextColor="{StaticResource PrimaryWhite}" IsVisible="{Binding HasData, Converter={StaticResource InverseBoolConverter}}" FontSize="Large"
+                VerticalOptions="StartAndExpand" 
+                HorizontalOptions="StartAndExpand" />
+                    <Label Text="&#128578;" TextColor="{StaticResource PrimaryWhite}"  FontSize="Large"
                 VerticalOptions="StartAndExpand" 
                 HorizontalOptions="StartAndExpand" />
 

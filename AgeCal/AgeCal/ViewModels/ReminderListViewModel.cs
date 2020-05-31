@@ -28,7 +28,7 @@ namespace AgeCal.ViewModels
             LoadMoreItemsCommand = new Command(LoadMore);
             AddCommand = new Command(NavigateOnAddPage);
             DeleteCommand = new Command(Delete);
-            MessageService.Register<IEnumerable<Reminder>>(this, AddedReminder);
+            MessageService.Register<Reminder>(this, AddedReminder);
         }
 
         private void Delete(object obj)
@@ -118,11 +118,10 @@ namespace AgeCal.ViewModels
                 IsBusy = false;
             }
         }
-        void AddedReminder(IEnumerable<Reminder> reminders)
+        void AddedReminder(Reminder reminder)
         {
-            if (reminders != null)
-                foreach (var reminder in reminders)
-                    Items.Add(reminder);
+            if (reminder != null)
+                ExecuteLoadItemsCommand();
         }
         public override void OnPageAppearing()
         {

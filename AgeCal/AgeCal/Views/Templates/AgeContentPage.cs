@@ -96,6 +96,7 @@ namespace AgeCal.Views
             {
                 ViewModel.DisplayToast += HandleToast;
                 ViewModel.PropertyChanged += OnViewModelPropertyChanged;
+                ViewModel.DisplaySpinner += OnShowSpinner;
                 if (NavigationBarView != null)
                     NavigationBarView.ButtonPressed = ViewModel.TopNavigationCommand;
                 if (BottomNavigationView != null)
@@ -103,6 +104,8 @@ namespace AgeCal.Views
 
                 if (!string.IsNullOrEmpty(ViewModel.Title))
                     PageTitle = ViewModel.Title;
+
+                ShowSpinner = !ViewModel.IsReady || ViewModel.IsBusy;
 
                 ViewModel.OnPageAppearing();
 
@@ -121,8 +124,14 @@ namespace AgeCal.Views
             {
                 ViewModel.DisplayToast -= HandleToast;
                 ViewModel.PropertyChanged -= OnViewModelPropertyChanged;
+                ViewModel.DisplaySpinner -= OnShowSpinner;
                 ViewModel.OnPageDisappearing();
             }
+        }
+
+        private void OnShowSpinner(object sender, bool e)
+        {
+             //TODO:
         }
 
         public string PageTitle
@@ -226,7 +235,7 @@ namespace AgeCal.Views
             {
                 ShowSpinner = newV;
                 IsBusy = ShowSpinner;
-                if (ShowSpinner)
+                if (newV)
                     PageLayout?.ShowSpinner();
                 else
                     PageLayout?.HideSpinner();
@@ -237,7 +246,26 @@ namespace AgeCal.Views
 
         protected virtual void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                try
+                {
+                    switch (e.PropertyName)
+                    {
+                        case (nameof(ViewModel.IsReady)):
+                        case (nameof(ViewModel.IsBusy)):
+                            ShowSpinner = !ViewModel.IsReady || ViewModel.IsBusy;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                catch
+                {
 
+
+                }
+            });
         }
 
     }

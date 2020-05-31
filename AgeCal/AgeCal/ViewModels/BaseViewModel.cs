@@ -18,6 +18,7 @@ namespace AgeCal.ViewModels
     public class BaseViewModel : ViewModelBase
     {
         public EventHandler<Toast> DisplayToast;
+        public EventHandler<bool> DisplaySpinner;
         public ExclusiveRelayCommand<AgeNavigationType> TopNavigationCommand { get; set; }
         public ExclusiveRelayCommand<Type> BottomNavigationCommand { get; set; }
         public ExclusiveRelayCommand<Toast> ToastCommand { get; set; }
@@ -43,6 +44,7 @@ namespace AgeCal.ViewModels
             set
             {
                 isBusy = value;
+                DisplaySpinner?.Invoke(this, isBusy);
                 RaisePropertyChanged(nameof(IsBusy));
             }
         }
@@ -67,18 +69,6 @@ namespace AgeCal.ViewModels
             }
         }
 
-        protected bool SetProperty<T>(ref T backingStore, T value,
-            [CallerMemberName]string propertyName = "",
-            Action onChanged = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(backingStore, value))
-                return false;
-
-            backingStore = value;
-            onChanged?.Invoke();
-            OnPropertyChanged(propertyName);
-            return true;
-        }
 
         protected void BottomNavigation(Type viewModel)
         {
@@ -122,18 +112,6 @@ namespace AgeCal.ViewModels
         {
 
         }
-        #region INotifyPropertyChanged
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            var changed = PropertyChanged;
-            if (changed == null)
-                return;
-
-            changed.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
         public virtual Task<Tuple<string, object>> ShouldReRoute() => Task.FromResult(new Tuple<string, object>(string.Empty, null));
-
-        #endregion
     }
 }
