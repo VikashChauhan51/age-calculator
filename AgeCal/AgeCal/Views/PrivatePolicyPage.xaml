@@ -7,10 +7,6 @@
              x:TypeArguments="viewModel:PrivatePolicyViewModel"
              x:Class="AgeCal.Views.PrivatePolicyPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <WebView x:Name="PrivateWebView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  />
     </ContentPage.Content>
 </views:AgeContentPage>

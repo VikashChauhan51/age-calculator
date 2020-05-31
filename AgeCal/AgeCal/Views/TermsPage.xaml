@@ -7,10 +7,6 @@
              x:TypeArguments="viewModel:TermsViewModel"
              x:Class="AgeCal.Views.TermsPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <WebView x:Name="TermsWebView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"  />
     </ContentPage.Content>
 </views:AgeContentPage>

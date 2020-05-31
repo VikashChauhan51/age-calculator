@@ -61,7 +61,7 @@ namespace AgeCal.i18n {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Birthday Tracker.
+        ///   Looks up a localized string similar to Birthday Reminder.
         /// </summary>
         internal static string AppName {
             get {
