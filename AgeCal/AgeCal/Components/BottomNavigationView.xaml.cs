@@ -1,4 +1,5 @@
-﻿using AgeCal.ViewModels;
+﻿using AgeCal.i18n;
+using AgeCal.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,16 +24,17 @@ namespace AgeCal.Components
             Button addButton = new Button
             {
                 Style = (Style)Application.Current.Resources["BtnRound"],
-                Text = "+"
+                Text = "+",
+                AutomationId = "addButton"
 
             };
             addButton.Clicked += AddData;
 
-            AddIcon("chart.png", "Home", typeof(HomeViewModel));
-            AddIcon("data.png", "Data", typeof(ItemsViewModel));
+            AddIcon("chart.png", AppResource.Home, typeof(HomeViewModel));
+            AddIcon("data.png", AppResource.Data, typeof(ItemsViewModel));
             this.IconLayout.Children.Add(addButton);
-            AddIcon("clock.png", "Reminder", typeof(ReminderListViewModel));
-            AddIcon("setting.png", "Settings", typeof(SettingViewModel));
+            AddIcon("clock.png", AppResource.Reminders, typeof(ReminderListViewModel));
+            AddIcon("setting.png", AppResource.Settings, typeof(SettingViewModel));
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
             nameof(ButtonPressed),
@@ -78,11 +80,12 @@ namespace AgeCal.Components
             var Icon = new ImageButton
             {
                 Source = icon,
-                HeightRequest = 36,
+                HeightRequest = 42,
                 Padding = 0,
                 Margin = 0,
                 BackgroundColor = Color.Transparent,
-                WidthRequest = 36,
+                WidthRequest = 42,
+                AutomationId = label + "Icon"
             };
             Icon.Clicked += Icon_Clicked;
             Icon.CommandParameter = viewModelType;
@@ -91,6 +94,8 @@ namespace AgeCal.Components
                 InputTransparent = true,
                 Text = label,
                 Margin = 0,
+                FontSize = 10,
+                AutomationId = label + "Label"
             };
             MainContainer.Children.Add(Icon);
             MainContainer.Children.Add(Text);

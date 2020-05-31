@@ -17,7 +17,6 @@ namespace AgeCal.Views
         public Home() : base()
         {
             InitializeComponent();
-            PageTitle = "Dashboard";
             ShowBottomNav = true;
         }
 

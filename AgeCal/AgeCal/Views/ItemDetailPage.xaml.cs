@@ -7,6 +7,7 @@ using AgeCal.Models;
 using AgeCal.ViewModels;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using AgeCal.i18n;
 
 namespace AgeCal.Views
 {
@@ -23,7 +24,6 @@ namespace AgeCal.Views
                 ShowSpinner = ViewModel.IsReady;
 
             }
-            PageTitle = "Details";
             PageHasbackButton = true;
             ShowBottomNav = false;
 
@@ -56,7 +56,7 @@ namespace AgeCal.Views
 
         async void BtnDelete_Clicked(object sender, EventArgs e)
         {
-            bool answer = await DisplayAlert("Confirmation", "Are you sure you want to delete?", "Yes", "No");
+            bool answer = await DisplayAlert(AppResource.Confirmation, AppResource.DeletePopupMessage, AppResource.Yes, AppResource.No);
             if (answer)
             {
                 ViewModel.DeleteCommand.Execute(null);

@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AgeCal.Components.BottomNavigationView">
     <ContentView.Content>
-        <StackLayout x:Name="BottomNavBar"  Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="80" BackgroundColor="{StaticResource PrimaryWhite}">
+        <StackLayout x:Name="BottomNavBar"  AutomationId="BottomNavBarContainer" Spacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" HeightRequest="80" BackgroundColor="{StaticResource PrimaryWhite}">
             <BoxView x:Name="TopDivider"  Style="{StaticResource SeparatorBoxView}" VerticalOptions="Start"   HorizontalOptions="FillAndExpand">
 
             </BoxView>
-            <FlexLayout x:Name="IconLayout" HorizontalOptions="FillAndExpand" AlignItems="Center" HeightRequest="79" JustifyContent="Center"></FlexLayout>
+            <FlexLayout x:Name="IconLayout" AutomationId="IconLayout" HorizontalOptions="FillAndExpand" AlignItems="Center" HeightRequest="79" JustifyContent="Center"></FlexLayout>
         </StackLayout>
     </ContentView.Content>
 </ContentView>

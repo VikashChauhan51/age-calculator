@@ -4,15 +4,15 @@
              xmlns:pageControls="clr-namespace:AgeCal.Components"
              x:Class="AgeCal.Components.TopNavigationView">
     <ContentView.Content>
-        <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryCyan}"  VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
-            <ImageButton x:Name="BackIcon" Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" IsVisible="False" Clicked="OnBackClick" WidthRequest="48" HeightRequest="48">
+        <StackLayout Spacing="0" Orientation="Horizontal" AutomationId="TopNavBarContainer" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryCyan}"  VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
+            <ImageButton x:Name="BackIcon" AutomationId="BackIcon" Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" IsVisible="False" Clicked="OnBackClick" WidthRequest="48" HeightRequest="48">
                 
             </ImageButton>
             <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Label x:Name="TitleLabel" FontSize="Medium" HorizontalOptions="FillAndExpand" TextColor="{StaticResource PrimaryWhite}"
+                <Label x:Name="TitleLabel" AutomationId="TitleLabel" FontSize="Medium" HorizontalOptions="FillAndExpand" TextColor="{StaticResource PrimaryWhite}"
                        HorizontalTextAlignment="Center" VerticalOptions="FillAndExpand"
                        VerticalTextAlignment="Center" MaxLines="1" Margin="0" LineBreakMode="TailTruncation" />
-                <Label x:Name="SubTitleLabel" HorizontalOptions="FillAndExpand"
+                <Label x:Name="SubTitleLabel" AutomationId="SubTitleLabel" HorizontalOptions="FillAndExpand"
                        HorizontalTextAlignment="Center" VerticalOptions="End" TextColor="{StaticResource PrimaryWhite}"
                        VerticalTextAlignment="Center" MaxLines="1" Margin="0,1,0,0" LineBreakMode="TailTruncation" />
             </StackLayout>

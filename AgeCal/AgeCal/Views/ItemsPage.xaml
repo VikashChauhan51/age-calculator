@@ -14,7 +14,7 @@
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="ItemsListView"
+            <ListView x:Name="ItemsListView" AutomationId="ItemsListView"
                 ItemsSource="{Binding Items}"
                 VerticalOptions="FillAndExpand"
                 HasUnevenRows="true"
@@ -29,11 +29,11 @@
                     <DataTemplate>
                         <ViewCell>
                             <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
-                            <StackLayout Padding="10">
-                                <Label Text="{Binding Text}" 
+                                <StackLayout AutomationId="ItemsListViewTemplate" Padding="10">
+                                <Label Text="{Binding Text}"  AutomationId="NameLabel"
                                 LineBreakMode="NoWrap" 
                                 FontSize="Medium" FontAttributes="Bold" />
-                                <Label Text="{Binding DOB,Converter={StaticResource AgeConverter}}" 
+                                    <Label AutomationId="DOBLabel" Text="{Binding DOB,Converter={StaticResource AgeConverter}}" 
                                 LineBreakMode="NoWrap"
                                 FontSize="Small" TextColor="Accent" />
                             </StackLayout>

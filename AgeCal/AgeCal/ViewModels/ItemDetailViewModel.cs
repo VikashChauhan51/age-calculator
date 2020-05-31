@@ -24,6 +24,7 @@ namespace AgeCal.ViewModels
             _userService = userService;
             DeleteCommand = new ExclusiveRelayCommand(Delete);
             ShareCommand = new ExclusiveRelayCommand(ShareData);
+            Title = AppResource.UserDetails;   
         }
 
         private async void ShareData()

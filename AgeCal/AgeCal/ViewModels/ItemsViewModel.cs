@@ -7,6 +7,7 @@ using AgeCal.Models;
 using System.Linq;
 using System.Collections.Generic;
 using AgeCal.Services;
+using AgeCal.i18n;
 
 namespace AgeCal.ViewModels
 {
@@ -18,7 +19,7 @@ namespace AgeCal.ViewModels
         private readonly IUserService _userService;
         public ItemsViewModel(IUserService userService)
         {
-            Title = "Data";
+            Title = AppResource.Data;
             Items = new ObservableCollection<User>();
             _userService = userService;
             LoadItemsCommand = new Command(ExecuteLoadItemsCommand);

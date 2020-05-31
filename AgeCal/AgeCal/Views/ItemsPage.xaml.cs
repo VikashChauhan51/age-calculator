@@ -30,7 +30,6 @@ namespace AgeCal.Views
                 ShowSpinner = !ViewModel.IsReady;
 
             }
-            PageTitle = "Data";
             ShowBottomNav = true;
         }
 

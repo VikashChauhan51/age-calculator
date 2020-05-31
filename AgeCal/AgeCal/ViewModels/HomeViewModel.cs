@@ -1,4 +1,5 @@
-﻿using AgeCal.Interfaces;
+﻿using AgeCal.i18n;
+using AgeCal.Interfaces;
 using AgeCal.Models;
 using AgeCal.Services;
 using System;
@@ -17,7 +18,7 @@ namespace AgeCal.ViewModels
         {
             _userService = userService;
             _reminderService = reminderService;
-            Title = "Dashboard";
+            Title = AppResource.Home;
             MessageService.Register<User>(this, AddedUser);
 
 
