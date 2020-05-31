@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AgeCal.UITest.Utilities
+namespace AgeCal.UITest
 {
     class AppExtensions
     {
