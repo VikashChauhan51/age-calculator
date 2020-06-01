@@ -31,8 +31,8 @@ namespace AgeCal.Droid.Services
 
             string documentsPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData); 
             path = base.GetPath(documentsPath);
-            if (!File.Exists(path))
-                File.Create(path);
+            //if (!File.Exists(path))
+            //    File.Create(path);
 
 
 

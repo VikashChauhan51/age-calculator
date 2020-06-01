@@ -11,6 +11,7 @@ namespace AgeCal.Views
     public class SemiFullPagePopup<T> : FullPagePopup<T> where T : BaseViewModel
     {
         private ImageButton closeButton;
+        public event EventHandler OnClose;
         public SemiFullPagePopup() : base()
         {
             ControlTemplate = new SemiFullPagePopupTemplate();
@@ -94,6 +95,7 @@ namespace AgeCal.Views
         private void CloseButton_Clicked(object sender, EventArgs e)
         {
             ClosePopup();
+            OnClose?.Invoke(this, e);
         }
 
         public void ClosePopup()

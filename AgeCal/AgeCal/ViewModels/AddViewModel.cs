@@ -15,11 +15,13 @@ namespace AgeCal.ViewModels
 
         public ExclusiveRelayCommand AddCommand { get; set; }
         private readonly IUserService _userService;
+        private bool loaded = false;
         public AddViewModel(IUserService userService)
         {
             _userService = userService;
             AddCommand = new ExclusiveRelayCommand(Add);
             HasError = false;
+            loaded = false;
         }
         string name = string.Empty;
         public string Name
@@ -28,6 +30,9 @@ namespace AgeCal.ViewModels
             set
             {
                 name = value;
+
+                if(loaded)
+                HasError = string.IsNullOrEmpty(name);
                 RaisePropertyChanged(nameof(Name));
             }
         }
@@ -115,11 +120,12 @@ namespace AgeCal.ViewModels
 
         public override void OnNavigationParameter(object parm)
         {
-
+            loaded = false;
 
         }
         bool IsValid()
         {
+            loaded = true;
             var isValid = true;
             if (string.IsNullOrEmpty(Name) || string.IsNullOrWhiteSpace(Name))
                 isValid = false;
@@ -131,7 +137,7 @@ namespace AgeCal.ViewModels
             return isValid;
 
         }
-        void Clear()
+       public void Clear()
         {
             var date = DateTime.Now;
             Name = string.Empty;
@@ -139,6 +145,7 @@ namespace AgeCal.ViewModels
             Time = new TimeSpan(12, 0, 0);
             DOB = date;
             HasError = false;
+            loaded = false;
         }
     }
 }
