@@ -31,7 +31,7 @@ namespace AgeCal.UITest.Tests
         #endregion
         static BaseTest()
         {
-            _config = ResourceLoader.ReadEmbededFile("App.config");
+           // _config = ResourceLoader.ReadEmbededFile("App.config");
         }
         public BaseTest(Platform platform)
         {
