@@ -23,8 +23,8 @@ namespace AgeCal.UITest
     {
         #region Fields
         public bool XAMARIN_TEST_CLOUD_ENABLED = false;
-        readonly string APP_LOCATION = "";
-        readonly string DEVICE_ID = "";
+        readonly string APP_LOCATION = @"D:\Project\age-calculator\AgeCal\AgeCal.Android\bin\Debug\com.companyname.AgeCal-Signed.apk";
+        readonly string DEVICE_ID = "HKE7YWCW";
         readonly string IOS_APP_NAME = "";
         IOSDeviceType IOSDevice = IOSDeviceType.Physical;
         #endregion
