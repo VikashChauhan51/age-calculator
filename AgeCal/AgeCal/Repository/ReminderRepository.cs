@@ -62,6 +62,7 @@ namespace AgeCal.Repository
             using (var connect = AgeDatabase.Database.Connection())
             {
                 return connect.Table<Reminder>()
+                           .OrderBy(x => x.When)
                            .Skip(skip)
                            .Take(take)
                            .ToList();

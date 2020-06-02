@@ -1,4 +1,7 @@
-﻿using AgeCal.ViewModels;
+﻿using AgeCal.Core;
+using AgeCal.Ioc;
+using AgeCal.Models;
+using AgeCal.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,5 +23,17 @@ namespace AgeCal.Views
             ShowBottomNav = true;
         }
 
+        void OnItemSelected(object sender, SelectedItemChangedEventArgs args)
+        {
+            var item = args.SelectedItem as User;
+            if (item == null)
+                return;
+
+            if (ViewModel != null)
+                IocRegistry.Locate<IAgeNavigationService>().NavigateTo<ItemDetailViewModel>(item);
+
+            // Manually deselect item.
+            ItemsListView.SelectedItem = null;
+        }
     }
 }

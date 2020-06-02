@@ -19,40 +19,12 @@ namespace AgeCal.Views
         public ItemDetailPage() : base()
         {
             InitializeComponent();
-            if (ViewModel != null)
-            {
-                ShowSpinner = ViewModel.IsReady;
-
-            }
             PageHasbackButton = true;
             ShowBottomNav = false;
 
         }
 
-        protected override void OnViewModelPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            Device.BeginInvokeOnMainThread(() =>
-            {
-                try
-                {
-                    base.OnViewModelPropertyChanged(sender, e);
-                    switch (e.PropertyName)
-                    {
-                        case (nameof(ViewModel.IsReady)):
-                            ShowSpinner = !ViewModel.IsReady;
-                            break;
-                        default:
-                            break;
-                    }
-                }
-                catch
-                {
-
-
-                }
-            });
-
-        }
+       
 
         async void BtnDelete_Clicked(object sender, EventArgs e)
         {

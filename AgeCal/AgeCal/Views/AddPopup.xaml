@@ -7,24 +7,31 @@
             xmlns:viewModel="clr-namespace:AgeCal.ViewModels"                   
               x:TypeArguments="viewModel:AddViewModel"
              x:Class="AgeCal.Views.AddPopup">
-    <StackLayout x:Name="AddPopupContainer" AutomationId="AddPopupContainer" Spacing="0" Padding="0"  Margin="0" HorizontalOptions="FillAndExpand"  VerticalOptions="FillAndExpand" BackgroundColor="Transparent">
-        <StackLayout Spacing="20" Padding="5">
-            <Label x:Name="NameLabel" AutomationId="NameLabel" Text="{local:Translation NameLabel}" Style="{StaticResource PrimaryLabel}"/>
-            <Entry  x:Name="NameEntry" AutomationId="NameEntry" MaxLength="50" Text="{Binding Name}" Placeholder="{local:Translation NamePlaceholder}" Style="{StaticResource PrimaryEntry}" >
-                <Entry.Behaviors>
-                    <validation:RequiredValidationBehavior  />
-                    <validation:MaxLengthValidatorBehavior MaxLength="45"  />
-                </Entry.Behaviors>
-            </Entry>
-            <Label x:Name="NameError" AutomationId="NameError" IsVisible="{Binding HasError,Mode=TwoWay}" FontSize="Small" TextColor="{StaticResource PrimaryRed}" Text="{local:Translation NameError}"></Label>
-            <Label x:Name="DescriptionLabel" AutomationId="DescriptionLabel" Text="{local:Translation DescriptionLabel}" Style="{StaticResource PrimaryLabel}" />
-            <Editor x:Name="DescriptionEditor" AutomationId="DescriptionEditor" MaxLength="100" Style="{StaticResource PrimaryEditor}" Text="{Binding Description}" Margin="0" />
-            <Label x:Name="BirthDateLabel" AutomationId="BirthDateLabel" Text="{local:Translation BirthDateLabel}" Style="{StaticResource PrimaryLabel}" />
-            <DatePicker x:Name="AgePicker" AutomationId="AgePicker" Date="{Binding DOB,Mode=TwoWay}" ></DatePicker>
-            <Label x:Name="BirthTimeLabel" AutomationId="BirthTimeLabel" Text="{local:Translation BirthTimeLabel}" Style="{StaticResource PrimaryLabel}" />
-            <TimePicker x:Name="AgeTimer" AutomationId="AgeTimer" Time="{Binding Time}"></TimePicker>
-            <Button x:Name="Save" AutomationId="btnSave" Command="{Binding AddCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>
-        </StackLayout>
+    <StackLayout x:Name="AddPopupContainer" AutomationId="AddPopupContainer" Spacing="0" Padding="0"  Margin="0" HorizontalOptions="FillAndExpand"  VerticalOptions="StartAndExpand" BackgroundColor="Transparent">
+
+        <ScrollView HorizontalScrollBarVisibility="Never"  Orientation="Vertical" VerticalOptions="FillAndExpand" VerticalScrollBarVisibility="Default">
+            <StackLayout Spacing="20" Padding="5" VerticalOptions="FillAndExpand" >
+                <Label x:Name="NameLabel" AutomationId="NameLabel" Text="{local:Translation NameLabel}" Style="{StaticResource PrimaryLabel}"/>
+                <Entry  x:Name="NameEntry" AutomationId="NameEntry" MaxLength="50" Text="{Binding Name}" Placeholder="{local:Translation NamePlaceholder}" Style="{StaticResource PrimaryEntry}" >
+                    <Entry.Behaviors>
+                        <validation:MaxLengthValidatorBehavior MaxLength="45"  />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label x:Name="NameError" AutomationId="NameError" IsVisible="{Binding HasError,Mode=TwoWay}" FontSize="Small" TextColor="{StaticResource PrimaryRed}" Text="{local:Translation NameError}"></Label>
+                <Label x:Name="DescriptionLabel" AutomationId="DescriptionLabel" Text="{local:Translation DescriptionLabel}" Style="{StaticResource PrimaryLabel}" />
+                <Entry x:Name="DescriptionEditor" AutomationId="DescriptionEditor" Placeholder="{local:Translation DescriptionLabel}" MaxLength="100" Style="{StaticResource PrimaryEditor}" Text="{Binding Description}" Margin="0" >
+                    <Entry.Behaviors>
+                        <validation:MaxLengthValidatorBehavior MaxLength="95"  />
+                    </Entry.Behaviors>
+                </Entry>
+                <Label x:Name="BirthDateLabel" AutomationId="BirthDateLabel" Text="{local:Translation BirthDateLabel}" Style="{StaticResource PrimaryLabel}" />
+                <DatePicker x:Name="AgePicker" AutomationId="AgePicker" Date="{Binding DOB,Mode=TwoWay}" ></DatePicker>
+                <!--<Label x:Name="BirthTimeLabel" AutomationId="BirthTimeLabel" Text="{local:Translation BirthTimeLabel}" Style="{StaticResource PrimaryLabel}" />-->
+                <!--<TimePicker x:Name="AgeTimer" AutomationId="AgeTimer" Time="{Binding Time}"></TimePicker>-->
+                <Button x:Name="Save" AutomationId="btnSave" Command="{Binding AddCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>
+            </StackLayout>
+        </ScrollView>
+       
 
         <StackLayout x:Name="AddPopupFooter" HeightRequest="0"
                  BackgroundColor="White" HorizontalOptions="FillAndExpand" Padding="0,0,0,40"  VerticalOptions="End" Spacing="0" />

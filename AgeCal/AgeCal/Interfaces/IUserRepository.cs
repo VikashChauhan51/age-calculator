@@ -8,11 +8,7 @@ namespace AgeCal.Interfaces
     public interface IUserRepository : IRepository<User, string>
     {
 
-        User GetTodayBirthday();
-        User GetMonthBirthday();
-        User GetYearBirthday();
-        bool TodayHasMoreBirthday();
-        bool MonthHasMoreBirthday();
-        bool YearsHasMoreBirthday();
+        IEnumerable<User> GetTodayBirthdays(int max = 10);
+        IEnumerable<User> GetUpcomingBirthdays(int max = 10);
     }
 }

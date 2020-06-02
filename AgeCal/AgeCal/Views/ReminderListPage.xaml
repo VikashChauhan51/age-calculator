@@ -23,11 +23,12 @@
                 IsPullToRefreshEnabled="true"
                 IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                 CachingStrategy="RecycleElement"
+                SeparatorColor="Transparent"                 
                 SeparatorVisibility="None"
                 ItemAppearing="ItemsListView_ItemAppearing"
                 ItemSelected="OnItemSelected">
                 <ListView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate >
                         <ViewCell>
                             <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
                                 <StackLayout Padding="10">

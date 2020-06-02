@@ -63,6 +63,7 @@ namespace AgeCal.Repository
             using (var connect = AgeDatabase.Database.Connection())
             {
                 return connect.Table<User>()
+                           .OrderBy(x => x.Text)
                            .Skip(skip)
                            .Take(take)
                            .ToList();
@@ -77,180 +78,71 @@ namespace AgeCal.Repository
                 connect.Update(entity);
             }
         }
-
-        //public bool Any(Func<User, bool> predicate)
-        //{
-        //    using (var connect = AgeDatabase.Database.Connection())
-        //    {
-        //        return connect.Table<User>()
-        //                   .Where(predicate)
-        //                   .Any();
-
-
-        //    }
-        //}
-
-        public User GetTodayBirthday()
+ 
+        public IEnumerable<User> GetTodayBirthdays(int max = 10)
         {
             var day = DateTime.Now.Day;
             var month = DateTime.Now.Month;
             int skip = 0;
             int take = 100;
+            List<User> list = new List<User>();
             using (var connect = AgeDatabase.Database.Connection())
             {
-                var items = connect.Table<User>().Skip(skip).Take(take).ToList();
+                List<User> items = GetItems(skip, take, connect);
                 while (items != null && items.Any())
                 {
                     foreach (var item in items)
                     {
+                        if (list.Count == max)
+                            break;
                         if (item.DOB.Month == month && item.DOB.Day == day)
-                            return item;
+                            list.Add(item);
 
                     }
-
+                    if (list.Count == max)
+                        break;
                     skip += take;
-                    items = connect.Table<User>().Skip(skip).Take(take).ToList();
+                    items = GetItems(skip, take, connect);
                 }
             }
-            return null;
+            return list;
         }
 
-        public User GetMonthBirthday()
+ 
+        public IEnumerable<User> GetUpcomingBirthdays(int max = 10)
         {
             var day = DateTime.Now.Day;
             var month = DateTime.Now.Month;
             int skip = 0;
             int take = 100;
+            List<User> list = new List<User>();
             using (var connect = AgeDatabase.Database.Connection())
             {
-                var items = connect.Table<User>().Skip(skip).Take(take).ToList();
+                List<User> items = GetItems(skip, take, connect);
                 while (items != null && items.Any())
                 {
                     foreach (var item in items)
                     {
-                        if (item.DOB.Month == month && item.DOB.Day > day)
-                            return item;
+                        if (list.Count == max)
+                            break;
+
+                        //current month and day must be grater than today or month must be grater than current month.
+                        if (item.DOB.Month == month && item.DOB.Day > day || item.DOB.Month > month)
+                            list.Add(item);
 
                     }
+                    if (list.Count == max)
+                        break;
                     skip += take;
-                    items = connect.Table<User>().Skip(skip).Take(take).ToList();
+                    items = GetItems(skip, take, connect);
                 }
             }
-            return null;
+            return list;
         }
 
-        public User GetYearBirthday()
+        private static List<User> GetItems(int skip, int take, SQLite.SQLiteConnection connect)
         {
-
-            var month = DateTime.Now.Month;
-            int skip = 0;
-            int take = 100;
-            using (var connect = AgeDatabase.Database.Connection())
-            {
-                var items = connect.Table<User>().Skip(skip).Take(take).ToList();
-                while (items != null && items.Any())
-                {
-                    foreach (var item in items)
-                    {
-                        if (item.DOB.Month > month)
-                            return item;
-
-
-
-                    }
-                    skip += take;
-                    items = connect.Table<User>().Skip(skip).Take(take).ToList();
-                }
-            }
-            return null;
-        }
-
-        public bool TodayHasMoreBirthday()
-        {
-            var day = DateTime.Now.Day;
-            var month = DateTime.Now.Month;
-            int skip = 0;
-            int take = 100;
-            int count = 0;
-            using (var connect = AgeDatabase.Database.Connection())
-            {
-                var items = connect.Table<User>().Skip(skip).Take(take).ToList();
-                while (items != null && items.Any())
-                {
-                    foreach (var item in items)
-                    {
-                        if (item.DOB.Month == month && item.DOB.Day == day)
-                            count++;
-
-                        if (count > 1)
-                            return true;
-
-
-                    }
-                    skip += take;
-                    items = connect.Table<User>().Skip(skip).Take(take).ToList();
-                }
-            }
-            return false;
-        }
-
-        public bool MonthHasMoreBirthday()
-        {
-            var day = DateTime.Now.Day;
-            var month = DateTime.Now.Month;
-            int skip = 0;
-            int take = 100;
-            int count = 0;
-            using (var connect = AgeDatabase.Database.Connection())
-            {
-                var items = connect.Table<User>().Skip(skip).Take(take).ToList();
-                while (items != null && items.Any())
-                {
-                    foreach (var item in items)
-                    {
-                        if (item.DOB.Month == month && item.DOB.Day > day)
-                            count++;
-
-                        if (count > 1)
-                            return true;
-
-
-
-                    }
-                    skip += take;
-                    items = connect.Table<User>().Skip(skip).Take(take).ToList();
-                }
-            }
-            return false;
-        }
-
-        public bool YearsHasMoreBirthday()
-        {
-            var month = DateTime.Now.Month;
-            int skip = 0;
-            int take = 100;
-            int count = 0;
-            using (var connect = AgeDatabase.Database.Connection())
-            {
-                var items = connect.Table<User>().Skip(skip).Take(take).ToList();
-                while (items != null && items.Any())
-                {
-                    foreach (var item in items)
-                    {
-                        if (item.DOB.Month > month)
-                            count++;
-
-                        if (count > 1)
-                            return true;
-
-
-
-                    }
-                    skip += take;
-                    items = connect.Table<User>().Skip(skip).Take(take).ToList();
-                }
-            }
-            return false;
+            return connect.Table<User>().OrderBy(x => x.Text).Skip(skip).Take(take).ToList();
         }
     }
 }

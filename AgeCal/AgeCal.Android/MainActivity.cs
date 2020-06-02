@@ -83,5 +83,11 @@ namespace AgeCal.Droid
             IocRegistry.Register<IShare, Share>();
 
         }
+
+        public override void OnBackPressed()
+        {
+            base.OnBackPressed();   
+        }
+        
     }
 }

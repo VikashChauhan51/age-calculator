@@ -5,7 +5,7 @@
              x:Class="AgeCal.Components.SemiFullPagePopupTemplate">
     <pageControls:PageLayout x:Name="PageLayout">
         <BoxView x:Name="OverlayBox" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Opacity="0.6" BackgroundColor="{StaticResource PrimaryDark}" />
-        <StackLayout x:Name="SemiPopupLayout"  Spacing="0" Opacity="0.9" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional" BackgroundColor="Transparent"  AbsoluteLayout.LayoutBounds="0,40,1,1">
+        <StackLayout x:Name="SemiPopupLayout"  Spacing="0" Opacity="1" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional" BackgroundColor="Transparent"  AbsoluteLayout.LayoutBounds="0,60,1,1">
             <Frame CornerRadius="20" AbsoluteLayout.LayoutFlags="XProportional,SizeProportional" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="0" Margin="0">
                     <!-- Here's where the content page render-->

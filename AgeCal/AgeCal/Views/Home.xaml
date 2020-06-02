@@ -7,38 +7,35 @@
             xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
              x:TypeArguments="viewModel:HomeViewModel"
              x:Class="AgeCal.Views.Home">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <converter:InverseBoolConverter x:Key="InverseBoolConverter" />
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Spacing="15" Margin="2" HorizontalOptions="StartAndExpand" VerticalOptions="StartAndExpand">
             <Label Text="Hey!" FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
-            <Label Text="Welcome to Age Calculator. Tap on + icon to add your birthday information." FontSize="Small" TextColor="{StaticResource PrimaryBlack}"></Label>
-            <Label Text="{Binding LabelText}" FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
-            <Frame CornerRadius="20" Margin="2" BackgroundColor="{StaticResource PrimaryCyan}" HasShadow="True" Opacity="0.6" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand">
-                <StackLayout Spacing="5">
-                    <Label Text="{Binding Birthday.Text}" TextColor="{StaticResource PrimaryWhite}" IsVisible="{Binding HasData}" FontSize="Large"
-                VerticalOptions="StartAndExpand" 
-                HorizontalOptions="StartAndExpand" />
-
-                    <Label Text="Happy birthday! I hope all your birthday wishes and dreams come true." TextColor="{StaticResource PrimaryWhite}" IsVisible="{Binding HasData}" FontSize="Small"
-                VerticalOptions="StartAndExpand" 
-                HorizontalOptions="StartAndExpand" />
-                    <Label Text="Smile!" TextColor="{StaticResource PrimaryWhite}" IsVisible="{Binding HasData, Converter={StaticResource InverseBoolConverter}}" FontSize="Large"
-                VerticalOptions="StartAndExpand" 
-                HorizontalOptions="StartAndExpand" />
-                    <Label Text="&#128578;" TextColor="{StaticResource PrimaryWhite}"  FontSize="Large"
-                VerticalOptions="StartAndExpand" 
-                HorizontalOptions="StartAndExpand" />
-
-                </StackLayout>
-            </Frame>
-            <Label Text="Other" IsVisible="{Binding HasMoreBirthday}"  FontSize="Large" TextColor="{StaticResource PrimaryBlack}"></Label>
-            <Label Text="{Binding Message}" IsVisible="{Binding HasMoreBirthday}"
-                VerticalOptions="StartAndExpand" 
-                HorizontalOptions="StartAndExpand" />
+            <Label Text="Welcome to Birthday Reminder. Tap on + icon to add your birthday information." FontSize="Small" TextColor="{StaticResource PrimaryBlack}"></Label>
+            <Label Text="{Binding Message}"  FontSize="Large" TextColor="{StaticResource PrimaryBlack}" />
+            <ListView x:Name="ItemsListView" AutomationId="ItemsListView"
+                ItemsSource="{Binding Items}"
+                VerticalOptions="FillAndExpand"
+                HasUnevenRows="true"
+                RefreshCommand="{Binding LoadItemsCommand}"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                CachingStrategy="RecycleElement"
+                SeparatorVisibility="None"
+                ItemSelected="OnItemSelected">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
+                                <StackLayout AutomationId="ItemsListViewTemplate" Padding="10">
+                                    <Label Text="{Binding Text}"  AutomationId="NameLabel"
+                                LineBreakMode="NoWrap" 
+                                FontSize="Medium" FontAttributes="Bold" />
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 

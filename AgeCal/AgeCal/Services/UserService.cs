@@ -64,6 +64,22 @@ namespace AgeCal.Services
 
         }
 
+
+
+        public IEnumerable<User> GetTodayBirthdays(int max = 10)
+        {
+            if (max <= 0)
+                max = 10;
+            return _userRepository.GetTodayBirthdays(max);
+        }
+
+        public IEnumerable<User> GetUpcomingBirthdays(int max = 10)
+        {
+            if (max <= 0)
+                max = 10;
+            return _userRepository.GetUpcomingBirthdays(max);
+        }
+
         private void DeleteReminders(string userId)
         {
             var reminders = _reminderRepository.GetReminders(userId);
@@ -79,7 +95,7 @@ namespace AgeCal.Services
 
         }
 
-  
+
         private static void Validate(User user)
         {
             if (user == null)
@@ -90,36 +106,6 @@ namespace AgeCal.Services
 
             if (string.IsNullOrEmpty(user.Text))
                 throw new ArgumentNullException("user.Name");
-        }
-
-        public User GetTodayBirthday()
-        {
-            return _userRepository.GetTodayBirthday();
-        }
-
-        public User GetMonthBirthday()
-        {
-            return _userRepository.GetMonthBirthday();
-        }
-
-        public User GetYearBirthday()
-        {
-            return _userRepository.GetYearBirthday();
-        }
-
-        public bool TodayHasMoreBirthday()
-        {
-           return _userRepository.TodayHasMoreBirthday();
-        }
-
-        public bool MonthHasMoreBirthday()
-        {
-            return _userRepository.MonthHasMoreBirthday();
-        }
-
-        public bool YearsHasMoreBirthday()
-        {
-            return _userRepository.YearsHasMoreBirthday();
         }
     }
 }

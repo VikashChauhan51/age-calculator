@@ -11,11 +11,7 @@ namespace AgeCal.Services
         User Get(string id);
         IEnumerable<User> Gets(int skip, int take);
         void Update(User user);
-        User GetTodayBirthday();
-        User GetMonthBirthday();
-        User GetYearBirthday();
-        bool TodayHasMoreBirthday();
-        bool MonthHasMoreBirthday();
-        bool YearsHasMoreBirthday();
+        IEnumerable<User> GetTodayBirthdays(int max = 10);
+        IEnumerable<User> GetUpcomingBirthdays(int max = 10);
     }
 }
