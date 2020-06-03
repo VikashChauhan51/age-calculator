@@ -14,6 +14,7 @@ using AgeCal.Models;
 using AgeCal.Services;
 using Plugin.LocalNotifications;
 using Android.Content;
+using System.Threading.Tasks;
 
 namespace AgeCal.Droid
 {
@@ -24,12 +25,13 @@ namespace AgeCal.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+            AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
             base.OnCreate(savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.reminder;
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App(typeof(Views.Home)));
 
@@ -37,9 +39,15 @@ namespace AgeCal.Droid
 
         }
 
-        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
+        private void AndroidEnvironment_UnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs e)
+        {  //TODO:Logging
+            e.Handled = true;
+        }
+
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
-             
+            //TODO:Logging
+            e.SetObserved();
         }
 
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -51,13 +59,13 @@ namespace AgeCal.Droid
 
         public override void RegisterComponentCallbacks(IComponentCallbacks callback)
         {
-            base.RegisterComponentCallbacks(callback);  
+            base.RegisterComponentCallbacks(callback);
         }
         public override void UnregisterReceiver(BroadcastReceiver receiver)
         {
-            base.UnregisterReceiver(receiver);  
+            base.UnregisterReceiver(receiver);
         }
-        
+
         void RegisterServices()
         {
             IocRegistry.Register<ILocalDatabase>(() =>
@@ -86,8 +94,18 @@ namespace AgeCal.Droid
 
         public override void OnBackPressed()
         {
-            base.OnBackPressed();   
+            if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
+            {
+
+            }
         }
-        
+        public override void OnTrimMemory([GeneratedEnum] TrimMemory level)
+        {
+
+            base.OnTrimMemory(level);
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
+            base.OnTrimMemory(level);
+        }
+
     }
 }
