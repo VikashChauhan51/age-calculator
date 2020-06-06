@@ -11,6 +11,9 @@ using AgeCal.Core;
 using AgeCal.ViewModels;
 using AgeCal.Interfaces;
 using AgeCal.Repository;
+using Xamarin.Essentials;
+using AgeCal.Utilities;
+using AgeCal.Utilities.Enums;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace AgeCal
@@ -50,6 +53,23 @@ namespace AgeCal
             navPage = new NavigationPage(page == null ? new MainPage() : new MainPage());
             MainPage = navPage;
             RegisterServices();
+            SetupCurrentTheme();
+        }
+
+        /// <summary>
+        /// Set up current theme from app settings
+        /// </summary>
+        public void SetupCurrentTheme()
+        {
+            var currentTheme = Preferences.Get("AgeCalAppTheme", null);
+            if (currentTheme != null)
+            {
+                if (Enum.TryParse(currentTheme, out Theme currentThemeEnum))
+                {
+                    ThemeHelper.SetAppTheme(currentThemeEnum);
+                }
+            }
+
         }
         protected override void OnStart()
         {
