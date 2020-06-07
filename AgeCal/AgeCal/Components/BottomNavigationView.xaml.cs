@@ -30,10 +30,10 @@ namespace AgeCal.Components
             };
             addButton.Clicked += AddData;
 
-            AddIcon("chart.png", AppResource.Home, typeof(HomeViewModel));
+            AddIcon("home.png", AppResource.Home, typeof(HomeViewModel));
             AddIcon("data.png", AppResource.Data, typeof(ItemsViewModel));
             this.IconLayout.Children.Add(addButton);
-            AddIcon("clock.png", AppResource.Reminders, typeof(ReminderListViewModel));
+            AddIcon("reminder.png", AppResource.Reminders, typeof(ReminderListViewModel));
             AddIcon("setting.png", AppResource.Settings, typeof(SettingViewModel));
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
