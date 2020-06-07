@@ -26,7 +26,7 @@ namespace AgeCal.Components
         protected override void UpdateSubTitle(string oldV, string newV)
         {
             base.UpdateSubTitle(oldV, newV);
-            SubTitleLabel.Text = newV;
+           // SubTitleLabel.Text = newV;
         }
         protected override void UpdateTitleIcon(string oldV, string newV)
         {

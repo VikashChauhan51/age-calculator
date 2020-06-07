@@ -9,12 +9,9 @@
                 
             </ImageButton>
             <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-                <Label x:Name="TitleLabel" AutomationId="TitleLabel" FontSize="Medium" HorizontalOptions="FillAndExpand" TextColor="{StaticResource PrimaryWhite}"
+                <Label x:Name="TitleLabel" AutomationId="TitleLabel" FontSize="Large" HorizontalOptions="FillAndExpand" TextColor="{StaticResource PrimaryWhite}"
                        HorizontalTextAlignment="Center" VerticalOptions="FillAndExpand"
                        VerticalTextAlignment="Center" MaxLines="1" Margin="0" LineBreakMode="TailTruncation" />
-                <Label x:Name="SubTitleLabel" AutomationId="SubTitleLabel" HorizontalOptions="FillAndExpand"
-                       HorizontalTextAlignment="Center" VerticalOptions="End" TextColor="{StaticResource PrimaryWhite}"
-                       VerticalTextAlignment="Center" MaxLines="1" Margin="0,1,0,0" LineBreakMode="TailTruncation" />
             </StackLayout>
         </StackLayout>
     </ContentView.Content>

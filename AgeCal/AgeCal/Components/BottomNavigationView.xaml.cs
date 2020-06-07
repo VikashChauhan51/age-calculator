@@ -30,8 +30,8 @@ namespace AgeCal.Components
             };
             addButton.Clicked += AddData;
 
-            AddIcon("home.png", AppResource.Home, typeof(HomeViewModel));
-            AddIcon("data.png", AppResource.Data, typeof(ItemsViewModel));
+            AddIcon("dashboard.png", AppResource.Home, typeof(HomeViewModel));
+            AddIcon("users.png", AppResource.Data, typeof(ItemsViewModel));
             this.IconLayout.Children.Add(addButton);
             AddIcon("reminder.png", AppResource.Reminders, typeof(ReminderListViewModel));
             AddIcon("setting.png", AppResource.Settings, typeof(SettingViewModel));

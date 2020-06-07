@@ -5,8 +5,8 @@
              x:Class="AgeCal.Components.ToastView">
     <ContentView.Content>
         <StackLayout Orientation="Horizontal"  BackgroundColor="{StaticResource PrimaryWhite}"   HorizontalOptions="Center"  VerticalOptions="Fill" Padding="0">
-            <Frame CornerRadius="20" HorizontalOptions="CenterAndExpand"  BorderColor="{StaticResource PrimaryGray}"  BackgroundColor="{StaticResource PrimaryGray}"  VerticalOptions="CenterAndExpand">
-                <Label x:Name="ToastLabel" LineBreakMode="WordWrap" TextColor="{StaticResource PrimaryWhite}" MaxLines="1" HorizontalOptions="Fill" VerticalOptions="Fill"
+            <Frame CornerRadius="20" HorizontalOptions="CenterAndExpand"  BorderColor="{StaticResource PrimaryWhite}"  BackgroundColor="{StaticResource PrimaryGray}"  VerticalOptions="CenterAndExpand">
+                <Label x:Name="ToastLabel" LineBreakMode="WordWrap" TextColor="{StaticResource PrimaryBlack}" MaxLines="1" HorizontalOptions="Fill" VerticalOptions="Fill"
                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center"></Label>
             </Frame>
         </StackLayout>

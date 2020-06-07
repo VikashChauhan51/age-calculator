@@ -9,7 +9,7 @@
              x:Class="AgeCal.Views.AddReminderPopup">
     <ContentPage.Content>
         <StackLayout Spacing="10">
-            <ImageButton x:Name="btnClose" Source="cross.png" Command="{Binding CloseCommand}"   WidthRequest="48" HeightRequest="48" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
+            <ImageButton x:Name="btnClose" Source="cross.png" Command="{Binding CloseCommand}"   WidthRequest="32" HeightRequest="32" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
             <StackLayout Spacing="20">
                 <Picker  x:Name="UserPicker" Title="Select user"  ItemDisplayBinding="{Binding Text}"  
                          ItemsSource="{Binding Items,Mode=TwoWay}" 
