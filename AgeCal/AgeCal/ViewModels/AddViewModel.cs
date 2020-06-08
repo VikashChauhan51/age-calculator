@@ -46,7 +46,16 @@ namespace AgeCal.ViewModels
                 RaisePropertyChanged(nameof(Description));
             }
         }
-     
+        string phone = string.Empty;
+        public string Phone
+        {
+            get { return phone; }
+            set
+            {
+                phone = value;
+                RaisePropertyChanged(nameof(Phone));
+            }
+        }
         bool hasError;
         public bool HasError
         {
@@ -96,6 +105,8 @@ namespace AgeCal.ViewModels
                         Description = Description,
                         DOB = DOB,
                         Time = Time,
+                        Phone=Phone,
+                        Email=string.Empty,
                         CreatedOn = DateTime.UtcNow
                     };
                     _userService.Add(user);

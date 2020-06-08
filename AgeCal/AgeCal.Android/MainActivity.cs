@@ -68,19 +68,7 @@ namespace AgeCal.Droid
 
         void RegisterServices()
         {
-            IocRegistry.Register<ILocalDatabase>(() =>
-            {
-                var db = new SqliteDatabase();
-                db.Initialize();
-                db.InitializeTables(new List<Type>
-                {
-                    typeof(User),
-                    typeof(Reminder),
-                    typeof(ReminderSetting),
-                    typeof(DashboardSetting)
-                });
-                return db;
-            });
+            IocRegistry.Register<ILocalDatabase, LocalDatabase>();
             IocRegistry.Register<INotificationManager>(() =>
             {
                 var notification = new AndroidNotificationManager();

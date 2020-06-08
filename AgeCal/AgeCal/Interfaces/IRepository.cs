@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace AgeCal.Interfaces
@@ -35,8 +36,19 @@ namespace AgeCal.Interfaces
         /// <param name="skip"></param>
         /// <param name="take"></param>
         /// <returns></returns>
-       // IEnumerable<TEntity> Find(Func<TEntity, bool> predicate, int skip, int take);
+        IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate, int skip, int take);
+        /// <summary>
+        /// Get results
+        /// </summary>
+        /// <param name="skip"></param>
+        /// <param name="take"></param>
+        /// <returns></returns>
         IEnumerable<TEntity> GetAll(int skip, int take);
-       // bool Any(Func<TEntity, bool> predicate);
+        /// <summary>
+        /// find any
+        /// </summary>
+        /// <param name="predicate"></param>
+        /// <returns></returns>
+        bool Any(Expression<Func<TEntity, bool>> predicate);
     }
 }

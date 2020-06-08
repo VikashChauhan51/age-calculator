@@ -1,4 +1,4 @@
-﻿using AgeCal.Database;
+﻿
 using AgeCal.Interfaces;
 using AgeCal.Models;
 using System;
@@ -11,61 +11,46 @@ namespace AgeCal.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public UserRepository()
+        private readonly ILocalDatabase _localDatabase;
+        public UserRepository(ILocalDatabase localDatabase)
         {
-
+            _localDatabase = localDatabase;
         }
         public void Add(User entity)
         {
-            using (var connect = AgeDatabase.Database.Connection())
+            using (var connect = new DBContext(_localDatabase))
             {
-
-                connect.Insert(entity);
+                connect.Users.Insert(entity);
             }
         }
 
 
         public void Delete(User entity)
         {
-            using (var connect = AgeDatabase.Database.Connection())
+            using (var connect = new DBContext(_localDatabase))
             {
 
-                connect.Delete(entity);
+                connect.Users.Delete(entity.Id);
             }
         }
 
-        //public IEnumerable<User> Find(Func<User, bool> predicate, int skip, int take)
-        //{
-        //    using (var connect = AgeDatabase.Database.Connection())
-        //    {
-        //        return connect.Table<User>()
-        //                   .Where(predicate)
-        //                   .Skip(skip)
-        //                   .Take(take)
-        //                   .ToList();
-
-        //    }
-        //}
-
         public User Get(string id)
         {
-            using (var connect = AgeDatabase.Database.Connection())
+            using (var connect = new DBContext(_localDatabase))
             {
-                return connect.Table<User>()
-                           .Where(x => x.Id == id)
-                           .FirstOrDefault();
+                return connect.Users.FindById(id);
 
             }
         }
 
         public IEnumerable<User> GetAll(int skip, int take)
         {
-            using (var connect = AgeDatabase.Database.Connection())
+            using (var connect = new DBContext(_localDatabase))
             {
-                return connect.Table<User>()
+                return connect.Users.Query()
                            .OrderBy(x => x.Text)
                            .Skip(skip)
-                           .Take(take)
+                           .Limit(take)
                            .ToList();
 
             }
@@ -73,12 +58,12 @@ namespace AgeCal.Repository
 
         public void Update(User entity)
         {
-            using (var connect = AgeDatabase.Database.Connection())
+            using (var connect = new DBContext(_localDatabase))
             {
-                connect.Update(entity);
+                connect.Users.Update(entity);
             }
         }
- 
+
         public IEnumerable<User> GetTodayBirthdays(int max = 10)
         {
             var day = DateTime.Now.Day;
@@ -86,7 +71,7 @@ namespace AgeCal.Repository
             int skip = 0;
             int take = 100;
             List<User> list = new List<User>();
-            using (var connect = AgeDatabase.Database.Connection())
+            using (var connect = new DBContext(_localDatabase))
             {
                 List<User> items = GetItems(skip, take, connect);
                 while (items != null && items.Any())
@@ -108,7 +93,7 @@ namespace AgeCal.Repository
             return list;
         }
 
- 
+
         public IEnumerable<User> GetUpcomingBirthdays(int max = 10)
         {
             var day = DateTime.Now.Day;
@@ -116,7 +101,7 @@ namespace AgeCal.Repository
             int skip = 0;
             int take = 100;
             List<User> list = new List<User>();
-            using (var connect = AgeDatabase.Database.Connection())
+            using (var connect = new DBContext(_localDatabase))
             {
                 List<User> items = GetItems(skip, take, connect);
                 while (items != null && items.Any())
@@ -140,9 +125,26 @@ namespace AgeCal.Repository
             return list;
         }
 
-        private static List<User> GetItems(int skip, int take, SQLite.SQLiteConnection connect)
+        private static List<User> GetItems(int skip, int take, DBContext connect)
         {
-            return connect.Table<User>().OrderBy(x => x.Text).Skip(skip).Take(take).ToList();
+            return connect.Users.Query().OrderBy(x => x.Text).Skip(skip).Limit(take).ToList();
+        }
+
+        public IEnumerable<User> Find(Expression<Func<User, bool>> predicate, int skip, int take)
+        {
+            using (var connect = new DBContext(_localDatabase))
+            {
+                return connect.Users.Find(predicate).OrderBy(x=>x.Text).Skip(skip).Take(take);
+            }
+
+        }
+
+        public bool Any(Expression<Func<User, bool>> predicate)
+        {
+            using (var connect = new DBContext(_localDatabase))
+            {
+                return connect.Users.Exists(predicate);
+            }
         }
     }
 }

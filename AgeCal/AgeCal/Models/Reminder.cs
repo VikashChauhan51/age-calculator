@@ -1,14 +1,13 @@
-﻿using SQLite;
+﻿
+using LiteDB;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AgeCal.Models
 {
     public class Reminder
     {
 
-        [PrimaryKey]
+        [BsonId]
         public string ReminderId { get; set; }
         public int Id { get; set; }
         public string UserId { get; set; }

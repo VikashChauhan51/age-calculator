@@ -89,7 +89,7 @@ namespace AgeCal.Services
                 foreach (var item in reminders)
                     ReminderHelper.DeleteReminderNotification(item);
 
-                _reminderRepository.Delete(reminders);
+                _reminderRepository.Delete(x=>x.UserId== userId);
 
             }
 

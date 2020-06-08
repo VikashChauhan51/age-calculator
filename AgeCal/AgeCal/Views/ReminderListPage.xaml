@@ -56,7 +56,7 @@
             </ListView>
             <ImageButton x:Name="btnAdd" Source="add.png" Command="{Binding AddCommand}"   AbsoluteLayout.LayoutBounds="0.95,0.95,50,50"
             AbsoluteLayout.LayoutFlags="PositionProportional"  
-                         WidthRequest="48" HeightRequest="48" BackgroundColor="Transparent"  />
+                         WidthRequest="42" HeightRequest="42" BackgroundColor="Transparent"  />
 
         </AbsoluteLayout>
 

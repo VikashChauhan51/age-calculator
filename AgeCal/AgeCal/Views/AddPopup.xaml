@@ -24,6 +24,12 @@
                         <validation:MaxLengthValidatorBehavior MaxLength="95"  />
                     </Entry.Behaviors>
                 </Entry>
+                <Label x:Name="PhoneLabel" AutomationId="PhoneLabel" Text="{local:Translation PhoneLabel}" Style="{StaticResource PrimaryLabel}" />
+                <Entry x:Name="PhoneEntry" AutomationId="PhoneEntry" Keyboard="Numeric" MaxLength="15" Text="{Binding Phone}" Placeholder="{local:Translation PhoneLabel}" Style="{StaticResource PrimaryEntry}" >
+                    <Entry.Behaviors>
+                        <validation:MaxLengthValidatorBehavior MaxLength="15"  />
+                    </Entry.Behaviors>
+                </Entry>
                 <Label x:Name="BirthDateLabel" AutomationId="BirthDateLabel" Text="{local:Translation BirthDateLabel}" Style="{StaticResource PrimaryLabel}" />
                 <DatePicker x:Name="AgePicker" AutomationId="AgePicker" Date="{Binding DOB,Mode=TwoWay}" ></DatePicker>
                 <!--<Label x:Name="BirthTimeLabel" AutomationId="BirthTimeLabel" Text="{local:Translation BirthTimeLabel}" Style="{StaticResource PrimaryLabel}" />-->

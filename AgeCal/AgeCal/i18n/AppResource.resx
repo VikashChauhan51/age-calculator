@@ -172,6 +172,9 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="PhoneLabel" xml:space="preserve">
+    <value>Phone</value>
+  </data>
   <data name="RateUs" xml:space="preserve">
     <value>RateUs</value>
   </data>

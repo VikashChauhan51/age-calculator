@@ -61,9 +61,6 @@
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>1.2.0.223</Version>
     </PackageReference>
-    <PackageReference Include="sqlite-net-pcl">
-      <Version>1.7.335</Version>
-    </PackageReference>
     <PackageReference Include="Xam.Plugins.Notifier">
       <Version>3.0.1</Version>
     </PackageReference>
@@ -86,7 +83,7 @@
     <Compile Include="Services\Localizer.cs" />
     <Compile Include="Services\NotificationHandler.cs" />
     <Compile Include="Services\Share.cs" />
-    <Compile Include="Services\SqliteDatabase.cs" />
+    <Compile Include="Services\LocalDatabase.cs" />
     <Compile Include="SplashActivity.cs" />
   </ItemGroup>
   <ItemGroup>
