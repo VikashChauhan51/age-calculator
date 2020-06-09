@@ -4,8 +4,8 @@
              xmlns:pageControls="clr-namespace:AgeCal.Components"
              x:Class="AgeCal.Components.TopNavigationView">
     <ContentView.Content>
-        <StackLayout Spacing="0" Orientation="Horizontal" AutomationId="TopNavBarContainer" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryCyan}"  VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
-            <ImageButton x:Name="BackIcon" AutomationId="BackIcon" Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" IsVisible="False" Clicked="OnBackClick" WidthRequest="48" HeightRequest="48">
+        <StackLayout Spacing="0"   Orientation="Horizontal" AutomationId="TopNavBarContainer" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryCyan}"  VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
+            <ImageButton x:Name="BackIcon" AutomationId="BackIcon" Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" IsVisible="False" Clicked="OnBackClick" WidthRequest="42" HeightRequest="42">
                 
             </ImageButton>
             <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">

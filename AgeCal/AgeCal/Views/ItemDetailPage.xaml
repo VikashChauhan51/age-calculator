@@ -13,14 +13,17 @@
             <converter:TimeSpanToStringConverter x:Key="TimeSpanToStringConverter" />
             <converter:AgeConverter x:Key="AgeConverter" />
             <converter:BirthdayConverter  x:Key="BirthdayConverter"  />
+            <converter:NullToBoolConverter x:Key="NullToBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout Spacing="5" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-            <Frame HasShadow="True" CornerRadius="5" OutlineColor="{StaticResource PrimaryGray}" HeightRequest="50">
+            <Frame HasShadow="True" CornerRadius="5"  OutlineColor="{StaticResource PrimaryGray}" >
                 <StackLayout Spacing="0"  Padding="0" Orientation="Horizontal">
-                    <ImageButton x:Name="btnDelete" AutomationId="btnDelete" Source="trash.png" Clicked="BtnDelete_Clicked" WidthRequest="48" HeightRequest="48" BackgroundColor="Transparent" HorizontalOptions="Start"  />
-                    <ImageButton x:Name="btnShare" AutomationId="btnShare" Source="share.png" Command="{Binding ShareCommand}"   WidthRequest="48" HeightRequest="48" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
+                    <ImageButton x:Name="btnDelete" AutomationId="btnDelete" Source="trash.png" Clicked="BtnDelete_Clicked" WidthRequest="42" HeightRequest="42" BackgroundColor="Transparent" HorizontalOptions="Start"  />
+                    <ImageButton x:Name="btnSMS" AutomationId="btnSMS" IsEnabled="{Binding Phone,Converter={StaticResource NullToBoolConverter }}" Source="message.png" Command="{Binding SMSCommand}"   WidthRequest="42" HeightRequest="42" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
+                    <ImageButton x:Name="btnCall" AutomationId="btnCall" IsEnabled="{Binding Phone,Converter={StaticResource NullToBoolConverter }}" Source="call.png" Command="{Binding CallCommand}"   WidthRequest="42" HeightRequest="42" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
+                    <ImageButton x:Name="btnShare" AutomationId="btnShare" Source="share.png" Command="{Binding ShareCommand}"   WidthRequest="42" HeightRequest="42" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
                 </StackLayout>
             </Frame>
             <Frame HasShadow="True" CornerRadius="5" OutlineColor="{StaticResource PrimaryGray}">

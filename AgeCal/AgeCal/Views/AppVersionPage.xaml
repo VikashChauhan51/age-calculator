@@ -7,10 +7,13 @@
              x:TypeArguments="viewModel:AppVersionViewModel"
              x:Class="AgeCal.Views.AppVersionPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Spacing="5" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
+            <Frame HasShadow="True" CornerRadius="5" OutlineColor="{StaticResource PrimaryGray}" >
+                <StackLayout Spacing="5"  Padding="0" Orientation="Vertical">
+                    <Label AutomationId="NameLabel" Text="{Binding Name}" FontSize="Large" FontAttributes="Bold"/>
+                    <Label AutomationId="VersionLabel" Text="{Binding Version}" FontSize="Medium"/>
+                </StackLayout>
+            </Frame>
         </StackLayout>
     </ContentPage.Content>
 </views:AgeContentPage>
