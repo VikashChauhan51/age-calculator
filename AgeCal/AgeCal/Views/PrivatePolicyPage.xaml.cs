@@ -21,71 +21,106 @@ namespace AgeCal.Views
             PageHasbackButton = true;
             var html = new HtmlWebViewSource
             {
-                Html = @"<html><body>
- <div id='placeholders'>
-<h2>Privacy Policy for <span class='highlight preview_company_name'>Company Name</span></h2>
-<p>At <span class='highlight preview_website_name'>Website Name</span>, accessible at <span class='highlight preview_website_url'>Website.com</span>, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by <span class='highlight preview_website_name'>Website Name</span> and how we use it.</p>
-<p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us through email at <span class='highlight preview_email_address'>Email@Website.com</span></p>
-<p>This privacy policy applies only to our online activities and is valid for visitors to our website with regards to the information that they shared and/or collect in <span class='highlight preview_website_name'>Website Name</span>. This policy is not applicable to any information collected offline or via channels other than this website.</p>
-<p><strong>Consent</strong></p>
-<p>By using our website, you hereby consent to our Privacy Policy and agree to its terms.</p>
-<p><strong>Information we collect</strong></p>
-<p>The personal information that you are asked to provide, and the reasons why you are asked to provide it, will be made clear to you at the point we ask you to provide your personal information.</p>
-<p>If you contact us directly, we may receive additional information about you such as your name, email address, phone number, the contents of the message and/or attachments you may send us, and any other information you may choose to provide.</p>
-<p>When you register for an Account, we may ask for your contact information, including items such as name, company name, address, email address, and telephone number.</p>
-<p><strong>How we use your information</strong></p>
-<p>We use the information we collect in various ways, including to:</p>
-<ul>
-<li>Provide, operate, and maintain our webste</li>
-<li>Improve, personalize, and expand our webste</li>
-<li>Understand and analyze how you use our webste</li>
-<li>Develop new products, services, features, and functionality</li>
-<li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the webste, and for marketing and promotional purposes</li>
-<li>Send you emails</li>
-<li>Find and prevent fraud</li>
-</ul>
-<p><strong>Log Files</strong></p>
-<p><span class='highlight preview_website_name'>Website Name</span> follows a standard procedure of using log files. These files log visitors when they visit websites. All hosting companies do this and a part of hosting services' analytics. The information collected by log files include internet protocol (IP) addresses, browser type, Internet Service Provider (ISP), date and time stamp, referring/exit pages, and possibly the number of clicks. These are not linked to any information that is personally identifiable. The purpose of the information is for analyzing trends, administering the site, tracking users' movement on the website, and gathering demographic information.</p>
-<h3>Cookies and Web Beacons</h3>
-<p>Like any other website, <span class='highlight preview_website_name'>Website Name</span> uses ‘cookies'. These cookies are used to store information including visitors' preferences, and the pages on the website that the visitor accessed or visited. The information is used to optimize the users' experience by customizing our web page content based on visitors' browser type and/or other information.</p>
-<h3>DoubleClick DART Cookie</h3>
-<p>Google is one of a third-party vendor on our site. It also uses cookies, known as DART cookies, to serve ads to our site visitors based upon their visit to www.website.com and other sites on the internet. However, visitors may choose to decline the use of DART cookies by visiting the Google ad and content network Privacy Policy at the following URL – <a href='https://policies.google.com/technologies/ads' target='_blank'>https://policies.google.com/technologies/ads</a>.</p>
-<p>Some of advertisers on our site may use cookies and web beacons. Our advertising partners are listed below. Each of our advertising partners has their own Privacy Policy for their policies on user data. For easier access, we hyperlinked to their Privacy Policies below.</p>
-<ul>
-<li>
-<p>Google</p>
-<p><a href='https://policies.google.com/technologies/ads'>https://policies.google.com/technologies/ads</a></p>
-</li>
-</ul>
-<p><strong>Advertising Partners Privacy Policies</strong></p>
-<p>You may consult this list to find the Privacy Policy for each of the advertising partners of <span class='highlight preview_website_name'>Website Name</span>.</p>
-<p>Third-party ad servers or ad networks uses technologies like cookies, JavaScript, or Web Beacons that are used in their respective advertisements and links that appear on <span class='highlight preview_website_name'>Website Name</span>, which are sent directly to users' browser. They automatically receive your IP address when this occurs. These technologies are used to measure the effectiveness of their advertising campaigns and/or to personalize the advertising content that you see on websites that you visit.</p>
-<p>Note that <span class='highlight preview_website_name'>Website Name</span> has no access to or control over these cookies that are used by third-party advertisers.</p>
-<p><strong>Third-Party Privacy Policies</strong></p>
-<p><span class='highlight preview_website_name'>Website Name</span>'s Privacy Policy does not apply to other advertisers or websites. Thus, we are advising you to consult the respective Privacy Policies of these third-party ad servers for more detailed information. It may include their practices and instructions about how to opt-out of certain options. You may find a complete list of these Privacy Policies and their links here: Privacy Policy Links.</p>
-<p>You can choose to disable cookies through your individual browser options. To know more detailed information about cookie management with specific web browsers, it can be found at the browsers' respective websites. What Are Cookies?</p>
-<p><strong>CCPA Privacy Policy (Do Not Sell My Personal Information)</strong></p>
-<p>Under the CCPA, among other rights, California consumers have the right to:</p>
-<p>Request that a business that collects a consumer's personal data disclose the categories and specific pieces of personal data that a business has collected about consumers.</p>
-<p>Request that a business delete any personal data about the consumer that a business has collected.</p>
-<p>Request that a business that sells a consumer's personal data, not sell the consumer's personal data.</p>
-<p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
-<p><strong>GDPR Privacy Policy (Data Protection Rights)</strong></p>
-<p>We would like to make sure you are fully aware of all of your data protection rights. Every user is entitled to the following:</p>
-<p>The right to access – You have the right to request copies of your personal data. We may charge you a small fee for this service.</p>
-<p>The right to rectification – You have the right to request that we correct any information you believe is inaccurate. You also have the right to request that we complete the information you believe is incomplete.</p>
-<p>The right to erasure – You have the right to request that we erase your personal data, under certain conditions.</p>
-<p>The right to restrict processing – You have the right to request that we restrict the processing of your personal data, under certain conditions.</p>
-<p>The right to object to processing – You have the right to object to our processing of your personal data, under certain conditions.</p>
-<p>The right to data portability – You have the right to request that we transfer the data that we have collected to another organization, or directly to you, under certain conditions.</p>
-<p>If you make a request, we have one month to respond to you. If you would like to exercise any of these rights, please contact us.</p>
-<p><strong>Children's Information</strong></p>
-<p>Another part of our priority is adding protection for children while using the internet. We encourage parents and guardians to observe, participate in, and/or monitor and guide their online activity.</p>
-<p><span class='highlight preview_website_name'>Website Name</span> does not knowingly collect any Personal Identifiable Information from children under the age of 13. If you think that your child provided this kind of information on our website, we strongly encourage you to contact us immediately and we will do our best efforts to promptly remove such information from our records.</p>
-</div>
-</body></html>"
+                Html = policy
             };
             PrivateWebView.Source = html;
         }
+
+        private static string policy = @"<!DOCTYPE html>
+    <html>
+    <head>
+      <meta charset='utf-8'>
+      <meta name='viewport' content='width=device-width'>
+      <title>Privacy Policy</title>
+      <style> body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; padding:1em; } </style>
+    </head>
+    <body>
+    <strong>Privacy Policy</strong> <p>
+                  Vikash Chauhan built the Tidings app as
+                  a Free app.This is a offline birthday reminder app. This SERVICE is provided by
+                  Vikash Chauhan at no cost and is intended for use as
+                  is.
+                </p> <p>
+                  This page is used to inform visitors regarding my
+                  policies with the collection, use, and disclosure of Personal
+                  Information if anyone decided to use my Service.
+                </p> <p>
+                  If you choose to use my Service, then you agree to
+                  the collection and use of information in relation to this
+                  policy. The Personal Information that I collect is
+                  used for providing and improving the Service. I will not use or share your information with
+                  anyone except as described in this Privacy Policy.
+                </p> <p>
+                  The terms used in this Privacy Policy have the same meanings
+                  as in our Terms and Conditions, which is accessible at
+                  Tidings unless otherwise defined in this Privacy Policy.
+                </p> <p><strong>Information Collection and Use</strong></p> <p>
+                  For a better experience, while using our Service, I
+                  may require you to provide us with certain personally
+                  identifiable information, including but not limited to Full name, Phone number and date of birth of user. The information that
+                  I request will be retained on your device and is not collected by me in any way.
+                </p> <div><p>
+                    The app does use third party services that may collect
+                    information used to identify you.
+                  </p> <p>
+                    Link to privacy policy of third party service providers used
+                    by the app
+                  </p> <ul><li><a href=‘https://www.google.com/policies/privacy/’ target=‘_blank’ rel=‘noopener noreferrer’>Google Play Services</a></li><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----><!----></ul></div> <p><strong>Log Data</strong></p> <p>
+                  I want to inform you that whenever you
+                  use my Service, in a case of an error in the app
+                  I am not collect any data and information from your device.
+                </p> <p><strong>Cookies</strong></p> <p>
+                  Cookies are files with a small amount of data that are
+                  commonly used as anonymous unique identifiers. These are sent
+                  to your browser from the websites that you visit and are
+                  stored on your device's internal memory.
+                </p> <p>
+                  This Service does not use these ‘cookies’ explicitly. However,
+                  the app may use third party code and libraries that use
+                  ‘cookies’ to collect information and improve their services.
+                  You have the option to either accept or refuse these cookies
+                  and know when a cookie is being sent to your device. If you
+                  choose to refuse our cookies, you may not be able to use some
+                  portions of this Service.
+                </p> <p><strong>Service Providers</strong></p> <p>
+                  I may employ third-party companies and
+                  individuals due to the following reasons:
+                </p> <ul><li>To facilitate our Service;</li> <li>To provide the Service on our behalf;</li> <li>To perform Service-related services; or</li> <li>To assist us in analyzing how our Service is used.</li></ul> <p>
+                  I want to inform users of this Service
+                  that these third parties have access to your Personal
+                  Information. The reason is to perform the tasks assigned to
+                  them on our behalf. However, they are obligated not to
+                  disclose or use the information for any other purpose.
+                </p> <p><strong>Security</strong></p> <p>
+                  I value your trust in providing us your
+                  Personal Information, thus we are striving to use commercially
+                  acceptable means of protecting it. But remember that no method
+                  of transmission over the internet, or method of electronic
+                  storage is 100% secure and reliable, and I cannot
+                  guarantee its absolute security.
+                </p> <p><strong>Links to Other Sites</strong></p> <p>
+                  This Service not contains any links to other sites.                  </p> <p><strong>Children’s Privacy</strong></p> <p>
+                  These Services do not address anyone under the age of 13.
+                  I do not knowingly collect personally
+                  identifiable information from children under 13. In the case
+                  I discover that a child under 13 has provided
+                  me with personal information, I immediately
+                  delete this from our servers. If you are a parent or guardian
+                  and you are aware that your child has provided us with
+                  personal information, please contact me so that
+                  I will be able to do necessary actions.
+                </p> <p><strong>Changes to This Privacy Policy</strong></p> <p>
+                  I may update our Privacy Policy from
+                  time to time. Thus, you are advised to review this page
+                  periodically for any changes. I will
+                  notify you of any changes by posting the new Privacy Policy on
+                  this page.
+                </p> <p>This policy is effective as of 2020-06-10</p> <p><strong>Contact Us</strong></p> <p>
+                  If you have any questions or suggestions about my
+                  Privacy Policy, do not hesitate to contact me at vikashchauhan51@gmail.com
+                </p>      </body>
+    </html>
+      
+";
     }
 }
