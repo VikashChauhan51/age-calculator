@@ -1,4 +1,5 @@
 ﻿using AgeCal.ViewModels;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,20 +20,26 @@ namespace AgeCal.Views
             PageTitle = "Contact Us";
             ShowBottomNav = false;
             PageHasbackButton = true;
-            var html = new HtmlWebViewSource
+             
+            ContactWebView.RegisterAction(data => 
             {
-                Html = contact
-            };
-            ContactWebView.Source = html;
-            ContactWebView.Navigating += ContactWebView_Navigating;
+                
+                try
+                {
+                  var result=  JObject.Parse(data);
+                    if (result!=null)
+                        Device.OpenUri(new Uri(result["value"].ToString()));
+                }
+                catch  
+                {
+
+                    
+                }
+                
+            });
+            
         }
 
-        private void ContactWebView_Navigating(object sender, WebNavigatingEventArgs e)
-        {
-            Device.OpenUri(new Uri(e.Url));
-            e.Cancel = true;
-        }
-
-        private static string contact= @"<p>For questions comments or concerns please email us at <a target=‘_blank’ href='mailto:vikashchauhan51@gmail.com'>vikashchauhan51@gmail.com</a></p> ";
+ 
     }
 }

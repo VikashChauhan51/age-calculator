@@ -1,0 +1,26 @@
+﻿
+<html dir="ltr" >
+<head>
+
+</head>
+<body>
+    <p>For questions comments or concerns please email us at <a href="mailto:tidingsw@gmail.com">tidingsw@gmail.com</a></p>
+    <script type="text/javascript">
+        function invokeCSharpAction(data) {
+            jsBridge.invokeAction(data);
+
+        }
+            // self executing function here
+            (function () {
+                var links = document.getElementsByTagName("a");
+                links[0].onclick = function (e) {
+                    e.preventDefault();
+                    var href = e.target.href;
+                    var actionJson = { 'action': 'any', 'value': href };
+                    invokeCSharpAction(JSON.stringify(actionJson));
+                }
+
+            })();
+    </script>
+</body>
+</html>

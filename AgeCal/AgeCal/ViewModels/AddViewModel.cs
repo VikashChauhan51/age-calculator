@@ -155,6 +155,7 @@ namespace AgeCal.ViewModels
             Description = string.Empty;
             Time = new TimeSpan(12, 0, 0);
             DOB = date;
+            Phone = string.Empty;
             HasError = false;
             loaded = false;
         }
