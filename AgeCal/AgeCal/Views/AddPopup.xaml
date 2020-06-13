@@ -31,7 +31,7 @@
                     </Entry.Behaviors>
                 </Entry>
                 <Label x:Name="BirthDateLabel" AutomationId="BirthDateLabel" Text="{local:Translation BirthDateLabel}" Style="{StaticResource PrimaryLabel}" />
-                <DatePicker x:Name="AgePicker" AutomationId="AgePicker" Date="{Binding DOB,Mode=TwoWay}" ></DatePicker>
+                <DatePicker x:Name="AgePicker" Format="d" AutomationId="AgePicker" Date="{Binding DOB,Mode=TwoWay}" ></DatePicker>
                 <!--<Label x:Name="BirthTimeLabel" AutomationId="BirthTimeLabel" Text="{local:Translation BirthTimeLabel}" Style="{StaticResource PrimaryLabel}" />-->
                 <!--<TimePicker x:Name="AgeTimer" AutomationId="AgeTimer" Time="{Binding Time}"></TimePicker>-->
                 <Button x:Name="Save" AutomationId="btnSave" Command="{Binding AddCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>

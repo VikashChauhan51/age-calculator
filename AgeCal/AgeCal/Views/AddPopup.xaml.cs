@@ -1,5 +1,6 @@
 ﻿using AgeCal.ViewModels;
 using System;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace AgeCal.Views
@@ -13,7 +14,8 @@ namespace AgeCal.Views
             Container = AddPopupContainer;
             AgePicker.MaximumDate = DateTime.Now;
             AgePicker.MinimumDate = new DateTime(1900, 1, 1);
-            
+            AgePicker.MinimumDate = new DateTime(1900, 1, 1);
+
         }
         protected override void OnAppearing()
         {

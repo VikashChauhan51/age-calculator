@@ -21,12 +21,20 @@
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
 
-    <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
+    <item name="android:datePickerDialogTheme">@style/MyDialogTheme</item>
   </style>
 
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#198EBE</item>
   </style>
+  <style name="MyDialogTheme" parent="android:Theme.Material.Dialog">
+        <item name="colorAccent">#198EBE</item>
+        <item name="android:datePickerStyle">@style/MyDatePicker</item>
+    </style>
+   <style name="MyDatePicker" parent="android:Widget.Material.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+        <item name="colorAccent">#198EBE</item>    
+    </style>
   <style name="SplashTheme" parent="Theme.AppCompat.Light.NoActionBar">
     <item name="android:windowBackground">@drawable/splash_screen</item>
     <!--<item name="android:background">#fff</item>-->
