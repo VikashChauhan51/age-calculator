@@ -18,10 +18,16 @@ namespace AgeCal.Views
         public AddReminderPopup()
         {
             InitializeComponent();
-             
+            
         }
-  
 
-        
+        private void UserPicker_Focused(object sender, FocusEventArgs e)
+        {
+            if (ViewModel == null || ViewModel.IsBusy || ViewModel.Items.Count == 0)
+                return;
+
+            if (ViewModel.HasMore)
+                ViewModel.LoadMoreCommand.Execute(null);
+        }
     }
 }

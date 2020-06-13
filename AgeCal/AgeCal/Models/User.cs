@@ -11,6 +11,7 @@ namespace AgeCal.Models
         public string Text { get; set; }
         public string Description { get; set; }
         public string Email { get; set; }
+        public int Gender { get; set; }
         public string Phone { get; set; }
         public DateTime DOB { get; set; }
         public TimeSpan Time { get; set; }

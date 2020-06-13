@@ -11,7 +11,7 @@
         <StackLayout Spacing="10">
             <ImageButton x:Name="btnClose" Source="cross.png" Command="{Binding CloseCommand}"   WidthRequest="32" HeightRequest="32" BackgroundColor="Transparent"   HorizontalOptions="EndAndExpand" />
             <StackLayout Spacing="20">
-                <Picker  x:Name="UserPicker" Title="Select user"  ItemDisplayBinding="{Binding Text}"  
+                <Picker  x:Name="UserPicker" Title="Select user" Focused="UserPicker_Focused"  ItemDisplayBinding="{Binding Text}"  
                          ItemsSource="{Binding Items,Mode=TwoWay}" 
                          SelectedItem="{Binding SelectedUser,Mode=TwoWay}"></Picker>
                 <Label IsVisible="{Binding HasError}" FontSize="Small" TextColor="{StaticResource PrimaryRed}" Text="Please select user"></Label>

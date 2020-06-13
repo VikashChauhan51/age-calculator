@@ -25,6 +25,7 @@ namespace AgeCal.Components
             {
                 Style = (Style)Application.Current.Resources["BtnRound"],
                 Text = "+",
+                FontSize=16,
                 AutomationId = "addButton"
 
             };
@@ -73,9 +74,14 @@ namespace AgeCal.Components
             var MainContainer = new StackLayout
             {
                 HorizontalOptions = LayoutOptions.Center,
-                Padding = new Thickness(15, 0, 15, 0),
+                Padding = new Thickness(10, 0, 10, 0),
                 Margin = 0,
 
+            };
+            var subContainer = new StackLayout
+            {
+                Orientation=StackOrientation.Vertical,
+                VerticalOptions=LayoutOptions.FillAndExpand
             };
             var Icon = new ImageButton
             {
@@ -94,11 +100,13 @@ namespace AgeCal.Components
                 InputTransparent = true,
                 Text = label,
                 Margin = 0,
+                HorizontalOptions=LayoutOptions.Center,
                 FontSize = 10,
                 AutomationId = label + "Label"
             };
-            MainContainer.Children.Add(Icon);
-            MainContainer.Children.Add(Text);
+            subContainer.Children.Add(Icon);
+            subContainer.Children.Add(Text);
+            MainContainer.Children.Add(subContainer);
             this.IconLayout.Children.Add(MainContainer);
         }
 

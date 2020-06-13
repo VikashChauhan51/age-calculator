@@ -8,7 +8,7 @@
              x:Class="AgeCal.Views.AppVersionPage">
     <ContentPage.Content>
         <StackLayout Spacing="5" Padding="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" >
-            <Frame HasShadow="True" CornerRadius="5" OutlineColor="{StaticResource PrimaryGray}" >
+            <Frame HasShadow="False" CornerRadius="5" OutlineColor="{StaticResource PrimaryGray}" >
                 <StackLayout Spacing="5"  Padding="0" Orientation="Vertical">
                     <Label AutomationId="NameLabel" Text="{Binding Name}" FontSize="Large" FontAttributes="Bold"/>
                     <Label AutomationId="VersionLabel" Text="{Binding Version}" FontSize="Medium"/>

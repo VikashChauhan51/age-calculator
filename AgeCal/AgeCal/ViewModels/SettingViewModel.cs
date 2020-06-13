@@ -32,9 +32,9 @@ namespace AgeCal.ViewModels
                 {
                           new Setting { Title = "Contact Us", ViewModel = typeof(ContactUsViewModel) },
                           new Setting { Title = "App Version", ViewModel = typeof(AppVersionViewModel) },
-                          new Setting { Title = "About Us", ViewModel = typeof(AboutViewModel) },
+                         // new Setting { Title = "About Us", ViewModel = typeof(AboutViewModel) },
                           new Setting { Title = "User Manual", ViewModel = typeof(UserManualViewModel) },
-                          new Setting { Title = "Rate Us", ViewModel = typeof(RateUsViewModel) }
+                         // new Setting { Title = "Rate Us", ViewModel = typeof(RateUsViewModel) }
                 };
                 support.Heading = "SUPPORT";
 

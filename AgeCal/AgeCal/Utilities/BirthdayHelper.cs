@@ -155,5 +155,16 @@ namespace AgeCal.Utilities
         {
             return new DateTime(date.Year, date.Month, date.Day, time.Hours, time.Minutes, time.Seconds);
         }
+
+        public static int GetAge(DateTime birthdayDate)
+        {
+            // Save today's date.
+            var today = DateTime.Today;
+            // Calculate the age.
+            var age = today.Year - birthdayDate.Year;
+            // Go back to the year the person was born in case of a leap year
+            if (birthdayDate.Date > today.AddYears(-age)) age--;
+            return age;
+        }
     }
 }

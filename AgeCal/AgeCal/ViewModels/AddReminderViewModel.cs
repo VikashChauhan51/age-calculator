@@ -56,8 +56,8 @@ namespace AgeCal.ViewModels
             try
             {
                 Items.Clear();
-                var items = _userService.Gets(0, 10);
-                HasMore = items != null && items.Count() == 10;
+                var items = _userService.Gets(0, 100);
+                HasMore = items != null && items.Count() == 100;
                 RenderData(items);
             }
             catch (Exception ex)

@@ -123,7 +123,14 @@
                 <Setter Property="HeightRequest"
                     Value="1" />
             </Style>
-
+            <Style x:Key="VerticalSeparatorBoxView" TargetType="BoxView"
+               Class="Separator">
+                <Setter Property="BackgroundColor"
+                    Value="#CCCCCC" />
+                <Setter Property="WidthRequest"
+                    Value="1" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+            </Style>
             <Style x:Key="RoundedBoxView" TargetType="BoxView"
                Class="Rounded">
                 <Setter Property="BackgroundColor"

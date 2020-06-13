@@ -36,9 +36,9 @@ namespace AgeCal.Views
     </head>
     <body>
     <strong>Privacy Policy</strong> <p>
-                  Vikash Chauhan built the Tidings app as
+                  Tidings team built the Tidings app as
                   a Free app.This is a offline birthday reminder app. This SERVICE is provided by
-                  Vikash Chauhan at no cost and is intended for use as
+                  Tidings team at no cost and is intended for use as
                   is.
                 </p> <p>
                   This page is used to inform visitors regarding my
@@ -117,7 +117,7 @@ namespace AgeCal.Views
                   this page.
                 </p> <p>This policy is effective as of 2020-06-10</p> <p><strong>Contact Us</strong></p> <p>
                   If you have any questions or suggestions about my
-                  Privacy Policy, do not hesitate to contact me at vikashchauhan51@gmail.com
+                  Privacy Policy, do not hesitate to contact me at tidingsw@gmail.com
                 </p>      </body>
     </html>
       

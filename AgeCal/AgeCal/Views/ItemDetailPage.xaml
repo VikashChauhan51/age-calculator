@@ -38,11 +38,8 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <Label AutomationId="DOBLabel" Grid.Column="0" Text="{Binding DOB,Converter={StaticResource DatetimeToStringConverter}}" FontSize="Small"/>
-                        <Label Grid.Column="1" Text="{local:Translation At}" FontSize="Small" FontAttributes="Bold" />
-                        <Label AutomationId="TimeLabel" Grid.Column="2" Text="{Binding Time,Converter={StaticResource TimeSpanToStringConverter}}" FontSize="Small"/>
                     </Grid>
                     <Label AutomationId="MyAge"  Text="{Binding DOB,Converter={StaticResource AgeConverter}}" FontAttributes="Bold" FontSize="Small"/>
                     <Label  AutomationId="MyBirthday" Text="{Binding DOB,Converter={StaticResource BirthdayConverter}}" TextColor="Accent" FontAttributes="Bold" FontSize="Small"/>
