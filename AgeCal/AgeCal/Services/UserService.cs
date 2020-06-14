@@ -32,6 +32,10 @@ namespace AgeCal.Services
         {
             return _userRepository.GetAll(skip, take);
         }
+        public IEnumerable<User> Gets(string text,int skip, int take)
+        {
+            return _userRepository.Find(x => x.Text.ToLower().StartsWith(text), skip, take);
+        }
         public User Get(string id)
         {
             if (string.IsNullOrEmpty(id))

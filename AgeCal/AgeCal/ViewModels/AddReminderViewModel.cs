@@ -18,7 +18,6 @@ namespace AgeCal.ViewModels
     {
 
         public ExclusiveRelayCommand SaveCommand { get; set; }
-        public ExclusiveRelayCommand LoadMoreCommand { get; set; }
         public ExclusiveRelayCommand CloseCommand { get; set; }
         private readonly IReminderService _reminderService;
         private readonly IUserService _userService;
@@ -26,18 +25,17 @@ namespace AgeCal.ViewModels
         {
             _reminderService = reminderService;
             _userService = userService;
-            Items = new ObservableCollection<User>();
             SaveCommand = new ExclusiveRelayCommand(SaveInfo);
             CloseCommand = new ExclusiveRelayCommand(ClosePopup);
-            LoadMoreCommand = new ExclusiveRelayCommand(LoadMore);
             Reset();
         }
 
         private void Reset()
         {
             selectedUser = null;
-            Items?.Clear();
             ValidationMessage = string.Empty;
+            CustomMessage = string.Empty;
+            Time = new TimeSpan();
             HasError = false;
             HasMore = false;
             NotifySameDay = false;
@@ -46,19 +44,21 @@ namespace AgeCal.ViewModels
             NotifyMonthBefore = false;
         }
 
-        void ExecuteLoadUsers()
+        public IEnumerable<User> ExecuteLoadUsers(string name)
         {
             if (IsBusy)
-                return;
+                return null;
 
             IsBusy = true;
 
             try
             {
-                Items.Clear();
-                var items = _userService.Gets(0, 100);
-                HasMore = items != null && items.Count() == 100;
-                RenderData(items);
+                if (!string.IsNullOrEmpty(name) && !string.IsNullOrWhiteSpace(name))
+                    return _userService.Gets(name, 0, 10);
+                else
+                    return _userService.Gets(0, 10);
+
+
             }
             catch (Exception ex)
             {
@@ -68,30 +68,7 @@ namespace AgeCal.ViewModels
             {
                 IsBusy = false;
             }
-        }
-        private void LoadMore()
-        {
-            if (IsBusy)
-                return;
-
-            IsBusy = true;
-            try
-            {
-
-
-                var items = _userService.Gets(Items.Count, 10);
-                HasMore = items != null && items.Count() == 10;
-                RenderData(items);
-            }
-            catch (Exception ex)
-            {
-
-
-            }
-            finally
-            {
-                IsBusy = false;
-            }
+            return null;
         }
 
         private void ClosePopup()
@@ -100,16 +77,7 @@ namespace AgeCal.ViewModels
             NavigationService.GoBackModel();
 
         }
-        private void RenderData(IEnumerable<User> items)
-        {
-            HasMore = items != null && items.Count() >= 10;
-            if (items != null)
-            {
-                foreach (var item in items)
-                    Items.Add(item);
-            }
 
-        }
         private void SaveInfo()
         {
             HasError = SelectedUser == null;
@@ -121,8 +89,6 @@ namespace AgeCal.ViewModels
                 if (!IsBusy)
                 {
                     IsBusy = true;
-                    //Delete prior reminder of user if any.
-                    DeletePriorReminder(SelectedUser.Id);
                     var today = DateTime.Now.Date;
                     var nextBirthday = BirthdayHelper.GetNextBirthday(BirthdayHelper.GetDate(SelectedUser.DOB, SelectedUser.Time));
                     var maxId = _reminderService.GetMaxId();
@@ -136,9 +102,9 @@ namespace AgeCal.ViewModels
                             UserId = SelectedUser.Id,
                             Tag = SelectedUser.Id,
                             Title = $"{SelectedUser.Text } Birthday",
-                            Message = $"Today,{SelectedUser.Text} has birthday.",
+                            Message = !string.IsNullOrEmpty(CustomMessage?.Trim()) ? CustomMessage.Trim() : $"Today,{SelectedUser.Text} has birthday.",
                             Active = true,
-                            When = nextBirthday
+                            When = AddTime(nextBirthday.Date)
                         };
                         reminders.Add(item);
                     }
@@ -151,9 +117,9 @@ namespace AgeCal.ViewModels
                             UserId = SelectedUser.Id,
                             Tag = SelectedUser.Id,
                             Title = $"{SelectedUser.Text } Birthday",
-                            Message = $"Tomorrow,{SelectedUser.Text} has birthday.",
+                            Message = !string.IsNullOrEmpty(CustomMessage?.Trim()) ? CustomMessage.Trim() : $"Tomorrow,{SelectedUser.Text} has birthday.",
                             Active = true,
-                            When = nextBirthday.AddDays(-1)
+                            When = AddTime(nextBirthday.AddDays(-1).Date)
                         };
                         reminders.Add(item);
                     }
@@ -166,9 +132,9 @@ namespace AgeCal.ViewModels
                             UserId = SelectedUser.Id,
                             Tag = SelectedUser.Id,
                             Title = $"{SelectedUser.Text } Birthday",
-                            Message = $"{SelectedUser.Text} has birthday on {nextBirthday.AddDays(-7).ToLocalTime().ToString()}.",
+                            Message = !string.IsNullOrEmpty(CustomMessage?.Trim()) ? CustomMessage.Trim() : $"{SelectedUser.Text} has birthday on {nextBirthday.AddDays(-7).ToLocalTime().ToString()}.",
                             Active = true,
-                            When = nextBirthday.AddDays(-7)
+                            When = AddTime(nextBirthday.AddDays(-7).Date)
                         };
                         reminders.Add(item);
                     }
@@ -181,9 +147,9 @@ namespace AgeCal.ViewModels
                             UserId = SelectedUser.Id,
                             Tag = SelectedUser.Id,
                             Title = $"{SelectedUser.Text } Birthday",
-                            Message = $"{SelectedUser.Text} has birthday on {nextBirthday.AddMonths(-1).ToLocalTime().ToString()}.",
+                            Message = !string.IsNullOrEmpty(CustomMessage?.Trim()) ? CustomMessage.Trim() : $"{SelectedUser.Text} has birthday on {nextBirthday.AddMonths(-1).ToLocalTime().ToString()}.",
                             Active = true,
-                            When = nextBirthday.AddMonths(-1)
+                            When = AddTime(nextBirthday.AddMonths(-1).Date)
                         };
                         reminders.Add(item);
                     }
@@ -215,19 +181,6 @@ namespace AgeCal.ViewModels
 
         }
 
-        private ObservableCollection<User> items;
-        public ObservableCollection<User> Items
-        {
-            get { return items; }
-            set
-            {
-                items = value;
-                if (items == null || items.Count == 0)
-                    ExecuteLoadUsers();
-
-                RaisePropertyChanged(nameof(Items));
-            }
-        }
         User selectedUser;
         public User SelectedUser
         {
@@ -237,12 +190,30 @@ namespace AgeCal.ViewModels
                 selectedUser = value;
                 if (value != null && HasError)
                     HasError = false;
-                if (HasMore)
-                    LoadMore();
                 RaisePropertyChanged(nameof(SelectedUser));
             }
         }
+        string customMessage = string.Empty;
+        public string CustomMessage
+        {
+            get { return customMessage; }
+            set
+            {
 
+                customMessage = value;
+                RaisePropertyChanged(nameof(CustomMessage));
+            }
+        }
+        TimeSpan time;
+        public TimeSpan Time
+        {
+            get { return time; }
+            set
+            {
+                time = value;
+                RaisePropertyChanged(nameof(Time));
+            }
+        }
 
         bool hasMore;
         public bool HasMore
@@ -327,19 +298,14 @@ namespace AgeCal.ViewModels
             }
         }
 
-
-        private void DeletePriorReminder(string userId)
+        private DateTimeOffset AddTime(DateTimeOffset date)
         {
-            try
-            {
-                _reminderService.DeleteReminders(userId);
-            }
-            catch (Exception ex)
-            {
 
+            // creating object of  DateTimeOffset 
+            DateTimeOffset offset = new DateTimeOffset(date.Year,
+                    date.Month, date.Day, 0, 0, 0, date.Offset);
 
-            }
+            return offset.Add(Time);
         }
-
     }
 }
