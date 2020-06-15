@@ -33,13 +33,13 @@ namespace AgeCal.Droid.Services
          
 
             var wearableExtender = new NotificationCompat.WearableExtender()
-    .SetBackground(BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.data))
+    .SetBackground(BitmapFactory.DecodeResource(context.Resources, Resource.Drawable.reminder_icon))
                 ;
 
             //Generate a notification with just short text and small icon
             var builder = new NotificationCompat.Builder(context)
                             .SetContentIntent(contentIntent)
-                            .SetSmallIcon(Resource.Drawable.data)
+                            .SetSmallIcon(Resource.Drawable.reminder_icon)
                             .SetContentTitle(title)
                             .SetContentText(message)
                             .SetStyle(style)

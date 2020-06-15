@@ -131,8 +131,8 @@ namespace AgeCal.Droid.Services
                 notificationBuilder.SetDeleteIntent(dismisPendingIntent);
                 notificationBuilder.SetContentTitle(e.Title);
                 notificationBuilder.SetContentText(e.Message);
-                notificationBuilder.SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.data));
-                notificationBuilder.SetSmallIcon(Resource.Drawable.data);
+                notificationBuilder.SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.reminder_icon));
+                notificationBuilder.SetSmallIcon(Resource.Drawable.reminder_icon);
                 notificationBuilder.SetDefaults((int)NotificationDefaults.Sound | (int)NotificationDefaults.Vibrate);
                 var pendingAlarmIntent = GetAlarmPendingIntent(context, e, ref notificationBuilder);
                 var alarmManager = context.GetSystemService(Context.AlarmService) as AlarmManager;
