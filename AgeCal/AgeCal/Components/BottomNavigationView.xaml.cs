@@ -25,17 +25,18 @@ namespace AgeCal.Components
             {
                 Style = (Style)Application.Current.Resources["BtnRound"],
                 Text = "+",
-                FontSize=16,
+                FontSize = 16,
                 AutomationId = "addButton"
 
             };
             addButton.Clicked += AddData;
 
-            AddIcon("dashboard.png", AppResource.Home, typeof(HomeViewModel));
-            AddIcon("users.png", AppResource.Data, typeof(ItemsViewModel));
+            AddIcon(ActiveIcons[typeof(HomeViewModel)], AppResource.Home, typeof(HomeViewModel));
+            AddIcon(ActiveIcons[typeof(ItemsViewModel)], AppResource.Data, typeof(ItemsViewModel));
             this.IconLayout.Children.Add(addButton);
-            AddIcon("reminder.png", AppResource.Reminders, typeof(ReminderListViewModel));
-            AddIcon("setting.png", AppResource.Settings, typeof(SettingViewModel));
+            AddIcon(ActiveIcons[typeof(ReminderListViewModel)], AppResource.Reminders, typeof(ReminderListViewModel));
+            AddIcon(ActiveIcons[typeof(SettingViewModel)], AppResource.Settings, typeof(SettingViewModel));
+            
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
             nameof(ButtonPressed),
@@ -80,18 +81,20 @@ namespace AgeCal.Components
             };
             var subContainer = new StackLayout
             {
-                Orientation=StackOrientation.Vertical,
-                VerticalOptions=LayoutOptions.FillAndExpand
+                Orientation = StackOrientation.Vertical,
+                VerticalOptions = LayoutOptions.FillAndExpand,
+                Spacing = 0,
+                Margin = 0
             };
             var Icon = new ImageButton
             {
                 Source = icon,
-                HeightRequest = 42,
+                HeightRequest = 32,
                 Padding = 0,
                 Margin = 0,
                 BackgroundColor = Color.Transparent,
-                WidthRequest = 42,
-                AutomationId = label + "Icon"
+                WidthRequest = 32,
+                AutomationId = label + "Icon",
             };
             Icon.Clicked += Icon_Clicked;
             Icon.CommandParameter = viewModelType;
@@ -100,7 +103,7 @@ namespace AgeCal.Components
                 InputTransparent = true,
                 Text = label,
                 Margin = 0,
-                HorizontalOptions=LayoutOptions.Center,
+                HorizontalOptions = LayoutOptions.Center,
                 FontSize = 10,
                 AutomationId = label + "Label"
             };
@@ -108,6 +111,7 @@ namespace AgeCal.Components
             subContainer.Children.Add(Text);
             MainContainer.Children.Add(subContainer);
             this.IconLayout.Children.Add(MainContainer);
+            FlexLayout.SetGrow(Icon, 1f);
         }
 
         private void Icon_Clicked(object sender, EventArgs e)
@@ -115,10 +119,19 @@ namespace AgeCal.Components
             var btn = sender as ImageButton;
             if (btn != null)
             {
-                var type = btn.CommandParameter as Type;
-                ButtonPressed?.Execute(type);
+                var type = btn.CommandParameter as Type; 
+                ButtonPressed?.Execute(type); 
             }
         }
+
+        private Dictionary<Type, string> ActiveIcons = new Dictionary<Type, string>
+        {
+            {typeof(HomeViewModel),"home_active.png" },
+            {typeof(ItemsViewModel),"users_active.png" },
+            {typeof(ReminderListViewModel),"reminder_active.png" },
+            {typeof(SettingViewModel),"setting_active.png" },
+        };
+         
     }
 
 

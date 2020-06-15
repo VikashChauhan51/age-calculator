@@ -10,6 +10,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <converter:DatetimeToStringConverter x:Key="DatetimeToStringConverter" />
+            <converter:DatetimeToTimeStringConverter x:Key="DatetimeToTimeStringConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -30,22 +31,37 @@
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
-                            <Frame CornerRadius="5" Margin="8,8,8,2" OutlineColor="{StaticResource PrimaryGray}"  HasShadow="True">
-                                <StackLayout Padding="10">
+                            <Frame  Margin="0" Padding="0" OutlineColor="{StaticResource PrimaryGray}" >
+                                <StackLayout Margin="0" Padding="2">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*" />
                                             <ColumnDefinition Width="Auto" />
                                         </Grid.ColumnDefinitions>
-                                        <Label Text="{Binding When,Converter={StaticResource DatetimeToStringConverter}}" 
-                                LineBreakMode="NoWrap" 
+                                        <StackLayout Orientation="Vertical" Margin="0" Spacing="5" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+                                           
+                                            <Label Text="{Binding Title}" 
+                                LineBreakMode="WordWrap" 
                                 FontSize="Medium" FontAttributes="Bold" />
+                                            <StackLayout Margin="0" Padding="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Label FontSize="Small" FontAttributes="Bold"  Text="Reminder On:" />
+                                                <Label Text="{Binding When,Converter={StaticResource DatetimeToStringConverter}}" 
+                                LineBreakMode="NoWrap" 
+                                FontSize="Small" FontAttributes="Bold" />
+                                            </StackLayout>
+                                            <StackLayout Margin="0" Padding="2" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                                                <Label FontSize="Small" FontAttributes="Bold"  Text="At:" />
+                                                <Label  FontSize="Small" Text="{Binding When,Converter={StaticResource DatetimeToTimeStringConverter}}" FontAttributes="None" />
+                                            </StackLayout>
+                                            
+                                          
+                                        </StackLayout>
 
-                                <ImageButton HeightRequest="32" Grid.Column="1" VerticalOptions="End" WidthRequest="32" Clicked="ImageButton_Clicked" Source="trash.png" BackgroundColor="Transparent" HorizontalOptions="End" />
+                                <ImageButton HeightRequest="32" Grid.Column="1" VerticalOptions="Start"  WidthRequest="32" Clicked="ImageButton_Clicked" Source="trash.png" BackgroundColor="Transparent" HorizontalOptions="End" />
                                     </Grid>
                                    
                                 <Label Text="{Binding Message}" 
-                                LineBreakMode="NoWrap"
+                                LineBreakMode="WordWrap" 
                                 FontSize="Small" TextColor="Accent" />
                                    
                                 </StackLayout>

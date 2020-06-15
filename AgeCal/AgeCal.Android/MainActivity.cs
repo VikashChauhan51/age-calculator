@@ -30,7 +30,7 @@ namespace AgeCal.Droid
             base.OnCreate(savedInstanceState);
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.reminder;
+            LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.reminder_icon;
 
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App(typeof(Views.Home)));

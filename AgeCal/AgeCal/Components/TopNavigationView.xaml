@@ -4,14 +4,14 @@
              xmlns:pageControls="clr-namespace:AgeCal.Components"
              x:Class="AgeCal.Components.TopNavigationView">
     <ContentView.Content>
-        <StackLayout Spacing="0"   Orientation="Horizontal" AutomationId="TopNavBarContainer" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryCyan}"  VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
+        <StackLayout Spacing="0"  Orientation="Horizontal" AutomationId="TopNavBarContainer" HorizontalOptions="FillAndExpand" BackgroundColor="{StaticResource PrimaryCyan}"  VerticalOptions="CenterAndExpand" Margin="0" Padding="0">
             <ImageButton x:Name="BackIcon" AutomationId="BackIcon" Source="back.png" BackgroundColor="Transparent" HorizontalOptions="Start" IsVisible="False" Clicked="OnBackClick" WidthRequest="42" HeightRequest="42">
                 
             </ImageButton>
-            <StackLayout Spacing="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Spacing="0" Padding="0" Margin="0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Label x:Name="TitleLabel" AutomationId="TitleLabel" FontSize="Large" HorizontalOptions="FillAndExpand" TextColor="{StaticResource PrimaryWhite}"
                        HorizontalTextAlignment="Center" VerticalOptions="FillAndExpand"
-                       VerticalTextAlignment="Center" MaxLines="1" Margin="0" LineBreakMode="TailTruncation" />
+                       VerticalTextAlignment="Start" MaxLines="1" Margin="0" LineBreakMode="NoWrap" />
             </StackLayout>
         </StackLayout>
     </ContentView.Content>
