@@ -88,7 +88,7 @@ namespace AgeCal.ViewModels
             }
         }
 
-        public void Add()
+        public async void Add()
         {
             try
             {
@@ -105,8 +105,8 @@ namespace AgeCal.ViewModels
                         Description = Description,
                         DOB = DOB,
                         Time = Time,
-                        Phone=Phone,
-                        Email=string.Empty,
+                        Phone = Phone,
+                        Email = string.Empty,
                         CreatedOn = DateTime.UtcNow
                     };
                     _userService.Add(user);
@@ -118,7 +118,7 @@ namespace AgeCal.ViewModels
             }
             catch (Exception ex)
             {
-
+                await NotificationManager.DisplayAlert("Error", "something went wrong.Please try again.", "Ok");
 
             }
             finally

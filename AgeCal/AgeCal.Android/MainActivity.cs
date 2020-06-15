@@ -69,12 +69,12 @@ namespace AgeCal.Droid
         void RegisterServices()
         {
             IocRegistry.Register<ILocalDatabase, LocalDatabase>();
-            IocRegistry.Register<INotificationManager>(() =>
-            {
-                var notification = new AndroidNotificationManager();
-                notification.Initialize();
-                return notification;
-            });
+            //IocRegistry.Register<INotificationManager>(() =>
+            //{
+            //    var notification = new AndroidNotificationManager();
+            //    notification.Initialize();
+            //    return notification;
+            //});
             IocRegistry.Register<ILocalizer, Localizer>();
             IocRegistry.Register<IShare, Share>();
 

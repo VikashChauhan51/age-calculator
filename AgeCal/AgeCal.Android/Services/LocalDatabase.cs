@@ -13,9 +13,6 @@ namespace AgeCal.Droid.Services
 
             string documentsPath = FileSystem.AppDataDirectory;
             var path = base.GetPath(documentsPath);
-            //if (!File.Exists(path))
-            //    File.Create(path).Dispose();
-
             return path;
         }
   

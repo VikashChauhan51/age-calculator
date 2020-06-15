@@ -93,6 +93,7 @@ namespace AgeCal
             var serviceLocator = new SimpleIocLocatorProvider(container);
             CommonServiceLocator.ServiceLocator.SetLocatorProvider(() => serviceLocator);
             IocRegistry.Register<IAppMessagingCenter, AppMessagingCenter>();
+            IocRegistry.Register<IMessageBoxService, MessageBoxService>();
             //register repositories
             IocRegistry.Register<IUserRepository, UserRepository>();
             IocRegistry.Register<IReminderRepository, ReminderRepository>();

@@ -36,7 +36,7 @@ namespace AgeCal.ViewModels
         protected ILocalizer Localizer => IocRegistry.Locate<ILocalizer>();
         protected IAppMessagingCenter MessageService => IocRegistry.Locate<IAppMessagingCenter>();
         protected IShare ShareService => IocRegistry.Locate<IShare>();
-        protected INotificationManager NotificationManager => IocRegistry.Locate<INotificationManager>();
+        protected IMessageBoxService NotificationManager => IocRegistry.Locate<IMessageBoxService>();
         bool isBusy = false;
         public bool IsBusy
         {

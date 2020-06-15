@@ -78,7 +78,7 @@ namespace AgeCal.ViewModels
 
         }
 
-        private void SaveInfo()
+        private async void SaveInfo()
         {
             HasError = SelectedUser == null;
             try
@@ -172,7 +172,7 @@ namespace AgeCal.ViewModels
             catch (Exception ex)
             {
 
-
+                await NotificationManager.DisplayAlert("Error", "something went wrong.Please try again.", "Ok");
             }
             finally
             {
