@@ -100,7 +100,10 @@ namespace AgeCal.Views
                 if (NavigationBarView != null)
                     NavigationBarView.ButtonPressed = ViewModel.TopNavigationCommand;
                 if (BottomNavigationView != null)
+                {
                     BottomNavigationView.ButtonPressed = ViewModel.BottomNavigationCommand;
+                    RenderBottomNavbar(BottomNavigationView.IsVisible);
+                }
 
                 if (!string.IsNullOrEmpty(ViewModel.Title))
                     PageTitle = ViewModel.Title;
@@ -131,7 +134,7 @@ namespace AgeCal.Views
 
         private void OnShowSpinner(object sender, bool e)
         {
-             //TODO:
+            //TODO:
         }
 
         public string PageTitle
@@ -213,14 +216,19 @@ namespace AgeCal.Views
         protected virtual void UpdateShowBottomNav(bool oldV, bool newV)
         {
             ShowBottomNav = newV;
+            RenderBottomNavbar(ShowBottomNav);
+        }
+        void RenderBottomNavbar(bool visible)
+        {
             if (BottomNavigationView != null)
             {
-                BottomNavigationView.IsVisible = ShowBottomNav;
-                BottomNavigationView.HasVisibility = ShowBottomNav;
+                BottomNavigationView.IsVisible = visible;
+                BottomNavigationView.HasVisibility = visible;
+                if (visible && ViewModel != null)
+                    BottomNavigationView.SetActiveIcon(ViewModel.GetType());
             }
 
         }
-
         public static readonly BindableProperty ShowSpinnerProperty = BindableProperty.Create(
             nameof(ShowSpinner),
             typeof(bool),

@@ -14,6 +14,7 @@ namespace AgeCal.Components
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class BottomNavigationView : ContentView
     {
+        private List<NavbarIcon> IconContainer;
         public BottomNavigationView()
         {
             InitializeComponent();
@@ -36,7 +37,8 @@ namespace AgeCal.Components
             this.IconLayout.Children.Add(addButton);
             AddIcon(ActiveIcons[typeof(ReminderListViewModel)], AppResource.Reminders, typeof(ReminderListViewModel));
             AddIcon(ActiveIcons[typeof(SettingViewModel)], AppResource.Settings, typeof(SettingViewModel));
-            
+            SetContainer();
+           
         }
         public static readonly BindableProperty ButtonPressedProperty = BindableProperty.Create(
             nameof(ButtonPressed),
@@ -95,6 +97,7 @@ namespace AgeCal.Components
                 BackgroundColor = Color.Transparent,
                 WidthRequest = 32,
                 AutomationId = label + "Icon",
+                BorderColor = Color.Transparent
             };
             Icon.Clicked += Icon_Clicked;
             Icon.CommandParameter = viewModelType;
@@ -105,6 +108,7 @@ namespace AgeCal.Components
                 Margin = 0,
                 HorizontalOptions = LayoutOptions.Center,
                 FontSize = 10,
+                FontAttributes = FontAttributes.None,
                 AutomationId = label + "Label"
             };
             subContainer.Children.Add(Icon);
@@ -119,7 +123,7 @@ namespace AgeCal.Components
             var btn = sender as ImageButton;
             if (btn != null)
             {
-                var type = btn.CommandParameter as Type; 
+                var type = btn.CommandParameter as Type;
                 ButtonPressed?.Execute(type); 
             }
         }
@@ -131,8 +135,54 @@ namespace AgeCal.Components
             {typeof(ReminderListViewModel),"reminder_active.png" },
             {typeof(SettingViewModel),"setting_active.png" },
         };
-         
+
+        public void SetActiveIcon(Type vm)
+        {
+            if (IconContainer != null)
+            {
+
+                foreach (var item in IconContainer)
+                {
+                    if ((Type)item.Icon.CommandParameter == vm)
+                    {
+                        item.Text.FontAttributes = FontAttributes.Bold;
+                    }
+                    else
+                    {
+                        item.Text.FontAttributes = FontAttributes.None;
+
+                    }
+                }
+            }
+
+        }
+        private void SetContainer()
+        {
+            IconContainer = null;
+            IconContainer = new List<NavbarIcon>();
+            var mainContainer = this.IconLayout.Children.Where(x => x.GetType() == typeof(StackLayout)).ToList();
+            if (mainContainer != null)
+            {
+                foreach (StackLayout item in mainContainer)
+                {
+                    var stack = (StackLayout)item.Children.First(x => x.GetType() == typeof(StackLayout));
+                    if (stack != null)
+                    {
+                        IconContainer.Add(new NavbarIcon
+                        {
+                            Icon = (ImageButton)stack.Children.First(x => x.GetType() == typeof(ImageButton)),
+                            Text = (Label)stack.Children.First(x => x.GetType() == typeof(Label))
+                        });
+                    };
+                }
+            }
+        }
+
     }
 
-
+    public class NavbarIcon
+    {
+        public ImageButton Icon { get; set; }
+        public Label Text { get; set; }
+    }
 }
