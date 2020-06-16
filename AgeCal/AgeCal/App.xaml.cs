@@ -97,9 +97,11 @@ namespace AgeCal
             //register repositories
             IocRegistry.Register<IUserRepository, UserRepository>();
             IocRegistry.Register<IReminderRepository, ReminderRepository>();
+            IocRegistry.Register<IReminderSettingRepository, ReminderSettingRepository>();
             //register services
             IocRegistry.Register<IUserService, UserService>();
             IocRegistry.Register<IReminderService, ReminderService>();
+            IocRegistry.Register<IReminderSettingService, ReminderSettingService>();
             //register navigation
             IocRegistry.Register<IAgeNavigationService>(NavigationFactory);
         }
@@ -116,7 +118,7 @@ namespace AgeCal
             navService.RegisterPage<ContactUsViewModel, ContactUsPage>();
             navService.RegisterPage<AppVersionViewModel, AppVersionPage>();
             navService.RegisterPage<UserManualViewModel, UserManualPage>();
-            navService.RegisterPage<RateUsViewModel, RateUsPage>();
+            navService.RegisterPage<ReminderSettingViewModel, ReminderSettingPage>();
             navService.RegisterPage<PrivatePolicyViewModel, PrivatePolicyPage>();
             navService.RegisterPage<TermsViewModel, TermsPage>();
             navService.RegisterPage<ReminderListViewModel, ReminderListPage>();

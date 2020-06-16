@@ -19,12 +19,14 @@ namespace AgeCal.Repository
         }
         public ILiteCollection<User> Users => _liteDatabase.GetCollection<User>("Users");
         public ILiteCollection<Reminder> Reminders => _liteDatabase.GetCollection<Reminder>("Reminders");
+        public ILiteCollection<ReminderSetting> ReminderSettings => _liteDatabase.GetCollection<ReminderSetting>("ReminderSettings");
 
 
         private void EnsureIndexing()
         {
             Users.EnsureIndex(x => x.Text);
             Reminders.EnsureIndex(x => x.When);
+            Reminders.EnsureIndex(x => x.Id);
         }
         public void Dispose()
         {

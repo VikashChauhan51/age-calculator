@@ -64,7 +64,7 @@ namespace AgeCal.Repository
             using (var connect = new DBContext(_localDatabase))
             {
 
-                return connect.Reminders.Find(predicate).OrderBy(x => x.When).Skip(skip).Take(take);
+                return connect.Reminders.Find(predicate).OrderBy(x => x.When).Skip(skip).Take(take).ToList();
             }
         }
 

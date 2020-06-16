@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<views:AgeContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AgeCal"
+             xmlns:views="clr-namespace:AgeCal.Views"
+             xmlns:viewModel="clr-namespace:AgeCal.ViewModels"
+             x:TypeArguments="viewModel:RateUsViewModel"
+             x:Class="AgeCal.Views.ReminderSettingPage">
+    <ContentPage.Content>
+        <StackLayout Spacing="10" Margin="0,10,0,0" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" Grid.Column="0" FontSize="Small" LineBreakMode="WordWrap" Text="Automatically remove past reminder" />
+                <Label Grid.Row="1" Grid.Column="0" FontSize="Small" LineBreakMode="WordWrap" Text="Automatically setup reminder for upcoming birthday" />
+                <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding AutoDeletePriorReminder}" />
+                <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding AutoSetupReminder}" />
+                <StackLayout Spacing="10" Margin="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
+                    <BoxView Style="{StaticResource SeparatorBoxView}" />
+                    <Label FontSize="Small" LineBreakMode="WordWrap" Text=" Default time for automatic setup reminder" />
+                    <TimePicker Time="{Binding Time}" />
+                    <Button x:Name="Save" Command="{Binding SaveCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</views:AgeContentPage>
