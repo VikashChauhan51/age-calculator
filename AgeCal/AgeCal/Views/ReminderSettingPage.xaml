@@ -22,13 +22,10 @@
                 <Label Grid.Row="1" Grid.Column="0" FontSize="Small" LineBreakMode="WordWrap" Text="Automatically setup reminder for upcoming birthday" />
                 <Switch Grid.Row="0" Grid.Column="1" IsToggled="{Binding AutoDeletePriorReminder}" />
                 <Switch Grid.Row="1" Grid.Column="1" IsToggled="{Binding AutoSetupReminder}" />
-                <StackLayout Spacing="10" Margin="5" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" >
-                    <BoxView Style="{StaticResource SeparatorBoxView}" />
-                    <Label FontSize="Small" LineBreakMode="WordWrap" Text=" Default time for automatic setup reminder" />
-                    <TimePicker Time="{Binding Time}" />
-                    <Button x:Name="Save" Command="{Binding SaveCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>
-                </StackLayout>
+                <Label Grid.Row="2" Grid.Column="0"  VerticalTextAlignment="Center" FontSize="Small" LineBreakMode="WordWrap" Text=" Default time for automatic setup reminder" />
+                <TimePicker Grid.Row="2" Grid.Column="1"  Time="{Binding Time}" />
             </Grid>
+            <Button x:Name="Save" Command="{Binding SaveCommand}" Style="{StaticResource BtnPrimary}" Text="{local:Translation SaveLabel}" ></Button>
         </StackLayout>
     </ContentPage.Content>
 </views:AgeContentPage>

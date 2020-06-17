@@ -55,7 +55,7 @@ namespace AgeCal.Views
                   clear to you exactly what you’re paying for.
                 </p> <p>
                   The Tiding app stores and processes personal data that
-                  you have provided to us, in order to provide my
+                  you have provided to us, in order to provide our
                   Service. It’s your responsibility to keep your phone and
                   access to the app secure. We therefore recommend that you do
                   not jailbreak or root your phone, which is the process of
@@ -81,7 +81,7 @@ namespace AgeCal.Views
                   battery and you can’t turn it on to avail the Service,
                   Tidings team cannot accept responsibility.
                 </p> <p>
-                  With respect to Vikash’s responsibility for your
+                  With respect to Tidings team responsibility for your
                   use of the app, when you’re using the app, it’s important to
                   bear in mind that although we endeavour to ensure that it is
                   updated and correct at all times, we do rely on third parties
@@ -107,16 +107,16 @@ namespace AgeCal.Views
                   (b) you must stop using the app, and (if needed) delete it
                   from your device.
                 </p> <p><strong>Changes to This Terms and Conditions</strong></p> <p>
-                  I may update our Terms and Conditions
+                  We may update our Terms and Conditions
                   from time to time. Thus, you are advised to review this page
-                  periodically for any changes. I will
+                  periodically for any changes. We will
                   notify you of any changes by posting the new Terms and
                   Conditions on this page.
                 </p> <p>
                   These terms and conditions are effective as of 2020-06-10
                 </p> <p><strong>Contact Us</strong></p> <p>
-                  If you have any questions or suggestions about my
-                  Terms and Conditions, do not hesitate to contact me
+                  If you have any questions or suggestions about our
+                  Terms and Conditions, do not hesitate to contact us
                   at tidingsw@gmail.com.
                 </p>  
     </body>
