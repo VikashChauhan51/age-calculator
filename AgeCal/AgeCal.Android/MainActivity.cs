@@ -15,6 +15,7 @@ using AgeCal.Services;
 using Plugin.LocalNotifications;
 using Android.Content;
 using System.Threading.Tasks;
+using Matcha.BackgroundService.Droid;
 
 namespace AgeCal.Droid
 {
@@ -31,7 +32,7 @@ namespace AgeCal.Droid
             Rg.Plugins.Popup.Popup.Init(this, savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             LocalNotificationsImplementation.NotificationIconId = Resource.Drawable.reminder_icon;
-
+            BackgroundAggregator.Init(this);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App(typeof(Views.Home)));
 

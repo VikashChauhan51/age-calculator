@@ -14,6 +14,7 @@ using AgeCal.Repository;
 using Xamarin.Essentials;
 using AgeCal.Utilities;
 using AgeCal.Utilities.Enums;
+using Matcha.BackgroundService;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace AgeCal
@@ -73,7 +74,7 @@ namespace AgeCal
         }
         protected override void OnStart()
         {
-            // Handle when your app starts
+            StartBackgroundService();
         }
 
         protected override void OnSleep()
@@ -83,7 +84,7 @@ namespace AgeCal
 
         protected override void OnResume()
         {
-            // Handle when your app resumes
+            if (Device.RuntimePlatform == Device.iOS) StartBackgroundService();
         }
 
         internal static void RegisterServices()
@@ -125,6 +126,15 @@ namespace AgeCal
             navService.RegisterPage<AddReminderViewModel, AddReminderPopup>();
             return navService;
 
+        }
+
+        private static void StartBackgroundService()
+        {
+            //Auto create reminder every 5 hours 
+            BackgroundAggregatorService.Add(() => new AutoReminderService(5));
+            BackgroundAggregatorService.Add(() => new AutoDeleteReminderService(8));
+            //you now running the periodic task in the background
+            BackgroundAggregatorService.StartBackgroundService();
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 using AgeCal.Models;
 
 namespace AgeCal.Services
@@ -14,5 +16,6 @@ namespace AgeCal.Services
         IEnumerable<Reminder> Gets(int skip, int take);
         int GetMaxId();
         void DeletePassedReminders(IEnumerable<Reminder> reminders);
+        bool Any(Expression<Func<Reminder, bool>> predicate);
     }
 }

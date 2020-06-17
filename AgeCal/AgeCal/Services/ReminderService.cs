@@ -5,6 +5,7 @@ using Plugin.LocalNotifications;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace AgeCal.Services
@@ -121,6 +122,11 @@ namespace AgeCal.Services
         public int GetMaxId()
         {
             return _reminderRepository.GetRemindeMaxId();
+        }
+
+        public bool Any(Expression<Func<Reminder, bool>> predicate)
+        {
+            return _reminderRepository.Any(predicate);
         }
     }
 }
